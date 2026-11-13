@@ -534,6 +534,479 @@ else
     return
 end
 
+@個別エフェクト(手動設定)
+--label:個別エフェクト
+--information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
+--group:Aグループ（開始・終了文字番号）
+--track@startA:Aグループ::開始A,1,100,1,1
+--track@endA:Aグループ::終了A,1,100,1,1
+--select@effectA:Aグループ::各種設定=0,変更なし=0,手動設定=1
+
+--track@xA:Aグループ::X,-2000,2000,0
+--track@yA:Aグループ::Y,-2000,2000,0
+--track@zA:Aグループ::Z,-2000,2000,0
+--track@zoomA:Aグループ::拡大率,0,1000,100
+--track@aspect_xA:Aグループ::X拡大率,0,1000,100
+--track@aspect_yA:Aグループ::Y拡大率,0,1000,50
+--track@aspect_zA:Aグループ::Z拡大率,0,1000,50
+--track@alphaA:Aグループ::透明度,0,100,0,0.1
+--track@rotate_xA:Aグループ::X回転,-3600,3600,0
+--track@rotate_yA:Aグループ::Y回転,-3600,3600,0
+--track@rotate_zA:Aグループ::Z回転,-3600,3600,0
+--select@rotationA:Aグループ::ローテーション=0,0°=0,90°=1,180°=2,270°=3,360°=4
+--check@flip_verticallyA:Aグループ::上下反転,0
+--check@horizontal_flipA:Aグループ::左右反転,0
+--check@luminance_inversionA:Aグループ::輝度反転,0
+--check@hue_inversionA:Aグループ::色相反転,0
+--check@transparency_inversionA:Aグループ::透明度反転,0
+--group
+
+--group:Bグループ（開始・終了文字番号）
+--track@startB:Bグループ::開始B,1,100,1,1
+--track@endB:Bグループ::終了B,1,100,1,1
+--select@effectB:Bグループ::各種設定=0,変更なし=0,手動設定=1
+
+--track@xB:Bグループ::X,-2000,2000,0
+--track@yB:Bグループ::Y,-2000,2000,0
+--track@zB:Bグループ::Z,-2000,2000,0
+--track@zoomB:Bグループ::拡大率,0,1000,100
+--track@aspect_xB:Bグループ::X拡大率,0,1000,100
+--track@aspect_yB:Bグループ::Y拡大率,0,1000,50
+--track@aspect_zB:Bグループ::Z拡大率,0,1000,50
+--track@alphaB:Bグループ::透明度,0,100,0,0.1
+--track@rotate_xB:Bグループ::X回転,-3600,3600,0
+--track@rotate_yB:Bグループ::Y回転,-3600,3600,0
+--track@rotate_zB:Bグループ::Z回転,-3600,3600,0
+--select@rotationB:Bグループ::ローテーション=0,0°=0,90°=1,180°=2,270°=3,360°=4
+--check@flip_verticallyB:Bグループ::上下反転,0
+--check@horizontal_flipB:Bグループ::左右反転,0
+--check@luminance_inversionB:Bグループ::輝度反転,0
+--check@hue_inversionB:Bグループ::色相反転,0
+--check@transparency_inversionB:Bグループ::透明度反転,0
+--group
+
+--group:Cグループ（開始・終了文字番号）
+--track@startC:Cグループ::開始C,1,100,1,1
+--track@endC:Cグループ::終了C,1,100,1,1
+--select@effectC:Cグループ::各種設定=0,変更なし=0,手動設定=1
+
+--track@xC:Cグループ::X,-2000,2000,0
+--track@yC:Cグループ::Y,-2000,2000,0
+--track@zC:Cグループ::Z,-2000,2000,0
+--track@zoomC:Cグループ::拡大率,0,1000,100
+--track@aspect_xC:Cグループ::X拡大率,0,1000,100
+--track@aspect_yC:Cグループ::Y拡大率,0,1000,50
+--track@aspect_zC:Cグループ::Z拡大率,0,1000,50
+--track@alphaC:Cグループ::透明度,0,100,0,0.1
+--track@rotate_xC:Cグループ::X回転,-3600,3600,0
+--track@rotate_yC:Cグループ::Y回転,-3600,3600,0
+--track@rotate_zC:Cグループ::Z回転,-3600,3600,0
+--select@rotationC:Cグループ::ローテーション=0,0°=0,90°=1,180°=2,270°=3,360°=4
+--check@flip_verticallyC:Cグループ::上下反転,0
+--check@horizontal_flipC:Cグループ::左右反転,0
+--check@luminance_inversionC:Cグループ::輝度反転,0
+--check@hue_inversionC:Cグループ::色相反転,0
+--check@transparency_inversionC:Cグループ::透明度反転,0
+--group
+
+--hide@xA:effectA==0
+--hide@yA:effectA==0
+--hide@zA:effectA==0
+--hide@zoomA:effectA==0
+--hide@aspect_xA:effectA==0
+--hide@aspect_yA:effectA==0
+--hide@aspect_zA:effectA==0
+--hide@alphaA:effectA==0
+--hide@rotate_xA:effectA==0
+--hide@rotate_yA:effectA==0
+--hide@rotate_zA:effectA==0
+--hide@rotationA:effectA==0
+--hide@flip_verticallyA:effectA==0
+--hide@horizontal_flipA:effectA==0
+--hide@luminance_inversionA:effectA==0
+--hide@hue_inversionA:effectA==0
+--hide@transparency_inversionA:effectA==0
+
+--hide@xB:effectB==0
+--hide@yB:effectB==0
+--hide@zB:effectB==0
+--hide@zoomB:effectB==0
+--hide@aspect_xB:effectB==0
+--hide@aspect_yB:effectB==0
+--hide@aspect_zB:effectB==0
+--hide@alphaB:effectB==0
+--hide@rotate_xB:effectB==0
+--hide@rotate_yB:effectB==0
+--hide@rotate_zB:effectB==0
+--hide@rotationB:effectB==0
+--hide@flip_verticallyB:effectB==0
+--hide@horizontal_flipB:effectB==0
+--hide@luminance_inversionB:effectB==0
+--hide@hue_inversionB:effectB==0
+--hide@transparency_inversionB:effectB==0
+
+--hide@xC:effectC==0
+--hide@yC:effectC==0
+--hide@zC:effectC==0
+--hide@zoomC:effectC==0
+--hide@aspect_xC:effectC==0
+--hide@aspect_yC:effectC==0
+--hide@aspect_zC:effectC==0
+--hide@alphaC:effectC==0
+--hide@rotate_xC:effectC==0
+--hide@rotate_yC:effectC==0
+--hide@rotate_zC:effectC==0
+--hide@rotationC:effectC==0
+--hide@flip_verticallyC:effectC==0
+--hide@horizontal_flipC:effectC==0
+--hide@luminance_inversionC:effectC==0
+--hide@hue_inversionC:effectC==0
+--hide@transparency_inversionC:effectC==0
+
+-- ヘルパーモジュールの読み込みを試行
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local AKIRA_h = nil
+if condition then
+    AKIRA_h = AKIRA_helper
+else
+    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+end
+
+-- 個別オブジェクトが有効かを確認
+local is_multi = obj.getoption("multi_object")
+if not is_multi then
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    return
+end
+
+-- ================================================================
+-- グローバル変数の初期化 (index == 0 のときリセット)
+-- 各文字の位置・変形情報をここに蓄積していく
+-- ================================================================
+if obj.index == 0 then
+    _G.gi_ox    = {}  -- 各文字の obj.ox
+    _G.gi_oy    = {}  -- 各文字の obj.oy
+    _G.gi_oz    = {}  -- 各文字の obj.oz
+    _G.gi_scale = {}  -- 各文字の obj.sx (拡大率)
+    _G.gi_alpha = {}  -- 各文字の alpha
+    _G.gi_rx    = {}  -- 各文字の obj.rx
+    _G.gi_ry    = {}  -- 各文字の obj.ry
+    _G.gi_rz    = {}  -- 各文字の obj.rz
+end
+
+-- ----------------------------------------------------------------
+-- まず、現在の文字の位置・変形情報をグローバル変数に保存する
+-- ----------------------------------------------------------------
+local idx   = obj.index
+local last = obj.num-1
+local scale = obj.sx
+local alpha = obj.getvalue("alpha")
+
+_G.gi_ox[idx]    = obj.ox
+_G.gi_oy[idx]    = obj.oy
+_G.gi_oz[idx]    = obj.oz
+_G.gi_scale[idx] = scale
+_G.gi_alpha[idx] = alpha
+_G.gi_rx[idx]    = obj.rx
+_G.gi_ry[idx]    = obj.ry
+_G.gi_rz[idx]    = obj.rz
+
+-- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
+local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
+local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
+local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
+local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
+local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
+local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+
+-- 現在の文字番号 (1-based)
+local current_char = idx + 1
+
+-- グループ判定
+local inA = (current_char >= sA and current_char <= eA)
+local inB = (current_char >= sB and current_char <= eB)
+local inC = (current_char >= sC and current_char <= eC)
+
+-- ここに各グループのオブジェクトのサイズを求める変数を作る予定
+-- ここに変数を作成する
+
+-- ================================================================
+-- 合成バッファのサイズを取得
+-- テキスト全体が収まるサイズ (各文字を ox,oy で配置できるよう全体サイズが必要)
+-- ================================================================
+local full_w = obj.screen_w
+local full_h = obj.screen_h
+if AKIRA_h then
+    local tw, th = AKIRA_h.get_text_size()
+    local lc     = AKIRA_h.line_break_confirmation()
+    full_w = math.min(obj.screen_w, tw)
+    full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- グループAの処理
+-- ================================================================
+if inA then
+
+    if current_char < eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 非終了文字の処理】
+        -- 仮想バッファ(フルサイズ)を新規作成し、
+        -- 保存した ox,oy の位置にこの文字を描画して cache に保存する
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- グローバル変数に保存した ox,oy の位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- 仮想バッファをキャッシュに保存 ("cache:gi_A_インデックス" の形式)
+        obj.copybuffer("cache:gi_A_" .. idx, "tempbuffer")
+
+        -- この文字は cache に保存したので framebuffer には描画しない (alpha=0 で不可視)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startA")
+
+    elseif current_char == eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 終了文字の処理】
+        -- フルサイズの仮想バッファを新規作成し、
+        -- 1) 終了文字を ox,oy に描画
+        -- 2) これまでの全 cache を各文字の保存済み ox,oy で描画
+        -- 3) 仮想バッファを load してエフェクトを適用し framebuffer に描画
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- (1) 終了文字(現在の文字)の ox,oy をグローバルに保存し、その位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- (2) 開始文字 ～ 終了文字の1つ前 までのキャッシュを順番に描画
+        --     各キャッシュはフルサイズ画像として ox,oy が既に適用されているため
+        --     (0,0,0, 1,1, 0,0,0) でそのまま合成する
+        for i = sA - 1, eA - 2 do  -- 0-based index: sA-1 から eA-2 まで
+            obj.copybuffer("object","cache:gi_A_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        -- (3) 合成した仮想バッファを framebuffer に描画 (エフェクト適用)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Aグループへのエフェクト適用 ↓
+        if effectA == 1 then
+           obj.effect("座標","X",xA,"Y",yA,"Z",zA)
+           obj.effect("拡大率","拡大率",100.000 + zoomA,"X",aspect_xA,"Y",aspect_yA,"Z",aspect_zA)
+           obj.effect("透明度","透明度",alphaA)
+           obj.effect("回転","X",rotate_xA,"Y",rotate_yA,"Z",rotate_zA)
+           obj.effect("ローテーション","90度回転",rotationA)
+           obj.effect("反転","上下反転",flip_verticallyA,
+           "左右反転",horizontal_flipA,
+           "輝度反転",luminance_inversionA,
+           "色相反転",hue_inversionA,
+           "透明度反転",transparency_inversionA
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endA")
+
+    end
+
+-- ================================================================
+-- グループBの処理
+-- ================================================================
+elseif inB then
+
+    if current_char < eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_B_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startB")
+
+    elseif current_char == eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sB - 1, eB - 2 do  -- 0-based index: sB-1 から eB-2 まで
+            obj.copybuffer("object","cache:gi_B_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Bグループへのエフェクト適用 ↓
+        if effectB == 1 then
+           obj.effect("座標","X",xB,"Y",yB,"Z",zB)
+           obj.effect("拡大率","拡大率",100.000 + zoomB,"X",aspect_xB,"Y",aspect_yB,"Z",aspect_zB)
+           obj.effect("透明度","透明度",alphaB)
+           obj.effect("回転","X",rotate_xB,"Y",rotate_yB,"Z",rotate_zB)
+           obj.effect("ローテーション","90度回転",rotationB)
+           obj.effect("反転","上下反転",flip_verticallyB,
+           "左右反転",horizontal_flipB,
+           "輝度反転",luminance_inversionB,
+           "色相反転",hue_inversionB,
+           "透明度反転",transparency_inversionB
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endB")
+
+    end
+
+-- ================================================================
+-- グループCの処理
+-- ================================================================
+elseif inC then
+
+    if current_char < eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_C_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startC")
+
+    elseif current_char == eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sC - 1, eC - 2 do  -- 0-based index: sC-1 から eC-2 まで
+            obj.copybuffer("object","cache:gi_C_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+
+        -- ↓ Cグループへのエフェクト適用 ↓
+        if effectC == 1 then
+           obj.effect("座標","X",xC,"Y",yC,"Z",zC)
+           obj.effect("拡大率","拡大率",100.000 + zoomC,"X",aspect_xC,"Y",aspect_yC,"Z",aspect_zC)
+           obj.effect("透明度","透明度",alphaC)
+           obj.effect("回転","X",rotate_xC,"Y",rotate_yC,"Z",rotate_zC)
+           obj.effect("ローテーション","90度回転",rotationC)
+           obj.effect("反転","上下反転",flip_verticallyC,
+           "左右反転",horizontal_flipC,
+           "輝度反転",luminance_inversionC,
+           "色相反転",hue_inversionC,
+           "透明度反転",transparency_inversionC
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endC")
+
+    end
+
+
+-- ================================================================
+-- グループ外の文字: そのまま tempbuffer に通常描画
+-- ================================================================
+elseif idx <= last then
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.draw(
+        _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+        _G.gi_scale[idx], _G.gi_alpha[idx],
+        _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+    )
+    obj.load("tempbuffer")
+
+    obj.clearbuffer("tempbuffer")
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","elseif")
+else
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","else")
+    return
+end
+
 @個別エフェクト(装飾)
 --label:個別エフェクト
 --information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
@@ -713,29 +1186,10 @@ if inA then
 
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
-           obj.effect("移動登場と退場_AKIRA",
-                "登退場秒数",entry_timeA,
-                "登場秒数",in_timeA,
-                "退場秒数",out_timeA,
-                "X",entry_xA,
-                "Y",entry_yA,
-                "Z",entry_zA,
-                "拡大率",entry_zoomA,
-                "X拡大率",entry_aspect_xA,
-                "Y拡大率",entry_aspect_yA,
-                "Z拡大率",entry_aspect_zA,
-                "X回転",entry_rotate_xA,
-                "Y回転",entry_rotate_yA,
-                "Z回転",entry_rotate_zA,
-                "登場順",0,
-                "間隔",0,
-                "イージングタイプ",entry_easingA,
-                "登場",entry_inA,
-                "退場",entry_outA,
-                "INフェード",entry_in_fadeA,
-                "インフェード時間",in_fade_timeA,
-                "OUTフェード",entry_out_fadeA,
-                "アウトフェード時間",out_fade_timeA
+            obj.effect("縁取り",
+            "サイズ",5,
+            "ぼかし",5,
+            "縁色","ffffff"
             )
         end
         -- ↑ エフェクト追加ここまで ↑
