@@ -1,0 +1,1864 @@
+@個別エフェクト(移動登退場)
+--label:個別エフェクト
+--information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
+--group:Aグループ（開始・終了文字番号）
+--track@startA:Aグループ::開始A,1,100,1,1
+--track@endA:Aグループ::終了A,1,100,1,1
+--select@effectA:Aグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--track@entry_timeA:Aグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeA:Aグループ::登場秒数,0,5,0,0.01
+--track@out_timeA:Aグループ::退場秒数,0,5,0,0.01
+
+--track@entry_xA:Aグループ::X,-2000,2000,0
+--track@entry_yA:Aグループ::Y,-2000,2000,0
+--track@entry_zA:Aグループ::Z,-2000,2000,0
+--track@entry_zoomA:Aグループ::拡大率,0,1000,100
+--track@entry_aspect_xA:Aグループ::X拡大率,0,1000,100
+--track@entry_aspect_yA:Aグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zA:Aグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xA:Aグループ::X回転,-3600,3600,0
+--track@entry_rotate_yA:Aグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zA:Aグループ::Z回転,-3600,3600,0
+
+--check@entry_inA:Aグループ::登場,1
+--check@entry_outA:Aグループ::退場,0
+
+--select@entry_easingA:Aグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeA:Aグループ::INフェード,0
+--track@in_fade_timeA:Aグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeA:Aグループ::OUTフェード,0
+--track@out_fade_timeA:Aグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--group:Bグループ（開始・終了文字番号）
+--track@startB:Bグループ::開始B,1,100,1,1
+--track@endB:Bグループ::終了B,1,100,1,1
+--select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--track@entry_timeB:Bグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeB:Bグループ::登場秒数,0,5,0,0.01
+--track@out_timeB:Bグループ::退場秒数,0,5,0,0.01
+
+--track@entry_xB:Bグループ::X,-2000,2000,0
+--track@entry_yB:Bグループ::Y,-2000,2000,0
+--track@entry_zB:Bグループ::Z,-2000,2000,0
+--track@entry_zoomB:Bグループ::拡大率,0,1000,100
+--track@entry_aspect_xB:Bグループ::X拡大率,0,1000,100
+--track@entry_aspect_yB:Bグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zB:Bグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xB:Bグループ::X回転,-3600,3600,0
+--track@entry_rotate_yB:Bグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zB:Bグループ::Z回転,-3600,3600,0
+
+--check@entry_inB:Bグループ::登場,1
+--check@entry_outB:Bグループ::退場,0
+
+--select@entry_easingB:Bグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeB:Bグループ::INフェード,0
+--track@in_fade_timeB:Bグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeB:Bグループ::OUTフェード,0
+--track@out_fade_timeB:Bグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--group:Cグループ（開始・終了文字番号）
+--track@startC:Cグループ::開始C,1,100,1,1
+--track@endC:Cグループ::終了C,1,100,1,1
+--select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--track@entry_timeC:Cグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeC:Cグループ::登場秒数,0,5,0,0.01
+--track@out_timeC:Cグループ::退場秒数,0,5,0,0.01
+
+--track@entry_xC:Cグループ::X,-2000,2000,0
+--track@entry_yC:Cグループ::Y,-2000,2000,0
+--track@entry_zC:Cグループ::Z,-2000,2000,0
+--track@entry_zoomC:Cグループ::拡大率,0,1000,100
+--track@entry_aspect_xC:Cグループ::X拡大率,0,1000,100
+--track@entry_aspect_yC:Cグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zC:Cグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xC:Cグループ::X回転,-3600,3600,0
+--track@entry_rotate_yC:Cグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zC:Cグループ::Z回転,-3600,3600,0
+
+--check@entry_inC:Cグループ::登場,1
+--check@entry_outC:Cグループ::退場,0
+
+--select@entry_easingC:Cグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeC:Cグループ::INフェード,0
+--track@in_fade_timeC:Cグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeC:Cグループ::OUTフェード,0
+--track@out_fade_timeC:Cグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeA:effectA==0
+--hide@in_timeA:effectA==0
+--hide@out_timeA:effectA==0
+--hide@entry_xA:effectA~=1
+--hide@entry_yA:effectA~=1
+--hide@entry_zA:effectA~=1
+--hide@entry_zoomA:effectA~=1
+--hide@entry_aspect_xA:effectA~=1
+--hide@entry_aspect_yA:effectA~=1
+--hide@entry_aspect_zA:effectA~=1
+--hide@entry_rotate_xA:effectA~=1
+--hide@entry_rotate_yA:effectA~=1
+--hide@entry_rotate_zA:effectA~=1
+--hide@entry_inA:effectA~=1
+--hide@entry_outA:effectA~=1
+--hide@entry_easingA:effectA==0
+--hide@entry_in_fadeA:effectA==0
+--hide@in_fade_timeA:effectA==0
+--hide@entry_out_fadeA:effectA==0
+--hide@out_fade_timeA:effectA==0
+
+--hide@entry_timeB:effectB==0
+--hide@in_timeB:effectB==0
+--hide@out_timeB:effectB==0
+--hide@entry_xB:effectB~=1
+--hide@entry_yB:effectB~=1
+--hide@entry_zB:effectB~=1
+--hide@entry_zoomB:effectB~=1
+--hide@entry_aspect_xB:effectB~=1
+--hide@entry_aspect_yB:effectB~=1
+--hide@entry_aspect_zB:effectB~=1
+--hide@entry_rotate_xB:effectB~=1
+--hide@entry_rotate_yB:effectB~=1
+--hide@entry_rotate_zB:effectB~=1
+--hide@entry_inB:effectB~=1
+--hide@entry_outB:effectB~=1
+--hide@entry_easingB:effectB==0
+--hide@entry_in_fadeB:effectB==0
+--hide@in_fade_timeB:effectB==0
+--hide@entry_out_fadeB:effectB==0
+--hide@out_fade_timeB:effectB==0
+
+--hide@entry_timeC:effectC==0
+--hide@in_timeC:effectC==0
+--hide@out_timeC:effectC==0
+--hide@entry_xC:effectC~=1
+--hide@entry_yC:effectC~=1
+--hide@entry_zC:effectC~=1
+--hide@entry_zoomC:effectC~=1
+--hide@entry_aspect_xC:effectC~=1
+--hide@entry_aspect_yC:effectC~=1
+--hide@entry_aspect_zC:effectC~=1
+--hide@entry_rotate_xC:effectC~=1
+--hide@entry_rotate_yC:effectC~=1
+--hide@entry_rotate_zC:effectC~=1
+--hide@entry_inC:effectC~=1
+--hide@entry_outC:effectC~=1
+--hide@entry_easingC:effectC==0
+--hide@entry_in_fadeC:effectC==0
+--hide@in_fade_timeC:effectC==0
+--hide@entry_out_fadeC:effectC==0
+--hide@out_fade_timeC:effectC==0
+
+-- ヘルパーモジュールの読み込みを試行
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local AKIRA_h = nil
+if condition then
+    AKIRA_h = AKIRA_helper
+else
+    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+end
+
+-- 個別オブジェクトが有効かを確認
+local is_multi = obj.getoption("multi_object")
+if not is_multi then
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    return
+end
+
+-- ================================================================
+-- グローバル変数の初期化 (index == 0 のときリセット)
+-- 各文字の位置・変形情報をここに蓄積していく
+-- ================================================================
+if obj.index == 0 then
+    _G.gi_ox    = {}  -- 各文字の obj.ox
+    _G.gi_oy    = {}  -- 各文字の obj.oy
+    _G.gi_oz    = {}  -- 各文字の obj.oz
+    _G.gi_scale = {}  -- 各文字の obj.sx (拡大率)
+    _G.gi_alpha = {}  -- 各文字の alpha
+    _G.gi_rx    = {}  -- 各文字の obj.rx
+    _G.gi_ry    = {}  -- 各文字の obj.ry
+    _G.gi_rz    = {}  -- 各文字の obj.rz
+end
+
+-- ----------------------------------------------------------------
+-- まず、現在の文字の位置・変形情報をグローバル変数に保存する
+-- ----------------------------------------------------------------
+local idx   = obj.index
+local last = obj.num-1
+local scale = obj.sx
+local alpha = obj.getvalue("alpha")
+
+_G.gi_ox[idx]    = obj.ox
+_G.gi_oy[idx]    = obj.oy
+_G.gi_oz[idx]    = obj.oz
+_G.gi_scale[idx] = scale
+_G.gi_alpha[idx] = alpha
+_G.gi_rx[idx]    = obj.rx
+_G.gi_ry[idx]    = obj.ry
+_G.gi_rz[idx]    = obj.rz
+
+-- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
+local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
+local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
+local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
+local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
+local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
+local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+
+-- 現在の文字番号 (1-based)
+local current_char = idx + 1
+
+-- グループ判定
+local inA = (current_char >= sA and current_char <= eA)
+local inB = (current_char >= sB and current_char <= eB)
+local inC = (current_char >= sC and current_char <= eC)
+
+-- ここに各グループのオブジェクトのサイズを求める変数を作る予定
+-- ここに変数を作成する
+
+-- ================================================================
+-- 合成バッファのサイズを取得
+-- テキスト全体が収まるサイズ (各文字を ox,oy で配置できるよう全体サイズが必要)
+-- ================================================================
+local full_w = obj.screen_w
+local full_h = obj.screen_h
+if AKIRA_h then
+    local tw, th = AKIRA_h.get_text_size()
+    local lc     = AKIRA_h.line_break_confirmation()
+    full_w = math.min(obj.screen_w, tw)
+    full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- グループAの処理
+-- ================================================================
+if inA then
+
+    if current_char < eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 非終了文字の処理】
+        -- 仮想バッファ(フルサイズ)を新規作成し、
+        -- 保存した ox,oy の位置にこの文字を描画して cache に保存する
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- グローバル変数に保存した ox,oy の位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- 仮想バッファをキャッシュに保存 ("cache:gi_A_インデックス" の形式)
+        obj.copybuffer("cache:gi_A_" .. idx, "tempbuffer")
+
+        -- この文字は cache に保存したので framebuffer には描画しない (alpha=0 で不可視)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startA")
+
+    elseif current_char == eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 終了文字の処理】
+        -- フルサイズの仮想バッファを新規作成し、
+        -- 1) 終了文字を ox,oy に描画
+        -- 2) これまでの全 cache を各文字の保存済み ox,oy で描画
+        -- 3) 仮想バッファを load してエフェクトを適用し framebuffer に描画
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- (1) 終了文字(現在の文字)の ox,oy をグローバルに保存し、その位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- (2) 開始文字 ～ 終了文字の1つ前 までのキャッシュを順番に描画
+        --     各キャッシュはフルサイズ画像として ox,oy が既に適用されているため
+        --     (0,0,0, 1,1, 0,0,0) でそのまま合成する
+        for i = sA - 1, eA - 2 do  -- 0-based index: sA-1 から eA-2 まで
+            obj.copybuffer("object","cache:gi_A_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        -- (3) 合成した仮想バッファを framebuffer に描画 (エフェクト適用)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Aグループへのエフェクト適用 ↓
+        if effectA == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "X",entry_xA,
+                "Y",entry_yA,
+                "Z",entry_zA,
+                "拡大率",entry_zoomA,
+                "X拡大率",entry_aspect_xA,
+                "Y拡大率",entry_aspect_yA,
+                "Z拡大率",entry_aspect_zA,
+                "X回転",entry_rotate_xA,
+                "Y回転",entry_rotate_yA,
+                "Z回転",entry_rotate_zA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endA")
+
+    end
+
+-- ================================================================
+-- グループBの処理
+-- ================================================================
+elseif inB then
+
+    if current_char < eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_B_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startB")
+
+    elseif current_char == eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sB - 1, eB - 2 do  -- 0-based index: sB-1 から eB-2 まで
+            obj.copybuffer("object","cache:gi_B_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Bグループへのエフェクト適用 ↓
+        if effectB == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "X",entry_xB,
+                "Y",entry_yB,
+                "Z",entry_zB,
+                "拡大率",entry_zoomB,
+                "X拡大率",entry_aspect_xB,
+                "Y拡大率",entry_aspect_yB,
+                "Z拡大率",entry_aspect_zB,
+                "X回転",entry_rotate_xB,
+                "Y回転",entry_rotate_yB,
+                "Z回転",entry_rotate_zB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endB")
+
+    end
+
+-- ================================================================
+-- グループCの処理
+-- ================================================================
+elseif inC then
+
+    if current_char < eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_C_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startC")
+
+    elseif current_char == eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sC - 1, eC - 2 do  -- 0-based index: sC-1 から eC-2 まで
+            obj.copybuffer("object","cache:gi_C_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+
+        -- ↓ Cグループへのエフェクト適用 ↓
+        if effectC == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "X",entry_xC,
+                "Y",entry_yC,
+                "Z",entry_zC,
+                "拡大率",entry_zoomC,
+                "X拡大率",entry_aspect_xC,
+                "Y拡大率",entry_aspect_yC,
+                "Z拡大率",entry_aspect_zC,
+                "X回転",entry_rotate_xC,
+                "Y回転",entry_rotate_yC,
+                "Z回転",entry_rotate_zC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endC")
+
+    end
+
+
+-- ================================================================
+-- グループ外の文字: そのまま tempbuffer に通常描画
+-- ================================================================
+elseif idx <= last then
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.draw(
+        _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+        _G.gi_scale[idx], _G.gi_alpha[idx],
+        _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+    )
+    obj.load("tempbuffer")
+
+    obj.clearbuffer("tempbuffer")
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","elseif")
+else
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","else")
+    return
+end
+
+@個別エフェクト(装飾)
+--label:個別エフェクト
+--information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
+--group:Aグループ（開始・終了文字番号）
+--track@startA:Aグループ::開始A,1,100,1,1
+--track@endA:Aグループ::終了A,1,100,1,1
+--select@effectA:Aグループ::アニメーション=0,なし=0,縁取り=1,枠線=2,ドロップシャドウ=3,凸エッジ=4,グラデーション=5,ぼかし=6,レンズブラー=7,放射ブラー=8,方向ブラー=9,モーションブラー=10,境界ぼかし=11,グロー=12,発光=13,閃光=14,拡散光=15,ライト=16,色ずれ=17,モザイク=18,ミラー=19,振動=20,震える=21,砕け散る=22
+
+
+--group
+
+--group:Bグループ（開始・終了文字番号）
+--track@startB:Bグループ::開始B,1,100,1,1
+--track@endB:Bグループ::終了B,1,100,1,1
+--select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+
+--group
+
+--group:Cグループ（開始・終了文字番号）
+--track@startC:Cグループ::開始C,1,100,1,1
+--track@endC:Cグループ::終了C,1,100,1,1
+--select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+
+--group
+
+--hide@entry_timeA:effectA==0
+--hide@in_timeA:effectA==0
+--hide@out_timeA:effectA==0
+--hide@entry_xA:effectA~=1
+
+
+-- ヘルパーモジュールの読み込みを試行
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local AKIRA_h = nil
+if condition then
+    AKIRA_h = AKIRA_helper
+else
+    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+end
+
+-- 個別オブジェクトが有効かを確認
+local is_multi = obj.getoption("multi_object")
+if not is_multi then
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    return
+end
+
+-- ================================================================
+-- グローバル変数の初期化 (index == 0 のときリセット)
+-- 各文字の位置・変形情報をここに蓄積していく
+-- ================================================================
+if obj.index == 0 then
+    _G.gi_ox    = {}  -- 各文字の obj.ox
+    _G.gi_oy    = {}  -- 各文字の obj.oy
+    _G.gi_oz    = {}  -- 各文字の obj.oz
+    _G.gi_scale = {}  -- 各文字の obj.sx (拡大率)
+    _G.gi_alpha = {}  -- 各文字の alpha
+    _G.gi_rx    = {}  -- 各文字の obj.rx
+    _G.gi_ry    = {}  -- 各文字の obj.ry
+    _G.gi_rz    = {}  -- 各文字の obj.rz
+end
+
+-- ----------------------------------------------------------------
+-- まず、現在の文字の位置・変形情報をグローバル変数に保存する
+-- ----------------------------------------------------------------
+local idx   = obj.index
+local last = obj.num-1
+local scale = obj.sx
+local alpha = obj.getvalue("alpha")
+
+_G.gi_ox[idx]    = obj.ox
+_G.gi_oy[idx]    = obj.oy
+_G.gi_oz[idx]    = obj.oz
+_G.gi_scale[idx] = scale
+_G.gi_alpha[idx] = alpha
+_G.gi_rx[idx]    = obj.rx
+_G.gi_ry[idx]    = obj.ry
+_G.gi_rz[idx]    = obj.rz
+
+-- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
+local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
+local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
+local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
+local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
+local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
+local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+
+-- 現在の文字番号 (1-based)
+local current_char = idx + 1
+
+-- グループ判定
+local inA = (current_char >= sA and current_char <= eA)
+local inB = (current_char >= sB and current_char <= eB)
+local inC = (current_char >= sC and current_char <= eC)
+
+-- ここに各グループのオブジェクトのサイズを求める変数を作る予定
+-- ここに変数を作成する
+
+-- ================================================================
+-- 合成バッファのサイズを取得
+-- テキスト全体が収まるサイズ (各文字を ox,oy で配置できるよう全体サイズが必要)
+-- ================================================================
+local full_w = obj.screen_w
+local full_h = obj.screen_h
+if AKIRA_h then
+    local tw, th = AKIRA_h.get_text_size()
+    local lc     = AKIRA_h.line_break_confirmation()
+    full_w = math.min(obj.screen_w, tw)
+    full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- グループAの処理
+-- ================================================================
+if inA then
+
+    if current_char < eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 非終了文字の処理】
+        -- 仮想バッファ(フルサイズ)を新規作成し、
+        -- 保存した ox,oy の位置にこの文字を描画して cache に保存する
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- グローバル変数に保存した ox,oy の位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- 仮想バッファをキャッシュに保存 ("cache:gi_A_インデックス" の形式)
+        obj.copybuffer("cache:gi_A_" .. idx, "tempbuffer")
+
+        -- この文字は cache に保存したので framebuffer には描画しない (alpha=0 で不可視)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startA")
+
+    elseif current_char == eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 終了文字の処理】
+        -- フルサイズの仮想バッファを新規作成し、
+        -- 1) 終了文字を ox,oy に描画
+        -- 2) これまでの全 cache を各文字の保存済み ox,oy で描画
+        -- 3) 仮想バッファを load してエフェクトを適用し framebuffer に描画
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- (1) 終了文字(現在の文字)の ox,oy をグローバルに保存し、その位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- (2) 開始文字 ～ 終了文字の1つ前 までのキャッシュを順番に描画
+        --     各キャッシュはフルサイズ画像として ox,oy が既に適用されているため
+        --     (0,0,0, 1,1, 0,0,0) でそのまま合成する
+        for i = sA - 1, eA - 2 do  -- 0-based index: sA-1 から eA-2 まで
+            obj.copybuffer("object","cache:gi_A_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        -- (3) 合成した仮想バッファを framebuffer に描画 (エフェクト適用)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Aグループへのエフェクト適用 ↓
+        if effectA == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "X",entry_xA,
+                "Y",entry_yA,
+                "Z",entry_zA,
+                "拡大率",entry_zoomA,
+                "X拡大率",entry_aspect_xA,
+                "Y拡大率",entry_aspect_yA,
+                "Z拡大率",entry_aspect_zA,
+                "X回転",entry_rotate_xA,
+                "Y回転",entry_rotate_yA,
+                "Z回転",entry_rotate_zA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endA")
+
+    end
+
+-- ================================================================
+-- グループBの処理
+-- ================================================================
+elseif inB then
+
+    if current_char < eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_B_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startB")
+
+    elseif current_char == eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sB - 1, eB - 2 do  -- 0-based index: sB-1 から eB-2 まで
+            obj.copybuffer("object","cache:gi_B_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Bグループへのエフェクト適用 ↓
+        if effectB == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "X",entry_xB,
+                "Y",entry_yB,
+                "Z",entry_zB,
+                "拡大率",entry_zoomB,
+                "X拡大率",entry_aspect_xB,
+                "Y拡大率",entry_aspect_yB,
+                "Z拡大率",entry_aspect_zB,
+                "X回転",entry_rotate_xB,
+                "Y回転",entry_rotate_yB,
+                "Z回転",entry_rotate_zB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endB")
+
+    end
+
+-- ================================================================
+-- グループCの処理
+-- ================================================================
+elseif inC then
+
+    if current_char < eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_C_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startC")
+
+    elseif current_char == eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sC - 1, eC - 2 do  -- 0-based index: sC-1 から eC-2 まで
+            obj.copybuffer("object","cache:gi_C_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+
+        -- ↓ Cグループへのエフェクト適用 ↓
+        if effectC == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "X",entry_xC,
+                "Y",entry_yC,
+                "Z",entry_zC,
+                "拡大率",entry_zoomC,
+                "X拡大率",entry_aspect_xC,
+                "Y拡大率",entry_aspect_yC,
+                "Z拡大率",entry_aspect_zC,
+                "X回転",entry_rotate_xC,
+                "Y回転",entry_rotate_yC,
+                "Z回転",entry_rotate_zC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endC")
+
+    end
+
+
+-- ================================================================
+-- グループ外の文字: そのまま tempbuffer に通常描画
+-- ================================================================
+elseif idx <= last then
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.draw(
+        _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+        _G.gi_scale[idx], _G.gi_alpha[idx],
+        _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+    )
+    obj.load("tempbuffer")
+
+    obj.clearbuffer("tempbuffer")
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","elseif")
+else
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","else")
+    return
+end
+
+@個別エフェクト(アニメーション1)
+--label:個別エフェクト
+--information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
+--group:Aグループ（開始・終了文字番号）
+--track@startA:Aグループ::開始A,1,100,1,1
+--track@endA:Aグループ::終了A,1,100,1,1
+--select@effectA:Aグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--track@entry_timeA:Aグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeA:Aグループ::登場秒数,0,5,0,0.01
+--track@out_timeA:Aグループ::退場秒数,0,5,0,0.01
+
+--track@entry_xA:Aグループ::X,-2000,2000,0
+--track@entry_yA:Aグループ::Y,-2000,2000,0
+--track@entry_zA:Aグループ::Z,-2000,2000,0
+--track@entry_zoomA:Aグループ::拡大率,0,1000,100
+--track@entry_aspect_xA:Aグループ::X拡大率,0,1000,100
+--track@entry_aspect_yA:Aグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zA:Aグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xA:Aグループ::X回転,-3600,3600,0
+--track@entry_rotate_yA:Aグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zA:Aグループ::Z回転,-3600,3600,0
+
+--track@entry_strengthA:Aグループ::強さ,-4000,4000,500
+--track@glow_diffusionA:Aグループ::拡散,0,4000,250
+--track@glow_thresholdA:Aグループ::しきい値,0,100,80
+--track@glow_speedA:Aグループ::拡散速度,0,4000,0
+--check@glow_fix_sizeA:Aグループ::サイズ固定,0
+--color@glow_colorA:Aグループ::光色,0xffffff
+
+--track@entry_clip_uA:Aグループ::上,-4000,4000,0
+--track@entry_clip_dA:Aグループ::下,-4000,4000,0
+--track@entry_clip_lA:Aグループ::左,-4000,4000,0
+--track@entry_clip_rA:Aグループ::右,-4000,4000,0
+--check@clip_centerA:Aグループ::中心の位置を固定,0
+
+--track@entry_ripples_heightA:Aグループ_波紋::高さ,-4000,4000,15
+--track@ripple_cxA:Aグループ::中心X,-4000,4000,0
+--track@ripple_cyA:Aグループ::中心Y,-4000,4000,0
+--track@ripple_wA:Aグループ::幅,0,4000,30
+--track@ripple_speedA:Aグループ::速度,-4000,4000,150
+--track@ripple_countA:Aグループ::波紋数,-100,100,0
+--track@ripple_intervalA:Aグループ::波紋間隔,-4000,4000,0
+--track@ripple_ampA:Aグループ::増幅減衰回数,-100,100,0
+
+--track@entry_raster_heightA:Aグループ_ラスター::高さ,-4000,4000,100
+--track@raster_wA:Aグループ::横幅,0,4000,100
+--track@raster_periodA:Aグループ::周期,0.01,100,1,0.01
+--check@raster_vA:Aグループ::縦ラスター,0
+--check@raster_randA:Aグループ::ランダム振幅,0
+
+--select@entry_easingA:Aグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeA:Aグループ::INフェード,0
+--track@in_fade_timeA:Aグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeA:Aグループ::OUTフェード,0
+--track@out_fade_timeA:Aグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeA:effectA==0
+--hide@in_timeA:effectA==0
+--hide@out_timeA:effectA==0
+--hide@entry_easingA:effectA==0
+--hide@entry_in_fadeA:effectA==0
+--hide@in_fade_timeA:effectA==0
+--hide@entry_out_fadeA:effectA==0
+--hide@out_fade_timeA:effectA==0
+
+--hide@entry_xA:effectA~=1
+--hide@entry_yA:effectA~=1
+--hide@entry_zA:effectA~=1
+--hide@entry_zoomA:effectA~=1
+--hide@entry_aspect_xA:effectA~=1
+--hide@entry_aspect_yA:effectA~=1
+--hide@entry_aspect_zA:effectA~=1
+--hide@entry_rotate_xA:effectA~=1
+--hide@entry_rotate_yA:effectA~=1
+--hide@entry_rotate_zA:effectA~=1
+
+--hide@entry_strengthA:effectA~=2
+--hide@glow_diffusionA:effectA~=2
+--hide@glow_thresholdA:effectA~=2
+--hide@glow_speedA:effectA~=2
+--hide@glow_fix_sizeA:effectA~=2
+--hide@glow_colorA:effectA~=2
+
+--hide@entry_clip_uA:effectA~=3
+--hide@entry_clip_dA:effectA~=3
+--hide@entry_clip_lA:effectA~=3
+--hide@entry_clip_rA:effectA~=3
+--hide@clip_centerA:effectA~=3
+
+--hide@entry_ripples_heightA:effectA~=4
+--hide@ripple_cxA:effectA~=4
+--hide@ripple_cyA:effectA~=4
+--hide@ripple_wA:effectA~=4
+--hide@ripple_speedA:effectA~=4
+--hide@ripple_countA:effectA~=4
+--hide@ripple_intervalA:effectA~=4
+--hide@ripple_ampA:effectA~=4
+
+--hide@entry_raster_heightA:effectA~=5
+--hide@raster_wA:effectA~=5
+--hide@raster_periodA:effectA~=5
+--hide@raster_vA:effectA~=5
+--hide@raster_randA:effectA~=5
+
+--group:Bグループ（開始・終了文字番号）
+--track@startB:Bグループ::開始B,1,100,1,1
+--track@endB:Bグループ::終了B,1,100,1,1
+--select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--track@entry_timeB:Bグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeB:Bグループ::登場秒数,0,5,0,0.01
+--track@out_timeB:Bグループ::退場秒数,0,5,0,0.01
+
+--track@entry_xB:Bグループ::X,-2000,2000,0
+--track@entry_yB:Bグループ::Y,-2000,2000,0
+--track@entry_zB:Bグループ::Z,-2000,2000,0
+--track@entry_zoomB:Bグループ::拡大率,0,1000,100
+--track@entry_aspect_xB:Bグループ::X拡大率,0,1000,100
+--track@entry_aspect_yB:Bグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zB:Bグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xB:Bグループ::X回転,-3600,3600,0
+--track@entry_rotate_yB:Bグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zB:Bグループ::Z回転,-3600,3600,0
+
+--track@entry_strengthB:Bグループ::強さ,-4000,4000,500
+--track@glow_diffusionB:Bグループ::拡散,0,4000,250
+--track@glow_thresholdB:Bグループ::しきい値,0,100,80
+--track@glow_speedB:Bグループ::拡散速度,0,4000,0
+--check@glow_fix_sizeB:Bグループ::サイズ固定,0
+--color@glow_colorB:Bグループ::光色,0xffffff
+
+--track@entry_clip_uB:Bグループ::上,-4000,4000,0
+--track@entry_clip_dB:Bグループ::下,-4000,4000,0
+--track@entry_clip_lB:Bグループ::左,-4000,4000,0
+--track@entry_clip_rB:Bグループ::右,-4000,4000,0
+--check@clip_centerB:Bグループ::中心の位置を固定,0
+
+--track@entry_ripples_heightB:Bグループ_波紋::高さ,-4000,4000,15
+--track@ripple_cxB:Bグループ::中心X,-4000,4000,0
+--track@ripple_cyB:Bグループ::中心Y,-4000,4000,0
+--track@ripple_wB:Bグループ::幅,0,4000,30
+--track@ripple_speedB:Bグループ::速度,-4000,4000,150
+--track@ripple_countB:Bグループ::波紋数,-100,100,0
+--track@ripple_intervalB:Bグループ::波紋間隔,-4000,4000,0
+--track@ripple_ampB:Bグループ::増幅減衰回数,-100,100,0
+
+--track@entry_raster_heightB:Bグループ_ラスター::高さ,-4000,4000,100
+--track@raster_wB:Bグループ::横幅,0,4000,100
+--track@raster_periodB:Bグループ::周期,0.01,100,1,0.01
+--check@raster_vB:Bグループ::縦ラスター,0
+--check@raster_randB:Bグループ::ランダム振幅,0
+
+--select@entry_easingB:Bグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeB:Bグループ::INフェード,0
+--track@in_fade_timeB:Bグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeB:Bグループ::OUTフェード,0
+--track@out_fade_timeB:Bグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeB:effectB==0
+--hide@in_timeB:effectB==0
+--hide@out_timeB:effectB==0
+--hide@entry_easingB:effectB==0
+--hide@entry_in_fadeB:effectB==0
+--hide@in_fade_timeB:effectB==0
+--hide@entry_out_fadeB:effectB==0
+--hide@out_fade_timeB:effectB==0
+
+--hide@entry_xB:effectB~=1
+--hide@entry_yB:effectB~=1
+--hide@entry_zB:effectB~=1
+--hide@entry_zoomB:effectB~=1
+--hide@entry_aspect_xB:effectB~=1
+--hide@entry_aspect_yB:effectB~=1
+--hide@entry_aspect_zB:effectB~=1
+--hide@entry_rotate_xB:effectB~=1
+--hide@entry_rotate_yB:effectB~=1
+--hide@entry_rotate_zB:effectB~=1
+
+--hide@entry_strengthB:effectB~=2
+--hide@glow_diffusionB:effectB~=2
+--hide@glow_thresholdB:effectB~=2
+--hide@glow_speedB:effectB~=2
+--hide@glow_fix_sizeB:effectB~=2
+--hide@glow_colorB:effectB~=2
+
+--hide@entry_clip_uB:effectB~=3
+--hide@entry_clip_dB:effectB~=3
+--hide@entry_clip_lB:effectB~=3
+--hide@entry_clip_rB:effectB~=3
+--hide@clip_centerB:effectB~=3
+
+--hide@entry_ripples_heightB:effectB~=4
+--hide@ripple_cxB:effectB~=4
+--hide@ripple_cyB:effectB~=4
+--hide@ripple_wB:effectB~=4
+--hide@ripple_speedB:effectB~=4
+--hide@ripple_countB:effectB~=4
+--hide@ripple_intervalB:effectB~=4
+--hide@ripple_ampB:effectB~=4
+
+--hide@entry_raster_heightB:effectB~=5
+--hide@raster_wB:effectB~=5
+--hide@raster_periodB:effectB~=5
+--hide@raster_vB:effectB~=5
+--hide@raster_randB:effectB~=5
+
+--group:Cグループ（開始・終了文字番号）
+--track@startC:Cグループ::開始C,1,100,1,1
+--track@endC:Cグループ::終了C,1,100,1,1
+--select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--track@entry_timeC:Cグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeC:Cグループ::登場秒数,0,5,0,0.01
+--track@out_timeC:Cグループ::退場秒数,0,5,0,0.01
+
+--track@entry_xC:Cグループ::X,-2000,2000,0
+--track@entry_yC:Cグループ::Y,-2000,2000,0
+--track@entry_zC:Cグループ::Z,-2000,2000,0
+--track@entry_zoomC:Cグループ::拡大率,0,1000,100
+--track@entry_aspect_xC:Cグループ::X拡大率,0,1000,100
+--track@entry_aspect_yC:Cグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zC:Cグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xC:Cグループ::X回転,-3600,3600,0
+--track@entry_rotate_yC:Cグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zC:Cグループ::Z回転,-3600,3600,0
+
+--track@entry_strengthC:Cグループ::強さ,-4000,4000,500
+--track@glow_diffusionC:Cグループ::拡散,0,4000,250
+--track@glow_thresholdC:Cグループ::しきい値,0,100,80
+--track@glow_speedC:Cグループ::拡散速度,0,4000,0
+--check@glow_fix_sizeC:Cグループ::サイズ固定,0
+--color@glow_colorC:Cグループ::光色,0xffffff
+
+--track@entry_clip_uC:Cグループ::上,-4000,4000,0
+--track@entry_clip_dC:Cグループ::下,-4000,4000,0
+--track@entry_clip_lC:Cグループ::左,-4000,4000,0
+--track@entry_clip_rC:Cグループ::右,-4000,4000,0
+--check@clip_centerC:Cグループ::中心の位置を固定,0
+
+
+--track@entry_ripples_heightC:Cグループ_波紋::高さ,-4000,4000,15
+--track@ripple_cxC:Cグループ::中心X,-4000,4000,0
+--track@ripple_cyC:Cグループ::中心Y,-4000,4000,0
+--track@ripple_wC:Cグループ::幅,0,4000,30
+--track@ripple_speedC:Cグループ::速度,-4000,4000,150
+--track@ripple_countC:Cグループ::波紋数,-100,100,0
+--track@ripple_intervalC:Cグループ::波紋間隔,-4000,4000,0
+--track@ripple_ampC:Cグループ::増幅減衰回数,-100,100,0
+
+--track@entry_raster_heightC:Cグループ_ラスター::高さ,-4000,4000,100
+--track@raster_wC:Cグループ::横幅,0,4000,100
+--track@raster_periodC:Cグループ::周期,0.01,100,1,0.01
+--check@raster_vC:Cグループ::縦ラスター,0
+--check@raster_randC:Cグループ::ランダム振幅,0
+
+--select@entry_easingC:Cグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeC:Cグループ::INフェード,0
+--track@in_fade_timeC:Cグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeC:Cグループ::OUTフェード,0
+--track@out_fade_timeC:Cグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeC:effectC==0
+--hide@in_timeC:effectC==0
+--hide@out_timeC:effectC==0
+--hide@entry_easingC:effectC==0
+--hide@entry_in_fadeC:effectC==0
+--hide@in_fade_timeC:effectC==0
+--hide@entry_out_fadeC:effectC==0
+--hide@out_fade_timeC:effectC==0
+
+--hide@entry_xC:effectC~=1
+--hide@entry_yC:effectC~=1
+--hide@entry_zC:effectC~=1
+--hide@entry_zoomC:effectC~=1
+--hide@entry_aspect_xC:effectC~=1
+--hide@entry_aspect_yC:effectC~=1
+--hide@entry_aspect_zC:effectC~=1
+--hide@entry_rotate_xC:effectC~=1
+--hide@entry_rotate_yC:effectC~=1
+--hide@entry_rotate_zC:effectC~=1
+
+--hide@entry_strengthC:effectC~=2
+--hide@glow_diffusionC:effectC~=2
+--hide@glow_thresholdC:effectC~=2
+--hide@glow_speedC:effectC~=2
+--hide@glow_fix_sizeC:effectC~=2
+--hide@glow_colorC:effectC~=2
+
+--hide@entry_clip_uC:effectC~=3
+--hide@entry_clip_dC:effectC~=3
+--hide@entry_clip_lC:effectC~=3
+--hide@entry_clip_rC:effectC~=3
+--hide@clip_centerC:effectC~=3
+
+--hide@entry_ripples_heightC:effectC~=4
+--hide@ripple_cxC:effectC~=4
+--hide@ripple_cyC:effectC~=4
+--hide@ripple_wC:effectC~=4
+--hide@ripple_speedC:effectC~=4
+--hide@ripple_countC:effectC~=4
+--hide@ripple_intervalC:effectC~=4
+--hide@ripple_ampC:effectC~=4
+
+--hide@entry_raster_heightC:effectC~=5
+--hide@raster_wC:effectC~=5
+--hide@raster_periodC:effectC~=5
+--hide@raster_vC:effectC~=5
+--hide@raster_randC:effectC~=5
+
+-- ヘルパーモジュールの読み込みを試行
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local AKIRA_h = nil
+if condition then
+    AKIRA_h = AKIRA_helper
+else
+    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+end
+
+-- 個別オブジェクトが有効かを確認
+local is_multi = obj.getoption("multi_object")
+if not is_multi then
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    return
+end
+
+-- ================================================================
+-- グローバル変数の初期化 (index == 0 のときリセット)
+-- 各文字の位置・変形情報をここに蓄積していく
+-- ================================================================
+if obj.index == 0 then
+    _G.gi_ox    = {}  -- 各文字の obj.ox
+    _G.gi_oy    = {}  -- 各文字の obj.oy
+    _G.gi_oz    = {}  -- 各文字の obj.oz
+    _G.gi_scale = {}  -- 各文字の obj.sx (拡大率)
+    _G.gi_alpha = {}  -- 各文字の alpha
+    _G.gi_rx    = {}  -- 各文字の obj.rx
+    _G.gi_ry    = {}  -- 各文字の obj.ry
+    _G.gi_rz    = {}  -- 各文字の obj.rz
+end
+
+-- ----------------------------------------------------------------
+-- まず、現在の文字の位置・変形情報をグローバル変数に保存する
+-- ----------------------------------------------------------------
+local idx   = obj.index
+local last = obj.num-1
+local scale = obj.sx
+local alpha = obj.getvalue("alpha")
+
+_G.gi_ox[idx]    = obj.ox
+_G.gi_oy[idx]    = obj.oy
+_G.gi_oz[idx]    = obj.oz
+_G.gi_scale[idx] = scale
+_G.gi_alpha[idx] = alpha
+_G.gi_rx[idx]    = obj.rx
+_G.gi_ry[idx]    = obj.ry
+_G.gi_rz[idx]    = obj.rz
+
+-- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
+local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
+local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
+local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
+local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
+local sC = math.min(startC, endC)  -- Bグループ開始 (1-based)
+local eC = math.max(startC, endC)  -- Bグループ終了 (1-based)
+
+-- 現在の文字番号 (1-based)
+local current_char = idx + 1
+
+-- グループ判定
+local inA = (current_char >= sA and current_char <= eA)
+local inB = (current_char >= sB and current_char <= eB)
+local inC = (current_char >= sC and current_char <= eC)
+
+-- 各グループのオブジェクトのサイズ
+-- ここに変数を作成する
+
+-- ================================================================
+-- 合成バッファのサイズを取得
+-- テキスト全体が収まるサイズ (各文字を ox,oy で配置できるよう全体サイズが必要)
+-- ================================================================
+local full_w = obj.screen_w
+local full_h = obj.screen_h
+if AKIRA_h then
+    local tw, th = AKIRA_h.get_text_size()
+    local lc     = AKIRA_h.line_break_confirmation()
+    full_w = math.min(obj.screen_w, tw)
+    full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- グループAの処理
+-- ================================================================
+if inA then
+
+    if current_char < eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 非終了文字の処理】
+        -- 仮想バッファ(フルサイズ)を新規作成し、
+        -- 保存した ox,oy の位置にこの文字を描画して cache に保存する
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- グローバル変数に保存した ox,oy の位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- 仮想バッファをキャッシュに保存 ("cache:gi_A_インデックス" の形式)
+        obj.copybuffer("cache:gi_A_" .. idx, "tempbuffer")
+
+        -- この文字は cache に保存したので framebuffer には描画しない (alpha=0 で不可視)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startA")
+
+    elseif current_char == eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 終了文字の処理】
+        -- フルサイズの仮想バッファを新規作成し、
+        -- 1) 終了文字を ox,oy に描画
+        -- 2) これまでの全 cache を各文字の保存済み ox,oy で描画
+        -- 3) 仮想バッファを load してエフェクトを適用し framebuffer に描画
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- (1) 終了文字(現在の文字)の ox,oy をグローバルに保存し、その位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- (2) 開始文字 ～ 終了文字の1つ前 までのキャッシュを順番に描画
+        --     各キャッシュはフルサイズ画像として ox,oy が既に適用されているため
+        --     (0,0,0, 1,1, 0,0,0) でそのまま合成する
+        for i = sA - 1, eA - 2 do  -- 0-based index: sA-1 から eA-2 まで
+            obj.copybuffer("object","cache:gi_A_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        -- (3) 合成した仮想バッファを framebuffer に描画 (エフェクト適用)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Aグループへのエフェクト適用 ↓
+        if effectA == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "X",entry_xA,
+                "Y",entry_yA,
+                "Z",entry_zA,
+                "拡大率",entry_zoomA,
+                "X拡大率",entry_aspect_xA,
+                "Y拡大率",entry_aspect_yA,
+                "Z拡大率",entry_aspect_zA,
+                "X回転",entry_rotate_xA,
+                "Y回転",entry_rotate_yA,
+                "Z回転",entry_rotate_zA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        elseif effectA == 2 then
+            obj.effect("発光登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "強さ",entry_strengthA,
+                "拡散",glow_diffusionA,
+                "しきい値",glow_thresholdA,
+                "拡散速度",glow_speedA,
+                "サイズ固定",glow_fix_sizeA,
+                "光色",glow_colorA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        elseif effectA == 3 then
+            obj.effect("クリッピング登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "上", entry_clip_uA,
+                "下", entry_clip_dA,
+                "左", entry_clip_lA,
+                "右", entry_clip_rA,
+                "中心の位置を固定", clip_centerA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        elseif effectA == 4 then
+            obj.effect("波紋登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "高さ", entry_ripples_heightA,
+                "中心X", ripple_cxA,
+                "中心Y", ripple_cyA,
+                "幅", ripple_wA,
+                "速度", ripple_speedA,
+                "波紋数", ripple_countA,
+                "波紋間隔", ripple_intervalA,
+                "増幅減衰回数", ripple_ampA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        elseif effectA == 5 then
+            obj.effect("ラスター登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeA,
+                "登場秒数",in_timeA,
+                "退場秒数",out_timeA,
+                "高さ", entry_raster_heightA,
+                "横幅", raster_wA,
+                "周期", raster_periodA,
+                "縦ラスター", raster_vA,
+                "ランダム振幅", raster_randA,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingA,
+                "INフェード",entry_in_fadeA,
+                "インフェード時間",in_fade_timeA,
+                "OUTフェード",entry_out_fadeA,
+                "アウトフェード時間",out_fade_timeA
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endA")
+
+    end
+
+-- ================================================================
+-- グループBの処理
+-- ================================================================
+elseif inB then
+
+    if current_char < eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_B_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startB")
+
+    elseif current_char == eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sB - 1, eB - 2 do  -- 0-based index: sB-1 から eB-2 まで
+            obj.copybuffer("object","cache:gi_B_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- ↓ Bグループへのエフェクト適用 ↓
+        if effectB == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "X",entry_xB,
+                "Y",entry_yB,
+                "Z",entry_zB,
+                "拡大率",entry_zoomB,
+                "X拡大率",entry_aspect_xA,
+                "Y拡大率",entry_aspect_yB,
+                "Z拡大率",entry_aspect_zB,
+                "X回転",entry_rotate_xB,
+                "Y回転",entry_rotate_yB,
+                "Z回転",entry_rotate_zB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        elseif effectB == 2 then
+            obj.effect("発光登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "強さ",entry_strengthB,
+                "拡散",glow_diffusionB,
+                "しきい値",glow_thresholdB,
+                "拡散速度",glow_speedB,
+                "サイズ固定",glow_fix_sizeB,
+                "光色",glow_colorB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        elseif effectB == 3 then
+            obj.effect("クリッピング登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "上", entry_clip_uB,
+                "下", entry_clip_dB,
+                "左", entry_clip_lB,
+                "右", entry_clip_rB,
+                "中心の位置を固定", clip_centerB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        elseif effectB == 4 then
+            obj.effect("波紋登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "高さ", entry_ripples_heightB,
+                "中心X", ripple_cxB,
+                "中心Y", ripple_cyB,
+                "幅", ripple_wB,
+                "速度", ripple_speedB,
+                "波紋数", ripple_countB,
+                "波紋間隔", ripple_intervalB,
+                "増幅減衰回数", ripple_ampB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        elseif effectB == 5 then
+            obj.effect("ラスター登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeB,
+                "登場秒数",in_timeB,
+                "退場秒数",out_timeB,
+                "高さ", entry_raster_heightB,
+                "横幅", raster_wB,
+                "周期", raster_periodB,
+                "縦ラスター", raster_vB,
+                "ランダム振幅", raster_randB,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingB,
+                "INフェード",entry_in_fadeB,
+                "インフェード時間",in_fade_timeB,
+                "OUTフェード",entry_out_fadeB,
+                "アウトフェード時間",out_fade_timeB
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endB")
+
+    end
+
+-- ================================================================
+-- グループCの処理
+-- ================================================================
+elseif inC then
+
+    if current_char < eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_C_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startC")
+
+    elseif current_char == eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sC - 1, eC - 2 do  -- 0-based index: sC-1 から eC-2 まで
+            obj.copybuffer("object","cache:gi_C_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+
+        -- ↓ Cグループへのエフェクト適用 ↓
+        if effectC == 1 then
+           obj.effect("移動登場と退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "X",entry_xC,
+                "Y",entry_yC,
+                "Z",entry_zC,
+                "拡大率",entry_zoomC,
+                "X拡大率",entry_aspect_xC,
+                "Y拡大率",entry_aspect_yC,
+                "Z拡大率",entry_aspect_zC,
+                "X回転",entry_rotate_xC,
+                "Y回転",entry_rotate_yC,
+                "Z回転",entry_rotate_zC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        elseif effectC == 2 then
+            obj.effect("発光登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "強さ",entry_strengthC,
+                "拡散",glow_diffusionC,
+                "しきい値",glow_thresholdC,
+                "拡散速度",glow_speedC,
+                "サイズ固定",glow_fix_sizeC,
+                "光色",glow_colorC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        elseif effectC == 3 then
+            obj.effect("クリッピング登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "上", entry_clip_uC,
+                "下", entry_clip_dC,
+                "左", entry_clip_lC,
+                "右", entry_clip_rC,
+                "中心の位置を固定", clip_centerC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        elseif effectC == 4 then
+            obj.effect("波紋登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "高さ", entry_ripples_heightC,
+                "中心X", ripple_cxC,
+                "中心Y", ripple_cyC,
+                "幅", ripple_wC,
+                "速度", ripple_speedC,
+                "波紋数", ripple_countC,
+                "波紋間隔", ripple_intervalC,
+                "増幅減衰回数", ripple_ampC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        elseif effectC == 5 then
+            obj.effect("ラスター登退場_AKIRA@各種登退場_AKIRA",
+                "登退場秒数",entry_timeC,
+                "登場秒数",in_timeC,
+                "退場秒数",out_timeC,
+                "高さ", entry_raster_heightC,
+                "横幅", raster_wC,
+                "周期", raster_periodC,
+                "縦ラスター", raster_vC,
+                "ランダム振幅", raster_randC,
+                "登場順",0,
+                "間隔",0,
+                "イージングタイプ",entry_easingC,
+                "INフェード",entry_in_fadeC,
+                "インフェード時間",in_fade_timeC,
+                "OUTフェード",entry_out_fadeC,
+                "アウトフェード時間",out_fade_timeC
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        obj.clearbuffer("tempbuffer")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endC")
+
+    end
+
+
+-- ================================================================
+-- グループ外の文字: そのまま tempbuffer に通常描画
+-- ================================================================
+elseif idx <= last then
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.draw(
+        _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+        _G.gi_scale[idx], _G.gi_alpha[idx],
+        _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+    )
+    obj.load("tempbuffer")
+
+    obj.clearbuffer("tempbuffer")
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","elseif")
+else
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","else")
+    return
+end

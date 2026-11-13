@@ -1,0 +1,2 @@
+# Individual_effects
+指定した文字たちに別々のアニメーションを付与するAviutl2のスクリプト。
