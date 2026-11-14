@@ -5,6 +5,7 @@
 --track@startA:Aグループ::開始A,1,100,1,1
 --track@endA:Aグループ::終了A,1,100,1,1
 --select@effectA:Aグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--select@ankerA:Aグループ::アンカー=0,非表示=0,表示=1
 --track@entry_timeA:Aグループ::登退場秒数,0,5,0.3,0.01
 --track@in_timeA:Aグループ::登場秒数,0,5,0,0.01
 --track@out_timeA:Aグループ::退場秒数,0,5,0,0.01
@@ -34,6 +35,7 @@
 --track@startB:Bグループ::開始B,1,100,1,1
 --track@endB:Bグループ::終了B,1,100,1,1
 --select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--select@ankerB:Bグループ::アンカー=0,非表示=0,表示=1
 --track@entry_timeB:Bグループ::登退場秒数,0,5,0.3,0.01
 --track@in_timeB:Bグループ::登場秒数,0,5,0,0.01
 --track@out_timeB:Bグループ::退場秒数,0,5,0,0.01
@@ -63,6 +65,7 @@
 --track@startC:Cグループ::開始C,1,100,1,1
 --track@endC:Cグループ::終了C,1,100,1,1
 --select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--select@ankerC:Cグループ::アンカー=0,非表示=0,表示=1
 --track@entry_timeC:Cグループ::登退場秒数,0,5,0.3,0.01
 --track@in_timeC:Cグループ::登場秒数,0,5,0,0.01
 --track@out_timeC:Cグループ::退場秒数,0,5,0,0.01
@@ -91,6 +94,7 @@
 --hide@entry_timeA:effectA==0
 --hide@in_timeA:effectA==0
 --hide@out_timeA:effectA==0
+--hide@ankerA:effectA~=1
 --hide@entry_xA:effectA~=1
 --hide@entry_yA:effectA~=1
 --hide@entry_zA:effectA~=1
@@ -112,6 +116,7 @@
 --hide@entry_timeB:effectB==0
 --hide@in_timeB:effectB==0
 --hide@out_timeB:effectB==0
+--hide@ankerB:effectB~=1
 --hide@entry_xB:effectB~=1
 --hide@entry_yB:effectB~=1
 --hide@entry_zB:effectB~=1
@@ -133,6 +138,7 @@
 --hide@entry_timeC:effectC==0
 --hide@in_timeC:effectC==0
 --hide@out_timeC:effectC==0
+--hide@ankerC:effectC~=1
 --hide@entry_xC:effectC~=1
 --hide@entry_yC:effectC~=1
 --hide@entry_zC:effectC~=1
@@ -229,6 +235,19 @@ if AKIRA_h then
     local lc     = AKIRA_h.line_break_confirmation()
     full_w = math.min(obj.screen_w, tw)
     full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- アンカーを表示するか非表示にするかをトラックバーで設定
+-- ================================================================
+if ankerA ~= 0 then
+    obj.setanchor("entry_xA,entry_yA",0,"arm","color",0xff0000)
+end
+if ankerB ~= 0 then
+    obj.setanchor("entry_xB,entry_yB",0,"arm","color",0x00ff00)
+end
+if ankerC ~= 0 then
+    obj.setanchor("entry_xC,entry_yC",0,"arm","color",0x0000ff)
 end
 
 -- ================================================================
@@ -542,11 +561,12 @@ end
 --track@endA:Aグループ::終了A,1,100,1,1
 --select@effectA:Aグループ::各種設定=0,変更なし=0,手動設定=1
 
+--select@ankerA:Aグループ::アンカー=0,非表示=0,表示=1
 --track@xA:Aグループ::X,-2000,2000,0
 --track@yA:Aグループ::Y,-2000,2000,0
 --track@zA:Aグループ::Z,-2000,2000,0
 --track@zoomA:Aグループ::拡大率,0,1000,100
---track@aspect_xA:Aグループ::X拡大率,0,1000,100
+--track@aspect_xA:Aグループ::X拡大率,0,1000,50
 --track@aspect_yA:Aグループ::Y拡大率,0,1000,50
 --track@aspect_zA:Aグループ::Z拡大率,0,1000,50
 --track@alphaA:Aグループ::透明度,0,100,0,0.1
@@ -566,11 +586,12 @@ end
 --track@endB:Bグループ::終了B,1,100,1,1
 --select@effectB:Bグループ::各種設定=0,変更なし=0,手動設定=1
 
+--select@ankerB:Bグループ::アンカー=0,非表示=0,表示=1
 --track@xB:Bグループ::X,-2000,2000,0
 --track@yB:Bグループ::Y,-2000,2000,0
 --track@zB:Bグループ::Z,-2000,2000,0
 --track@zoomB:Bグループ::拡大率,0,1000,100
---track@aspect_xB:Bグループ::X拡大率,0,1000,100
+--track@aspect_xB:Bグループ::X拡大率,0,1000,50
 --track@aspect_yB:Bグループ::Y拡大率,0,1000,50
 --track@aspect_zB:Bグループ::Z拡大率,0,1000,50
 --track@alphaB:Bグループ::透明度,0,100,0,0.1
@@ -590,11 +611,12 @@ end
 --track@endC:Cグループ::終了C,1,100,1,1
 --select@effectC:Cグループ::各種設定=0,変更なし=0,手動設定=1
 
+--select@ankerC:Cグループ::アンカー=0,非表示=0,表示=1
 --track@xC:Cグループ::X,-2000,2000,0
 --track@yC:Cグループ::Y,-2000,2000,0
 --track@zC:Cグループ::Z,-2000,2000,0
 --track@zoomC:Cグループ::拡大率,0,1000,100
---track@aspect_xC:Cグループ::X拡大率,0,1000,100
+--track@aspect_xC:Cグループ::X拡大率,0,1000,50
 --track@aspect_yC:Cグループ::Y拡大率,0,1000,50
 --track@aspect_zC:Cグループ::Z拡大率,0,1000,50
 --track@alphaC:Cグループ::透明度,0,100,0,0.1
@@ -609,6 +631,7 @@ end
 --check@transparency_inversionC:Cグループ::透明度反転,0
 --group
 
+--hide@ankerA:effectA==0
 --hide@xA:effectA==0
 --hide@yA:effectA==0
 --hide@zA:effectA==0
@@ -627,6 +650,7 @@ end
 --hide@hue_inversionA:effectA==0
 --hide@transparency_inversionA:effectA==0
 
+--hide@ankerB:effectB==0
 --hide@xB:effectB==0
 --hide@yB:effectB==0
 --hide@zB:effectB==0
@@ -645,6 +669,7 @@ end
 --hide@hue_inversionB:effectB==0
 --hide@transparency_inversionB:effectB==0
 
+--hide@ankerC:effectC==0
 --hide@xC:effectC==0
 --hide@yC:effectC==0
 --hide@zC:effectC==0
@@ -741,6 +766,19 @@ if AKIRA_h then
     local lc     = AKIRA_h.line_break_confirmation()
     full_w = math.min(obj.screen_w, tw)
     full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- アンカーを表示するか非表示にするかをトラックバーで設定
+-- ================================================================
+if ankerA ~= 0 then
+    obj.setanchor("xA,yA",0,"arm","color",0xff0000)
+end
+if ankerB ~= 0 then
+    obj.setanchor("xB,yB",0,"arm","color",0x00ff00)
+end
+if ankerC ~= 0 then
+    obj.setanchor("xC,yC",0,"arm","color",0x0000ff)
 end
 
 -- ================================================================
@@ -1409,6 +1447,7 @@ end
 --track@startA:Aグループ::開始A,1,100,1,1
 --track@endA:Aグループ::終了A,1,100,1,1
 --select@effectA:Aグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--select@ankerA:Aグループ::アンカー=0,非表示=0,表示=1
 --track@entry_timeA:Aグループ::登退場秒数,0,5,0.3,0.01
 --track@in_timeA:Aグループ::登場秒数,0,5,0,0.01
 --track@out_timeA:Aグループ::退場秒数,0,5,0,0.01
@@ -1468,6 +1507,7 @@ end
 --hide@entry_out_fadeA:effectA==0
 --hide@out_fade_timeA:effectA==0
 
+--hide@ankerA:effectA~=1
 --hide@entry_xA:effectA~=1
 --hide@entry_yA:effectA~=1
 --hide@entry_zA:effectA~=1
@@ -1511,6 +1551,7 @@ end
 --track@startB:Bグループ::開始B,1,100,1,1
 --track@endB:Bグループ::終了B,1,100,1,1
 --select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--select@ankerB:Bグループ::アンカー=0,非表示=0,表示=1
 --track@entry_timeB:Bグループ::登退場秒数,0,5,0.3,0.01
 --track@in_timeB:Bグループ::登場秒数,0,5,0,0.01
 --track@out_timeB:Bグループ::退場秒数,0,5,0,0.01
@@ -1570,6 +1611,7 @@ end
 --hide@entry_out_fadeB:effectB==0
 --hide@out_fade_timeB:effectB==0
 
+--hide@ankerB:effectB~=1
 --hide@entry_xB:effectB~=1
 --hide@entry_yB:effectB~=1
 --hide@entry_zB:effectB~=1
@@ -1613,6 +1655,7 @@ end
 --track@startC:Cグループ::開始C,1,100,1,1
 --track@endC:Cグループ::終了C,1,100,1,1
 --select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--select@ankerC:Cグループ::アンカー=0,非表示=0,表示=1
 --track@entry_timeC:Cグループ::登退場秒数,0,5,0.3,0.01
 --track@in_timeC:Cグループ::登場秒数,0,5,0,0.01
 --track@out_timeC:Cグループ::退場秒数,0,5,0,0.01
@@ -1673,6 +1716,7 @@ end
 --hide@entry_out_fadeC:effectC==0
 --hide@out_fade_timeC:effectC==0
 
+--hide@ankerC:effectC~=1
 --hide@entry_xC:effectC~=1
 --hide@entry_yC:effectC~=1
 --hide@entry_zC:effectC~=1
@@ -1790,6 +1834,19 @@ if AKIRA_h then
     local lc     = AKIRA_h.line_break_confirmation()
     full_w = math.min(obj.screen_w, tw)
     full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- アンカーを表示するか非表示にするかをトラックバーで設定
+-- ================================================================
+if ankerA ~= 0 then
+    obj.setanchor("entry_xA,entry_yA",0,"arm","color",0xff0000)
+end
+if ankerB ~= 0 then
+    obj.setanchor("entry_xB,entry_yB",0,"arm","color",0x00ff00)
+end
+if ankerC ~= 0 then
+    obj.setanchor("entry_xC,entry_yC",0,"arm","color",0x0000ff)
 end
 
 -- ================================================================
