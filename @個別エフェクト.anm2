@@ -1164,9 +1164,95 @@ end
 --group:Aグループ（開始・終了文字番号）
 --track@startA:Aグループ::開始A,1,100,1,1
 --track@endA:Aグループ::終了A,1,100,1,1
---select@effectA:Aグループ::アニメーション=0,なし=0,縁取り=1,枠線=2,ドロップシャドウ=3,凸エッジ=4,グラデーション=5,ぼかし=6,レンズブラー=7,放射ブラー=8,方向ブラー=9,モーションブラー=10,境界ぼかし=11,グロー=12,発光=13,閃光=14,拡散光=15,ライト=16,色ずれ=17,モザイク=18,ミラー=19,振動=20,震える=21,砕け散る=22
+--select@effectA:Aグループ::アニメーション=0,なし=0,縁取り=1,枠線=2,ドロップシャドウ=3,凸エッジ=4,グラデーション=5,ぼかし=6,グロー=7,発光=8,色ずれ=9,モザイク=10,ミラー=11,振動=12,震える=13,砕け散る=14
 
+--track@frame_sA:Aグループ(縁取り)::サイズ,0,500,5,1
+--track@frame_bA:Aグループ(縁取り)::ぼかし,0,100,5,1
+--color@frame_colA::Aグループ(縁取り)::縁色,0xffffff
 
+--track@border_xA:Aグループ(枠線)::X,-2000,2000,0
+--track@border_yA:Aグループ(枠線)::Y,-2000,1000,0
+--track@border_sA:Aグループ(枠線)::サイズ,0,1000,10
+--track@border_rA:Aグループ(枠線)::丸み,0,1000,0
+--color@border_colA:Aグループ(枠線)::枠色,0xffffff
+
+--track@drop_shadow_xA:Aグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yA:Aグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepA:Aグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionA:Aグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorA:Aグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@edge_widthA:Aグループ(凸エッジ)::幅,0,100,4
+--track@edge_heightA:Aグループ(凸エッジ)::高さ,0,3.00,1.00,0.01
+--track@edge_rotateA:Aグループ(凸エッジ)::角度,-3600,3600,45.00,0.01
+
+--track@grd_powA:Aグループ(グラデーション)::強さ,0.0,100.0,100.0
+--track@grd_cxA:Aグループ(グラデーション)::中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyA:Aグループ(グラデーション)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateA:Aグループ(グラデーション)::角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthA:Aグループ(グラデーション)::幅,0,2000,100
+--select@grd_compositeA:Aグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeA:Aグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colA:Aグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colA:Aグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@blur_rangeA:Aグループ(ぼかし)::範囲,0,1000,5
+--track@blur_aspectA:Aグループ(ぼかし)::縦横比,-100.00,100.00,0.00,0.01
+--track@blur_lightA:Aグループ(ぼかし)::光の強さ,0.0,60.0,0.0,0.1
+
+--track@glow2_strengthA::Aグループ(グロー)::強さ,-4000,4000,50
+--track@glow2_diffusionA::Aグループ(グロー)::拡散,0,400,50
+--track@glow2_angleA::Aグループ(グロー)::角度,-3600,3600,25
+--track@glow2_thresholdA::Aグループ(グロー)::しきい値,0,100,20
+--track@glow2_ratioA::Aグループ(グロー)::比率,0,200,100
+--track@glow2_blurA::Aグループ(グロー)::ぼかし,0,100,1
+--color@glow2_colorA::Aグループ(グロー)::光色,nil
+--check@glow2_disableA::Aグループ(グロー)::光色を無効,0
+--select@glow2_shapeA::Aグループ(グロー)::形状=0,通常=0,クロス(4本)=1,クロス(6本)=2,クロス(8本)=3,クロス(10本)=4,クロス(12本)=5,ライン=6
+
+--track@glow_strengthA::Aグループ(発光)::強さ,-4000,4000,500
+--track@glow_diffusionA::Aグループ(発光)::拡散,0,4000,250
+--track@glow_thresholdA::Aグループ(発光)::しきい値,0,100,80
+--track@glow_speedA::Aグループ(発光)::拡散速度,0,4000,0
+--check@glow_fix_sizeA::Aグループ(発光)::サイズ固定,0
+--color@glow_colorA::Aグループ(発光)::光色,0xffffff
+
+--track@shift_widthA::Aグループ(色ずれ)::ずれ幅,-4000,4000,7
+--track@shift_angleA::Aグループ(色ずれ)::角度,-3600,3600,90
+--track@shift_strengthA::Aグループ(色ずれ)::強さ,-4000,4000,100
+--select@shift_typeA::Aグループ(色ずれ)::色ずれの種類=1,赤緑A=0,赤青A=1,緑青A=2,赤緑B=3,赤青B=4,緑青B=5
+
+--track@mosaic_sizeA::Aグループ(モザイク)::モザイクサイズ,1,4000,12
+--check@mosaic_tileA::Aグループ(モザイク)::タイル風,0
+
+--track@mirror_alphaA::Aグループ(ミラー)::透明度
+--track@mirror_attenuationA::Aグループ(ミラー)::減衰
+--track@mirror_boundaryA::Aグループ(ミラー)::境目調整
+--select@mirror_dirA::Aグループ(ミラー)::ミラーの方向=1,上側=0,下側=1,左側=2,右側=3
+
+--track@vib_xA::Aグループ(振動)::X,-4000,4000,10
+--track@vib_yA::Aグループ(振動)::Y,-4000,4000,10
+--track@vib_zA::Aグループ(振動)::Z,-4000,4000,0
+--track@vib_periodA::Aグループ(振動)::周期,0,100,1,0.01
+--check@vib_randA::Aグループ(振動)::ランダムに強さを変える,1
+--check@vib_complexA::Aグループ(振動)::複雑に振動,0
+
+--track@tremble_ampA::Aグループ(震える)::振幅,-4000,4000,5
+--track@tremble_angleA::Aグループ(震える)::角度,-3600,3600,10
+--track@tremble_intervalA::Aグループ(震える)::震え間隔,0,100,0,1
+
+--track@shatter_timeA::Aグループ(砕け散る)::開始時間,-100.00,100.00,0.00,0.01
+--track@shatter_playbackspeedA::Aグループ(砕け散る)::再生速度,-10.00,10.00,1.00,0.01
+--track@shatter_cxA:Aグループ(砕け散る)::中心X,-5000.0,5000.0,0.0,0.1
+--track@shatter_cyA:Aグループ(砕け散る)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@shatter_czA:Aグループ(砕け散る)::中心Z,-5000.0,5000.0,0.0,0.1
+--track@shatter_fragmentA:Aグループ(砕け散る)::破片サイズ,5.0,1000.0,50.0
+--track@shatter_speedA:Aグループ(砕け散る)::速度,-5000.0,5000.0,100.0
+--track@shatter_gravityA:Aグループ(砕け散る)::重力,0.0,1000.0,100.0
+--track@shatter_lagA:Aグループ(砕け散る)::時間差,-1000.0,1000.0,100.0,0.1
+--track@shatter_distanceA:Aグループ(砕け散る)::距離影響,0.0,5000.0,100.0,0.1
+--track@shatter_rotateA:Aグループ(砕け散る)::ランダム回転,0.0,5000.0,100.0,0.1
+--track@shatter_directionA:Aグループ(砕け散る)::ランダム方向,0.0,5000.0,100.0,0.1
 --group
 
 --group:Bグループ（開始・終了文字番号）
@@ -1183,11 +1269,80 @@ end
 
 --group
 
---hide@entry_timeA:effectA==0
---hide@in_timeA:effectA==0
---hide@out_timeA:effectA==0
---hide@entry_xA:effectA~=1
-
+--hide@frame_sA:effectA~=1
+--hide@frame_bA:effectA~=1
+--hide@frame_colA:effectA~=1
+--hide@border_xA:effectA~=2
+--hide@border_yA:effectA~=2
+--hide@border_sA:effectA~=2
+--hide@border_rA:effectA~=2
+--hide@border_colA:effectA~=2
+--hide@drop_shadow_xA:effectA~=3
+--hide@drop_shadow_yA:effectA~=3
+--hide@drop_shadow_deepA:effectA~=3
+--hide@drop_shadow_diffusionA:effectA~=3
+--hide@drop_shadow_colorA:effectA~=3
+--hide@edge_widthA:effectA~=4
+--hide@edge_heightA:effectA~=4
+--hide@edge_rotateA:effectA~=4
+--hide@grd_powA:effectA~=5
+--hide@grd_cxA:effectA~=5
+--hide@grd_cyA:effectA~=5
+--hide@grd_rotateA:effectA~=5
+--hide@grd_widthA:effectA~=5
+--hide@grd_compositeA:effectA~=5
+--hide@grd_typeA:effectA~=5
+--hide@grd_start_colA:effectA~=5
+--hide@grd_end_colA:effectA~=5
+--hide@blur_rangeA:effectA~=6
+--hide@blur_aspectA:effectA~=6
+--hide@blur_lightA:effectA~=6
+--hide@glow2_strengthA:effectA~=7
+--hide@glow2_diffusionA:effectA~=7
+--hide@glow2_angleA:effectA~=7
+--hide@glow2_thresholdA:effectA~=7
+--hide@glow2_ratioA:effectA~=7
+--hide@glow2_blurA:effectA~=7
+--hide@glow2_colorA:effectA~=7
+--hide@glow2_disableA:effectA~=7
+--hide@glow2_shapeA:effectA~=7
+--hide@glow_strengthA:effectA~=8
+--hide@glow_diffusionA:effectA~=8
+--hide@glow_thresholdA:effectA~=8
+--hide@glow_speedA:effectA~=8
+--hide@glow_fix_sizeA:effectA~=8
+--hide@glow_colorA:effectA~=8
+--hide@shift_widthA:effectA~=9
+--hide@shift_angleA:effectA~=9
+--hide@shift_strengthA:effectA~=9
+--hide@shift_typeA:effectA~=9
+--hide@mosaic_sizeA:effectA~=10
+--hide@mosaic_tileA:effectA~=10
+--hide@mirror_alphaA:effectA~=11
+--hide@mirror_attenuationA:effectA~=11
+--hide@mirror_boundaryA:effectA~=11
+--hide@mirror_dirA:effectA~=11
+--hide@vib_xA:effectA~=12
+--hide@vib_yA:effectA~=12
+--hide@vib_zA:effectA~=12
+--hide@vib_periodA:effectA~=12
+--hide@vib_randA:effectA~=12
+--hide@vib_complexA:effectA~=12
+--hide@tremble_ampA:effectA~=13
+--hide@tremble_angleA:effectA~=13
+--hide@tremble_intervalA:effectA~=13
+--hide@shatter_timeA:effectA~=14
+--hide@shatter_playbackspeedA:effectA~=14
+--hide@shatter_cxA:effectA~=14
+--hide@shatter_cyA:effectA~=14
+--hide@shatter_czA:effectA~=14
+--hide@shatter_fragmentA:effectA~=14
+--hide@shatter_speedA:effectA~=14
+--hide@shatter_gravityA:effectA~=14
+--hide@shatter_lagA:effectA~=14
+--hide@shatter_distanceA:effectA~=14
+--hide@shatter_rotateA:effectA~=14
+--hide@shatter_directionA:effectA~=14
 
 -- ヘルパーモジュールの読み込みを試行
 local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
@@ -1380,9 +1535,121 @@ if inA then
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
             obj.effect("縁取り",
-            "サイズ",5,
-            "ぼかし",5,
-            "縁色","ffffff"
+            "サイズ",frame_sA,
+            "ぼかし",frame_bA,
+            "縁色",frame_colA
+            )
+        elseif effectA == 2 then
+            obj.effect("枠線",
+            "X",border_xA,
+            "Y",border_yA,
+            "サイズ",border_sA,
+            "丸み",border_rA,
+            "枠色",border_colA
+            )
+        elseif effectA == 3 then
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xA,
+            "Y",drop_shadow_yA,
+            "濃さ",drop_shadow_deepA,
+            "拡散",drop_shadow_diffusionA,
+            "影色",drop_shadow_colorA,
+            "影を別オブジェクトで描画",0
+            )
+        elseif effectA == 4 then
+            obj.effect("凸エッジ",
+            "幅",edge_widthA,
+            "高さ",edge_heightA,
+            "角度",edge_rotateA
+            )
+        elseif effectA == 5 then -- 合成モード、形状への変換テーブル未作成のため、一旦定数。またアプデでグラデの使用は変わったようだが、未対応。
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+        elseif effectA == 6 then
+            obj.effect("ぼかし",
+            "範囲",blur_rangeA,
+            "縦横比",blur_aspectA,
+            "光の強さ",blur_lightA,
+            "サイズ固定",0
+            )
+        elseif effectA == 7 then -- 形状への変換テーブル未作成のため、一旦定数。
+            obj.effect("グロー",
+            "強さ",glow2_strengthA,
+            "拡散",glow2_diffusionA,
+            "角度",glow2_angleA,
+            "しきい値",glow2_thresholdA,
+            "比率",glow2_ratioA,
+            "ぼかし",glow2_blurA,
+            "形状","クロス(4本)",
+            "光成分のみ",glow2_disableA,
+            "サイズ固定",0
+            )
+        elseif effectA == 8 then -- 光色の項目は一旦保留
+            obj.effect("発光",
+            "強さ",glow_strengthA,
+            "拡散",glow_diffusionA,
+            "しきい値",glow_thresholdA,
+            "拡散速度",glow_speedA,
+            "サイズ固定",0
+            )
+        elseif effectA == 9 then -- 色ずれの種類への変換テーブル未作成のため、一旦定数。
+            obj.effect("色ずれ",
+            "ずれ幅",shift_widthA,
+            "角度",shift_angleA,
+            "強さ",shift_strengthA,
+            "色ずれの種類","赤緑A"
+            )
+        elseif effectA == 10 then
+            obj.effect("モザイク",
+            "サイズ",mosaic_sizeA,
+            "タイル風",mosaic_tileA
+            )
+        elseif effectA == 11 then -- ミラーの方向への変換テーブル未作成のため、一旦定数。
+            obj.effect("ミラー",
+            "透明度",mirror_alphaA,
+            "減衰",mirror_attenuationA,
+            "境目調整",mirror_boundaryA,
+            "ミラーの方向","下側",
+            "中心の位置を変更",0
+            )
+        elseif effectA == 12 then
+            obj.effect("振動",
+            "X",vib_xA,
+            "Y",vib_yA,
+            "Z",vib_zA,
+            "周期",vib_period,
+            "ランダムに強さを変える",vib_randA,
+            "複雑に振動",vib_complexA
+            )
+        elseif effectA == 13 then
+            obj.effect("震える",
+            "振幅",tremble_ampA,
+            "角度",tremble_angleA,
+            "間隔",tremble_intervalA
+            )
+        elseif effectA == 14 then
+            obj.effect("砕け散る",
+            "開始時間",shatter_timeA,
+            "再生速度",shatter_playbackspeedA,
+            "中心X",shatter_cxA,
+            "中心Y",shatter_cyA,
+            "中心Z",shatter_czA,
+            "破片サイズ",shatter_fragmentA,
+            "速度",shatter_speedA,
+            "重力",shatter_gravityA,
+            "時間差",shatter_lagA,
+            "距離影響",shatter_distanceA,
+            "ランダム回転",shatter_rotateA,
+            "ランダム方向",shatter_directionA
             )
         end
         -- ↑ エフェクト追加ここまで ↑
