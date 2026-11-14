@@ -1,4 +1,5 @@
-﻿@個別エフェクト(移動登退場)
+﻿-- 他のファイルでは問題ないが、このファイルだけは最初の1行を開けないと認識されないようだ。理由は不明。
+@個別エフェクト(移動登退場)
 --label:個別エフェクト
 --information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
 --group:Aグループ（開始・終了文字番号）
@@ -169,7 +170,7 @@ end
 -- 個別オブジェクトが有効かを確認
 local is_multi = obj.getoption("multi_object")
 if not is_multi then
-    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクト」処理をスキップします。")
     return
 end
 
@@ -223,6 +224,41 @@ local inC = (current_char >= sC and current_char <= eC)
 
 -- ここに各グループのオブジェクトのサイズを求める変数を作る予定
 -- ここに変数を作成する
+
+-- ================================================================
+-- まとめた文字群の中心点を計算する関数
+-- ================================================================
+local function get_group_center(start_num, end_num)
+    local s = math.min(start_num, end_num)
+    local e = math.max(start_num, end_num)
+    local min_x, max_x = math.huge, -math.huge
+    local min_y, max_y = math.huge, -math.huge
+    local count = 0
+
+    for i = s - 1, e - 1 do
+        local ox = _G.gi_ox and _G.gi_ox[i]
+        local oy = _G.gi_oy and _G.gi_oy[i]
+        local w  = (_G.gi_w and _G.gi_w[i]) or 0
+        local h  = (_G.gi_h and _G.gi_h[i]) or 0
+        if ox and oy then
+            count = count + 1
+            local left   = ox - w / 2
+            local right  = ox + w / 2
+            local top    = oy - h / 2
+            local bottom = oy + h / 2
+            if left < min_x then min_x = left end
+            if right > max_x then max_x = right end
+            if top < min_y then min_y = top end
+            if bottom > max_y then max_y = bottom end
+        end
+    end
+
+    if count == 0 then
+        return 0, 0
+    end
+
+    return (min_x + max_x) / 2, (min_y + max_y) / 2
+end
 
 -- ================================================================
 -- 合成バッファのサイズを取得
@@ -316,6 +352,13 @@ if inA then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxA, cyA = get_group_center(startA, endA)
+        obj.cx = cxA
+        obj.cy = cyA
+        obj.ox = cxA
+        obj.oy = cyA
+
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
            obj.effect("移動登場と退場_AKIRA",
@@ -403,6 +446,13 @@ elseif inB then
 
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxB, cyB = get_group_center(startB, endB)
+        obj.cx = cxB
+        obj.cy = cyB
+        obj.ox = cxB
+        obj.oy = cyB
 
         -- ↓ Bグループへのエフェクト適用 ↓
         if effectB == 1 then
@@ -492,6 +542,13 @@ elseif inC then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxC, cyC = get_group_center(startC, endC)
+        obj.cx = cxC
+        obj.cy = cyC
+        obj.ox = cxC
+        obj.oy = cyC
 
         -- ↓ Cグループへのエフェクト適用 ↓
         if effectC == 1 then
@@ -700,7 +757,7 @@ end
 -- 個別オブジェクトが有効かを確認
 local is_multi = obj.getoption("multi_object")
 if not is_multi then
-    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクト」処理をスキップします。")
     return
 end
 
@@ -754,6 +811,41 @@ local inC = (current_char >= sC and current_char <= eC)
 
 -- ここに各グループのオブジェクトのサイズを求める変数を作る予定
 -- ここに変数を作成する
+
+-- ================================================================
+-- まとめた文字群の中心点を計算する関数
+-- ================================================================
+local function get_group_center(start_num, end_num)
+    local s = math.min(start_num, end_num)
+    local e = math.max(start_num, end_num)
+    local min_x, max_x = math.huge, -math.huge
+    local min_y, max_y = math.huge, -math.huge
+    local count = 0
+
+    for i = s - 1, e - 1 do
+        local ox = _G.gi_ox and _G.gi_ox[i]
+        local oy = _G.gi_oy and _G.gi_oy[i]
+        local w  = (_G.gi_w and _G.gi_w[i]) or 0
+        local h  = (_G.gi_h and _G.gi_h[i]) or 0
+        if ox and oy then
+            count = count + 1
+            local left   = ox - w / 2
+            local right  = ox + w / 2
+            local top    = oy - h / 2
+            local bottom = oy + h / 2
+            if left < min_x then min_x = left end
+            if right > max_x then max_x = right end
+            if top < min_y then min_y = top end
+            if bottom > max_y then max_y = bottom end
+        end
+    end
+
+    if count == 0 then
+        return 0, 0
+    end
+
+    return (min_x + max_x) / 2, (min_y + max_y) / 2
+end
 
 -- ================================================================
 -- 合成バッファのサイズを取得
@@ -847,6 +939,13 @@ if inA then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxA, cyA = get_group_center(startA, endA)
+        obj.cx = cxA
+        obj.cy = cyA
+        obj.ox = cxA
+        obj.oy = cyA
+
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
            obj.effect("座標","X",xA,"Y",yA,"Z",zA)
@@ -921,6 +1020,13 @@ elseif inB then
 
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxB, cyB = get_group_center(startB, endB)
+        obj.cx = cxB
+        obj.cy = cyB
+        obj.ox = cxB
+        obj.oy = cyB
 
         -- ↓ Bグループへのエフェクト適用 ↓
         if effectB == 1 then
@@ -997,6 +1103,13 @@ elseif inC then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxC, cyC = get_group_center(startC, endC)
+        obj.cx = cxC
+        obj.cy = cyC
+        obj.ox = cxC
+        obj.oy = cyC
 
         -- ↓ Cグループへのエフェクト適用 ↓
         if effectC == 1 then
@@ -1088,7 +1201,7 @@ end
 -- 個別オブジェクトが有効かを確認
 local is_multi = obj.getoption("multi_object")
 if not is_multi then
-    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクト」処理をスキップします。")
     return
 end
 
@@ -1142,6 +1255,41 @@ local inC = (current_char >= sC and current_char <= eC)
 
 -- ここに各グループのオブジェクトのサイズを求める変数を作る予定
 -- ここに変数を作成する
+
+-- ================================================================
+-- まとめた文字群の中心点を計算する関数
+-- ================================================================
+local function get_group_center(start_num, end_num)
+    local s = math.min(start_num, end_num)
+    local e = math.max(start_num, end_num)
+    local min_x, max_x = math.huge, -math.huge
+    local min_y, max_y = math.huge, -math.huge
+    local count = 0
+
+    for i = s - 1, e - 1 do
+        local ox = _G.gi_ox and _G.gi_ox[i]
+        local oy = _G.gi_oy and _G.gi_oy[i]
+        local w  = (_G.gi_w and _G.gi_w[i]) or 0
+        local h  = (_G.gi_h and _G.gi_h[i]) or 0
+        if ox and oy then
+            count = count + 1
+            local left   = ox - w / 2
+            local right  = ox + w / 2
+            local top    = oy - h / 2
+            local bottom = oy + h / 2
+            if left < min_x then min_x = left end
+            if right > max_x then max_x = right end
+            if top < min_y then min_y = top end
+            if bottom > max_y then max_y = bottom end
+        end
+    end
+
+    if count == 0 then
+        return 0, 0
+    end
+
+    return (min_x + max_x) / 2, (min_y + max_y) / 2
+end
 
 -- ================================================================
 -- 合成バッファのサイズを取得
@@ -1222,6 +1370,13 @@ if inA then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxA, cyA = get_group_center(startA, endA)
+        obj.cx = cxA
+        obj.cy = cyA
+        obj.ox = cxA
+        obj.oy = cyA
+
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
             obj.effect("縁取り",
@@ -1290,6 +1445,13 @@ elseif inB then
 
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxB, cyB = get_group_center(startB, endB)
+        obj.cx = cxB
+        obj.cy = cyB
+        obj.ox = cxB
+        obj.oy = cyB
 
         -- ↓ Bグループへのエフェクト適用 ↓
         if effectB == 1 then
@@ -1379,6 +1541,13 @@ elseif inC then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxC, cyC = get_group_center(startC, endC)
+        obj.cx = cxC
+        obj.cy = cyC
+        obj.ox = cxC
+        obj.oy = cyC
 
         -- ↓ Cグループへのエフェクト適用 ↓
         if effectC == 1 then
@@ -1491,6 +1660,9 @@ end
 --check@raster_vA:Aグループ::縦ラスター,0
 --check@raster_randA:Aグループ::ランダム振幅,0
 
+--check@entry_inA:Aグループ::登場,1
+--check@entry_outA:Aグループ::退場,0
+
 --select@entry_easingA:Aグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
 --check@entry_in_fadeA:Aグループ::INフェード,0
 --track@in_fade_timeA:Aグループ::インフェード時間,0,5,0.3,0.01
@@ -1501,6 +1673,8 @@ end
 --hide@entry_timeA:effectA==0
 --hide@in_timeA:effectA==0
 --hide@out_timeA:effectA==0
+--hide@entry_inA:effectA==0
+--hide@entry_outA:effectA==0
 --hide@entry_easingA:effectA==0
 --hide@entry_in_fadeA:effectA==0
 --hide@in_fade_timeA:effectA==0
@@ -1595,6 +1769,9 @@ end
 --check@raster_vB:Bグループ::縦ラスター,0
 --check@raster_randB:Bグループ::ランダム振幅,0
 
+--check@entry_inB:Bグループ::登場,1
+--check@entry_outB:Bグループ::退場,0
+
 --select@entry_easingB:Bグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
 --check@entry_in_fadeB:Bグループ::INフェード,0
 --track@in_fade_timeB:Bグループ::インフェード時間,0,5,0.3,0.01
@@ -1605,6 +1782,8 @@ end
 --hide@entry_timeB:effectB==0
 --hide@in_timeB:effectB==0
 --hide@out_timeB:effectB==0
+--hide@entry_inB:effectB==0
+--hide@entry_outB:effectB==0
 --hide@entry_easingB:effectB==0
 --hide@entry_in_fadeB:effectB==0
 --hide@in_fade_timeB:effectB==0
@@ -1700,7 +1879,11 @@ end
 --check@raster_vC:Cグループ::縦ラスター,0
 --check@raster_randC:Cグループ::ランダム振幅,0
 
+--check@entry_inC:Cグループ::登場,1
+--check@entry_outC:Cグループ::退場,0
+
 --select@entry_easingC:Cグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+
 --check@entry_in_fadeC:Cグループ::INフェード,0
 --track@in_fade_timeC:Cグループ::インフェード時間,0,5,0.3,0.01
 --check@entry_out_fadeC:Cグループ::OUTフェード,0
@@ -1711,6 +1894,8 @@ end
 --hide@in_timeC:effectC==0
 --hide@out_timeC:effectC==0
 --hide@entry_easingC:effectC==0
+--hide@entry_inC:effectC==0
+--hide@entry_outC:effectC==0
 --hide@entry_in_fadeC:effectC==0
 --hide@in_fade_timeC:effectC==0
 --hide@entry_out_fadeC:effectC==0
@@ -1768,7 +1953,7 @@ end
 -- 個別オブジェクトが有効かを確認
 local is_multi = obj.getoption("multi_object")
 if not is_multi then
-    debug_print("個別オブジェクトが有効ではないため、「個別エフェクトまとめる」処理をスキップします。")
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクト」処理をスキップします。")
     return
 end
 
@@ -1822,6 +2007,41 @@ local inC = (current_char >= sC and current_char <= eC)
 
 -- 各グループのオブジェクトのサイズ
 -- ここに変数を作成する
+
+-- ================================================================
+-- まとめた文字群の中心点を計算する関数
+-- ================================================================
+local function get_group_center(start_num, end_num)
+    local s = math.min(start_num, end_num)
+    local e = math.max(start_num, end_num)
+    local min_x, max_x = math.huge, -math.huge
+    local min_y, max_y = math.huge, -math.huge
+    local count = 0
+
+    for i = s - 1, e - 1 do
+        local ox = _G.gi_ox and _G.gi_ox[i]
+        local oy = _G.gi_oy and _G.gi_oy[i]
+        local w  = (_G.gi_w and _G.gi_w[i]) or 0
+        local h  = (_G.gi_h and _G.gi_h[i]) or 0
+        if ox and oy then
+            count = count + 1
+            local left   = ox - w / 2
+            local right  = ox + w / 2
+            local top    = oy - h / 2
+            local bottom = oy + h / 2
+            if left < min_x then min_x = left end
+            if right > max_x then max_x = right end
+            if top < min_y then min_y = top end
+            if bottom > max_y then max_y = bottom end
+        end
+    end
+
+    if count == 0 then
+        return 0, 0
+    end
+
+    return (min_x + max_x) / 2, (min_y + max_y) / 2
+end
 
 -- ================================================================
 -- 合成バッファのサイズを取得
@@ -1915,6 +2135,13 @@ if inA then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxA, cyA = get_group_center(startA, endA)
+        obj.cx = cxA
+        obj.cy = cyA
+        obj.ox = cxA
+        obj.oy = cyA
+
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
            obj.effect("移動登場と退場_AKIRA",
@@ -1934,6 +2161,8 @@ if inA then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
                 "INフェード",entry_in_fadeA,
                 "インフェード時間",in_fade_timeA,
                 "OUTフェード",entry_out_fadeA,
@@ -1953,6 +2182,8 @@ if inA then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
                 "INフェード",entry_in_fadeA,
                 "インフェード時間",in_fade_timeA,
                 "OUTフェード",entry_out_fadeA,
@@ -1971,6 +2202,8 @@ if inA then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
                 "INフェード",entry_in_fadeA,
                 "インフェード時間",in_fade_timeA,
                 "OUTフェード",entry_out_fadeA,
@@ -1992,6 +2225,8 @@ if inA then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
                 "INフェード",entry_in_fadeA,
                 "インフェード時間",in_fade_timeA,
                 "OUTフェード",entry_out_fadeA,
@@ -2010,6 +2245,8 @@ if inA then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingA,
+                "登場",entry_inA,
+                "退場",entry_outA,
                 "INフェード",entry_in_fadeA,
                 "インフェード時間",in_fade_timeA,
                 "OUTフェード",entry_out_fadeA,
@@ -2077,6 +2314,13 @@ elseif inB then
         obj.setoption("drawtarget", "framebuffer")
         obj.load("tempbuffer")
 
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxB, cyB = get_group_center(startB, endB)
+        obj.cx = cxB
+        obj.cy = cyB
+        obj.ox = cxB
+        obj.oy = cyB
+
         -- ↓ Bグループへのエフェクト適用 ↓
         if effectB == 1 then
            obj.effect("移動登場と退場_AKIRA",
@@ -2096,6 +2340,8 @@ elseif inB then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
                 "INフェード",entry_in_fadeB,
                 "インフェード時間",in_fade_timeB,
                 "OUTフェード",entry_out_fadeB,
@@ -2115,6 +2361,8 @@ elseif inB then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
                 "INフェード",entry_in_fadeB,
                 "インフェード時間",in_fade_timeB,
                 "OUTフェード",entry_out_fadeB,
@@ -2133,6 +2381,8 @@ elseif inB then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
                 "INフェード",entry_in_fadeB,
                 "インフェード時間",in_fade_timeB,
                 "OUTフェード",entry_out_fadeB,
@@ -2154,6 +2404,8 @@ elseif inB then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
                 "INフェード",entry_in_fadeB,
                 "インフェード時間",in_fade_timeB,
                 "OUTフェード",entry_out_fadeB,
@@ -2172,6 +2424,8 @@ elseif inB then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingB,
+                "登場",entry_inB,
+                "退場",entry_outB,
                 "INフェード",entry_in_fadeB,
                 "インフェード時間",in_fade_timeB,
                 "OUTフェード",entry_out_fadeB,
@@ -2240,6 +2494,13 @@ elseif inC then
         obj.load("tempbuffer")
 
 
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxC, cyC = get_group_center(startC, endC)
+        obj.cx = cxC
+        obj.cy = cyC
+        obj.ox = cxC
+        obj.oy = cyC
+
         -- ↓ Cグループへのエフェクト適用 ↓
         if effectC == 1 then
            obj.effect("移動登場と退場_AKIRA",
@@ -2259,6 +2520,8 @@ elseif inC then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
                 "INフェード",entry_in_fadeC,
                 "インフェード時間",in_fade_timeC,
                 "OUTフェード",entry_out_fadeC,
@@ -2278,6 +2541,8 @@ elseif inC then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
                 "INフェード",entry_in_fadeC,
                 "インフェード時間",in_fade_timeC,
                 "OUTフェード",entry_out_fadeC,
@@ -2296,6 +2561,8 @@ elseif inC then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
                 "INフェード",entry_in_fadeC,
                 "インフェード時間",in_fade_timeC,
                 "OUTフェード",entry_out_fadeC,
@@ -2317,6 +2584,8 @@ elseif inC then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
                 "INフェード",entry_in_fadeC,
                 "インフェード時間",in_fade_timeC,
                 "OUTフェード",entry_out_fadeC,
@@ -2335,6 +2604,8 @@ elseif inC then
                 "登場順",0,
                 "間隔",0,
                 "イージングタイプ",entry_easingC,
+                "登場",entry_inC,
+                "退場",entry_outC,
                 "INフェード",entry_in_fadeC,
                 "インフェード時間",in_fade_timeC,
                 "OUTフェード",entry_out_fadeC,
@@ -2425,7 +2696,7 @@ if not is_multi then
 end
 
 -- ================================================================
--- 合成バッファのサイズを取得
+-- 合成バッファのサイズを取得 (他のスクリプトと同一にして位置ズレを防止)
 -- ================================================================
 local full_w = obj.screen_w
 local full_h = obj.screen_h
@@ -2435,15 +2706,6 @@ if AKIRA_h then
     full_w = math.min(obj.screen_w, tw)
     full_h = math.min(obj.screen_h, th * lc)
 end
-
--- 縁取りがバッファ端で切れないよう外側マージンを考慮
-local tA_calc = (effectA == 1) and sizeA or 0
-local tB_calc = tA_calc + ((effectB == 1) and sizeB or 0)
-local tC_calc = tB_calc + ((effectC == 1) and sizeC or 0)
-local max_blur = math.max(blurA or 0, blurB or 0, blurC or 0)
-local margin = (tC_calc + max_blur) * 2 + 64
-full_w = math.min(obj.screen_w, full_w + margin)
-full_h = math.min(obj.screen_h, full_h + margin)
 
 -- ================================================================
 -- index == 0 のとき：各キャッシュバッファの初期化
@@ -2552,19 +2814,20 @@ end
 
 -- ================================================================
 -- 描画処理
--- 最後の文字で、最奥(3段目) → 2段目 → 1段目 → 最前面(本体) の順に重ねて描画
+-- 最後の文字で tempbuffer 上に最奥(3段目) → 2段目 → 1段目 → 本体 を合成し、
+-- 完成したバッファを load して元の位置に正確に描画する
 -- ================================================================
-obj.setoption("drawtarget", "framebuffer")
-
 if idx == obj.num - 1 then
     -- 各段の外側への累計太さを計算
     local t1 = (effectA == 1) and sizeA or 0
     local t2 = t1 + ((effectB == 1) and sizeB or 0)
     local t3 = t2 + ((effectC == 1) and sizeC or 0)
 
-    -- ------------------------------------------------------------
+    -- tempbuffer 上にレイヤー順で合成
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.clearbuffer("tempbuffer")
+
     -- [第3段目] 最奥：Cグループ(C) / 指定外(Z)
-    -- ------------------------------------------------------------
     if effectC == 1 and t3 > 0 then
         if _G.gi_has_Z then
             obj.copybuffer("object", "cache:text_Z")
@@ -2578,9 +2841,7 @@ if idx == obj.num - 1 then
         end
     end
 
-    -- ------------------------------------------------------------
     -- [第2段目] 中奥：Bグループ(B) / 指定外(Y)
-    -- ------------------------------------------------------------
     if effectB == 1 and t2 > 0 then
         if _G.gi_has_Y then
             obj.copybuffer("object", "cache:text_Y")
@@ -2594,9 +2855,7 @@ if idx == obj.num - 1 then
         end
     end
 
-    -- ------------------------------------------------------------
     -- [第1段目] 手前：Aグループ(A) / 指定外(X)
-    -- ------------------------------------------------------------
     if effectA == 1 and t1 > 0 then
         if _G.gi_has_X then
             obj.copybuffer("object", "cache:text_X")
@@ -2610,16 +2869,16 @@ if idx == obj.num - 1 then
         end
     end
 
-    -- ------------------------------------------------------------
     -- [最前面] 文字本体 (元のテキスト色)
-    -- ------------------------------------------------------------
     obj.copybuffer("object", "cache:text_all")
     obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
 
-    -- 最後の文字が二重に描画されるのを防ぐためクリア
-    obj.clearbuffer("object")
+    -- 完成した合成画像をフレームバッファへロード (AviUtlが本来の位置に描画)
+    obj.setoption("drawtarget", "framebuffer")
+    obj.load("tempbuffer")
     obj.clearbuffer("tempbuffer")
 else
     -- 最後の文字以外は画面に描画しない
+    obj.setoption("drawtarget", "framebuffer")
     obj.clearbuffer("object")
 end
