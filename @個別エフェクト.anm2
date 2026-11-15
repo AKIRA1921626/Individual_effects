@@ -207,12 +207,14 @@ _G.gi_ry[idx]    = obj.ry
 _G.gi_rz[idx]    = obj.rz
 
 -- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
-local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
-local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
-local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
-local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
-local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
-local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
 
 -- 現在の文字番号 (1-based)
 local current_char = idx + 1
@@ -794,12 +796,14 @@ _G.gi_ry[idx]    = obj.ry
 _G.gi_rz[idx]    = obj.rz
 
 -- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
-local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
-local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
-local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
-local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
-local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
-local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
 
 -- 現在の文字番号 (1-based)
 local current_char = idx + 1
@@ -1418,12 +1422,14 @@ _G.gi_ry[idx]    = obj.ry
 _G.gi_rz[idx]    = obj.rz
 
 -- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
-local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
-local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
-local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
-local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
-local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
-local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
 
 -- 現在の文字番号 (1-based)
 local current_char = idx + 1
@@ -2118,12 +2124,14 @@ _G.gi_ry[idx]    = obj.ry
 _G.gi_rz[idx]    = obj.rz
 
 -- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
-local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
-local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
-local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
-local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
-local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
-local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
 
 -- 現在の文字番号 (1-based)
 local current_char = idx + 1
@@ -2764,12 +2772,14 @@ _G.gi_ry[idx]    = obj.ry
 _G.gi_rz[idx]    = obj.rz
 
 -- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
-local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
-local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
-local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
-local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
-local sC = math.min(startC, endC)  -- Cグループ開始 (1-based)
-local eC = math.max(startC, endC)  -- Cグループ終了 (1-based)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
 
 -- 現在の文字番号 (1-based)
 local current_char = idx + 1
@@ -3549,12 +3559,14 @@ _G.gi_ry[idx]    = obj.ry
 _G.gi_rz[idx]    = obj.rz
 
 -- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
-local sA = math.min(startA, endA)  -- Aグループ開始 (1-based)
-local eA = math.max(startA, endA)  -- Aグループ終了 (1-based)
-local sB = math.min(startB, endB)  -- Bグループ開始 (1-based)
-local eB = math.max(startB, endB)  -- Bグループ終了 (1-based)
-local sC = math.min(startC, endC)  -- Bグループ開始 (1-based)
-local eC = math.max(startC, endC)  -- Bグループ終了 (1-based)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
 
 -- 現在の文字番号 (1-based)
 local current_char = idx + 1
@@ -4210,33 +4222,46 @@ end
 
 --group:1段目::Aグループ（開始・終了文字番号）
 --select@effectA:1段目::縁取り=1,有効=1,なし=0
---track@sizeA:1段目::サイズA,0,1000,5,1
---track@blurA:1段目::ぼかしA,0,1000,0,1
 --track@startA:1段目::開始A,1,100,1,1
 --track@endA:1段目::終了A,1,100,1,1
+--track@sizeA:1段目::サイズA,0,1000,5,1
+--track@blurA:1段目::ぼかしA,0,1000,0,1
 --color@colorA:1段目::縁色(A),0xff0000
 --color@colorX:1段目::指定外縁色(X),0xffffff
 --group
 
 --group:2段目::Bグループ（開始・終了文字番号）
 --select@effectB:2段目::縁取り=0,なし=0,有効=1
---track@sizeB:2段目::サイズB,0,1000,5,1
---track@blurB:2段目::ぼかしB,0,1000,0,1
 --track@startB:2段目::開始B,1,100,1,1
 --track@endB:2段目::終了B,1,100,1,1
+--track@sizeB:2段目::サイズB,0,1000,5,1
+--track@blurB:2段目::ぼかしB,0,1000,0,1
 --color@colorB:2段目::縁色(B),0x0000ff
 --color@colorY:2段目::指定外縁色(Y),0x000000
 --group
 
 --group:3段目::Cグループ（開始・終了文字番号）
 --select@effectC:3段目::縁取り=0,なし=0,有効=1
---track@sizeC:3段目::サイズC,0,1000,5,1
---track@blurC:3段目::ぼかしC,0,1000,0,1
 --track@startC:3段目::開始C,1,100,1,1
 --track@endC:3段目::終了C,1,100,1,1
+--track@sizeC:3段目::サイズC,0,1000,5,1
+--track@blurC:3段目::ぼかしC,0,1000,0,1
 --color@colorC:3段目::縁色(C),0x00ff00
 --color@colorZ:3段目::指定外縁色(Z),0x333333
 --group
+
+--hide@sizeA:effectA==0
+--hide@blurA:effectA==0
+--hide@colorA:effectA==0
+--hide@colorX:effectA==0
+--hide@sizeB:effectB==0
+--hide@blurB:effectB==0
+--hide@colorB:effectB==0
+--hide@colorY:effectB==0
+--hide@sizeC:effectC==0
+--hide@blurC:effectC==0
+--hide@colorC:effectC==0
+--hide@colorZ:effectC==0
 
 -- ヘルパーモジュールの読み込みを試行
 local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
@@ -4262,8 +4287,8 @@ local full_h = obj.screen_h
 if AKIRA_h then
     local tw, th = AKIRA_h.get_text_size()
     local lc     = AKIRA_h.line_break_confirmation()
-    full_w = math.min(obj.screen_w, tw)
-    full_h = math.min(obj.screen_h, th * lc)
+    full_w = math.min(obj.screen_w, tw) + 100 -- 仮想バッファが足りていなかったので、適当に+100している
+    full_h = math.min(obj.screen_h, th * lc) + 100 -- 仮想バッファが足りていなかったので、適当に+100している
 end
 
 -- ================================================================
