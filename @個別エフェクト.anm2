@@ -853,13 +853,14 @@ end
 -- ================================================================
 local full_w = obj.screen_w
 local full_h = obj.screen_h
+--[[
 if AKIRA_h then
     local tw, th = AKIRA_h.get_text_size()
     local lc     = AKIRA_h.line_break_confirmation()
     full_w = math.min(obj.screen_w, tw)
     full_h = math.min(obj.screen_h, th * lc)
 end
-
+]]
 -- ================================================================
 -- アンカーを表示するか非表示にするかをトラックバーで設定
 -- ================================================================
@@ -922,7 +923,7 @@ if inA then
 
         -- (1) 終了文字(現在の文字)の ox,oy をグローバルに保存し、その位置に描画
         obj.draw(
-            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_ox[idx] + xA, _G.gi_oy[idx] + yA, _G.gi_oz[idx] +zA,
             _G.gi_scale[idx], _G.gi_alpha[idx],
             _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
         )
@@ -932,7 +933,7 @@ if inA then
         --     (0,0,0, 1,1, 0,0,0) でそのまま合成する
         for i = sA - 1, eA - 2 do  -- 0-based index: sA-1 から eA-2 まで
             obj.copybuffer("object","cache:gi_A_" .. i)
-            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+            obj.draw(0 + xA, 0 + yA, 0 + zA, 1, 1, 0, 0, 0)
         end
 
         -- (3) 合成した仮想バッファを framebuffer に描画 (エフェクト適用)
@@ -948,7 +949,6 @@ if inA then
 
         -- ↓ Aグループへのエフェクト適用 ↓
         if effectA == 1 then
-           obj.effect("座標","X",xA,"Y",yA,"Z",zA)
            obj.effect("拡大率","拡大率",100.000 + zoomA,"X",aspect_xA,"Y",aspect_yA,"Z",aspect_zA)
            obj.effect("透明度","透明度",alphaA)
            obj.effect("回転","X",rotate_xA,"Y",rotate_yA,"Z",rotate_zA)
@@ -1008,14 +1008,14 @@ elseif inB then
         obj.clearbuffer("tempbuffer")
 
         obj.draw(
-            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_ox[idx] + xB, _G.gi_oy[idx] + yB, _G.gi_oz[idx] + zB,
             _G.gi_scale[idx], _G.gi_alpha[idx],
             _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
         )
 
         for i = sB - 1, eB - 2 do  -- 0-based index: sB-1 から eB-2 まで
             obj.copybuffer("object","cache:gi_B_" .. i)
-            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+            obj.draw(0 + xB, 0 + yB, 0 + zB, 1, 1, 0, 0, 0)
         end
 
         obj.setoption("drawtarget", "framebuffer")
@@ -1030,7 +1030,6 @@ elseif inB then
 
         -- ↓ Bグループへのエフェクト適用 ↓
         if effectB == 1 then
-           obj.effect("座標","X",xB,"Y",yB,"Z",zB)
            obj.effect("拡大率","拡大率",100.000 + zoomB,"X",aspect_xB,"Y",aspect_yB,"Z",aspect_zB)
            obj.effect("透明度","透明度",alphaB)
            obj.effect("回転","X",rotate_xB,"Y",rotate_yB,"Z",rotate_zB)
@@ -1090,14 +1089,14 @@ elseif inC then
         obj.clearbuffer("tempbuffer")
 
         obj.draw(
-            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_ox[idx] + xC, _G.gi_oy[idx] + yC, _G.gi_oz[idx] + zC,
             _G.gi_scale[idx], _G.gi_alpha[idx],
             _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
         )
 
         for i = sC - 1, eC - 2 do  -- 0-based index: sC-1 から eC-2 まで
             obj.copybuffer("object","cache:gi_C_" .. i)
-            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+            obj.draw(0 + xC, 0 + yC, 0 + zC, 1, 1, 0, 0, 0)
         end
         
         obj.setoption("drawtarget", "framebuffer")
@@ -1113,7 +1112,6 @@ elseif inC then
 
         -- ↓ Cグループへのエフェクト適用 ↓
         if effectC == 1 then
-           obj.effect("座標","X",xC,"Y",yC,"Z",zC)
            obj.effect("拡大率","拡大率",100.000 + zoomC,"X",aspect_xC,"Y",aspect_yC,"Z",aspect_zC)
            obj.effect("透明度","透明度",alphaC)
            obj.effect("回転","X",rotate_xC,"Y",rotate_yC,"Z",rotate_zC)
