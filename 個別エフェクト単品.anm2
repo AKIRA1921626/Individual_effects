@@ -1,0 +1,1560 @@
+--label:個別エフェクト
+--information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。アニメーション1。
+--group:Aグループ（開始・終了文字番号）
+--track@startA:Aグループ::開始A,1,100,1,1
+--track@endA:Aグループ::終了A,1,100,1,1
+--select@effectA:Aグループ::アニメーション=0,なし=0,グラデ=1,グラデ縁取り=2,グラデ縁取り*2=3,グラデ縁取り*3=4,グラデ縁取り*3ドロップシャドウ=5,グラデ縁取り*3ドロップシャドウ枠線=6
+
+--track@grd_powA:Aグループ(グラデーション)::グラデ強さ,0.0,100.0,100.0
+--track@grd_cxA:Aグループ(グラデーション)::グラデ中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyA:Aグループ(グラデーション)::グラデ中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateA:Aグループ(グラデーション)::グラデ角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthA:Aグループ(グラデーション)::グラデ幅,0,2000,100
+--select@grd_compositeA:Aグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeA:Aグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colA:Aグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colA:Aグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@edge_widthA0:Aグループ(凸エッジ)::凸エッジ1幅,0,100,4
+--track@edge_heightA0:Aグループ(凸エッジ)::凸エッジ1高さ,0,3.00,1.00,0.01
+--track@edge_rotateA0:Aグループ(凸エッジ)::凸エッジ角度,-3600,3600,45.00,0.01
+
+--track@frame_sA0:Aグループ(縁取り)::縁取り1サイズ,0,500,5,1
+--track@frame_bA0:Aグループ(縁取り)::縁取り1ぼかし,0,100,5,1
+--color@frame_colA0:Aグループ(縁取り)::縁取り1縁色,0xffffff
+
+--track@edge_widthA1:Aグループ(凸エッジ)::凸エッジ2幅,0,100,4
+--track@edge_heightA1:Aグループ(凸エッジ)::凸エッジ2高さ,0,3.00,1.00,0.01
+--track@edge_rotateA1:Aグループ(凸エッジ)::凸エッジ2角度,-3600,3600,45.00,0.01
+
+--track@frame_sA1:Aグループ(縁取り)::縁取り2サイズ,0,500,5,1
+--track@frame_bA1:Aグループ(縁取り)::縁取り2ぼかし,0,100,5,1
+--color@frame_colA1:Aグループ(縁取り)::縁取り2縁色,0xffffff
+
+--track@edge_widthA2:Aグループ(凸エッジ)::凸エッジ3幅,0,100,4
+--track@edge_heightA2:Aグループ(凸エッジ)::凸エッジ3高さ,0,3.00,1.00,0.01
+--track@edge_rotateA2:Aグループ(凸エッジ)::凸エッジ3角度,-3600,3600,45.00,0.01
+
+--track@frame_sA2:Aグループ(縁取り)::縁取り3サイズ,0,500,5,1
+--track@frame_bA2:Aグループ(縁取り)::縁取り3ぼかし,0,100,5,1
+--color@frame_colA2:Aグループ(縁取り)::縁取り3縁色,0xffffff
+
+--track@edge_widthA3:Aグループ(凸エッジ)::凸エッジ4幅,0,100,4
+--track@edge_heightA3:Aグループ(凸エッジ)::凸エッジ4高さ,0,3.00,1.00,0.01
+--track@edge_rotateA3:Aグループ(凸エッジ)::凸エッジ4角度,-3600,3600,45.00,0.01
+
+--track@drop_shadow_xA:Aグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yA:Aグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepA:Aグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionA:Aグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorA:Aグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@border_xA:Aグループ(枠線)::枠線X,-2000,2000,0
+--track@border_yA:Aグループ(枠線)::枠線Y,-2000,1000,0
+--track@border_sA:Aグループ(枠線)::枠線サイズ,0,1000,10
+--track@border_rA:Aグループ(枠線)::枠線丸み,0,1000,0
+--color@border_colA:Aグループ(枠線)::枠線枠色,0xffffff
+
+--group
+
+--group:Bグループ（開始・終了文字番号）
+--track@startB:Bグループ::開始B,1,100,1,1
+--track@endB:Bグループ::終了B,1,100,1,1
+--select@effectB:Bグループ::アニメーション=0,なし=0,グラデ=1,グラデ縁取り=2,グラデ縁取り*2=3,グラデ縁取り*3=4,グラデ縁取り*3ドロップシャドウ=5,グラデ縁取り*3ドロップシャドウ枠線=6
+
+--track@grd_powB:Bグループ(グラデーション)::グラデ強さ,0.0,100.0,100.0
+--track@grd_cxB:Bグループ(グラデーション)::グラデ中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyB:Bグループ(グラデーション)::グラデ中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateB:Bグループ(グラデーション)::グラデ角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthB:Bグループ(グラデーション)::グラデ幅,0,2000,100
+--select@grd_compositeB:Bグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeB:Bグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colB:Bグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colB:Bグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@edge_widthB0:Bグループ(凸エッジ)::凸エッジ1幅,0,100,4
+--track@edge_heightB0:Bグループ(凸エッジ)::凸エッジ1高さ,0,3.00,1.00,0.01
+--track@edge_rotateB0:Bグループ(凸エッジ)::凸エッジ角度,-3600,3600,45.00,0.01
+
+--track@frame_sB0:Bグループ(縁取り)::縁取り1サイズ,0,500,5,1
+--track@frame_bB0:Bグループ(縁取り)::縁取り1ぼかし,0,100,5,1
+--color@frame_colB0:Bグループ(縁取り)::縁取り1縁色,0xffffff
+
+--track@edge_widthB1:Bグループ(凸エッジ)::凸エッジ2幅,0,100,4
+--track@edge_heightB1:Bグループ(凸エッジ)::凸エッジ2高さ,0,3.00,1.00,0.01
+--track@edge_rotateB1:Bグループ(凸エッジ)::凸エッジ2角度,-3600,3600,45.00,0.01
+
+--track@frame_sB1:Bグループ(縁取り)::縁取り2サイズ,0,500,5,1
+--track@frame_bB1:Bグループ(縁取り)::縁取り2ぼかし,0,100,5,1
+--color@frame_colB1:Bグループ(縁取り)::縁取り2縁色,0xffffff
+
+--track@edge_widthB2:Bグループ(凸エッジ)::凸エッジ3幅,0,100,4
+--track@edge_heightB2:Bグループ(凸エッジ)::凸エッジ3高さ,0,3.00,1.00,0.01
+--track@edge_rotateB2:Bグループ(凸エッジ)::凸エッジ3角度,-3600,3600,45.00,0.01
+
+--track@frame_sB2:Bグループ(縁取り)::縁取り3サイズ,0,500,5,1
+--track@frame_bB2:Bグループ(縁取り)::縁取り3ぼかし,0,100,5,1
+--color@frame_colB2:Bグループ(縁取り)::縁取り3縁色,0xffffff
+
+--track@edge_widthB3:Bグループ(凸エッジ)::凸エッジ4幅,0,100,4
+--track@edge_heightB3:Bグループ(凸エッジ)::凸エッジ4高さ,0,3.00,1.00,0.01
+--track@edge_rotateB3:Bグループ(凸エッジ)::凸エッジ4角度,-3600,3600,45.00,0.01
+
+--track@drop_shadow_xB:Bグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yB:Bグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepB:Bグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionB:Bグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorB:Bグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@border_xB:Bグループ(枠線)::枠線X,-2000,2000,0
+--track@border_yB:Bグループ(枠線)::枠線Y,-2000,1000,0
+--track@border_sB:Bグループ(枠線)::枠線サイズ,0,1000,10
+--track@border_rB:Bグループ(枠線)::枠線丸み,0,1000,0
+--color@border_colB:Bグループ(枠線)::枠線枠色,0xffffff
+
+--group
+
+--group:Cグループ（開始・終了文字番号）
+--track@startC:Cグループ::開始C,1,100,1,1
+--track@endC:Cグループ::終了C,1,100,1,1
+--select@effectC:Cグループ::アニメーション=0,なし=0,グラデ=1,グラデ縁取り=2,グラデ縁取り*2=3,グラデ縁取り*3=4,グラデ縁取り*3ドロップシャドウ=5,グラデ縁取り*3ドロップシャドウ枠線=6
+
+--track@grd_powC:Cグループ(グラデーション)::グラデ強さ,0.0,100.0,100.0
+--track@grd_cxC:Cグループ(グラデーション)::グラデ中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyC:Cグループ(グラデーション)::グラデ中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateC:Cグループ(グラデーション)::グラデ角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthC:Cグループ(グラデーション)::グラデ幅,0,2000,100
+--select@grd_compositeC:Cグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeC:Cグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colC:Cグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colC:Cグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@edge_widthC0:Cグループ(凸エッジ)::凸エッジ1幅,0,100,4
+--track@edge_heightC0:Cグループ(凸エッジ)::凸エッジ1高さ,0,3.00,1.00,0.01
+--track@edge_rotateC0:Cグループ(凸エッジ)::凸エッジ角度,-3600,3600,45.00,0.01
+
+--track@frame_sC0:Cグループ(縁取り)::縁取り1サイズ,0,500,5,1
+--track@frame_bC0:Cグループ(縁取り)::縁取り1ぼかし,0,100,5,1
+--color@frame_colC0:Cグループ(縁取り)::縁取り1縁色,0xffffff
+
+--track@edge_widthC1:Cグループ(凸エッジ)::凸エッジ2幅,0,100,4
+--track@edge_heightC1:Cグループ(凸エッジ)::凸エッジ2高さ,0,3.00,1.00,0.01
+--track@edge_rotateC1:Cグループ(凸エッジ)::凸エッジ2角度,-3600,3600,45.00,0.01
+
+--track@frame_sC1:Cグループ(縁取り)::縁取り2サイズ,0,500,5,1
+--track@frame_bC1:Cグループ(縁取り)::縁取り2ぼかし,0,100,5,1
+--color@frame_colC1:Cグループ(縁取り)::縁取り2縁色,0xffffff
+
+--track@edge_widthC2:Cグループ(凸エッジ)::凸エッジ3幅,0,100,4
+--track@edge_heightC2:Cグループ(凸エッジ)::凸エッジ3高さ,0,3.00,1.00,0.01
+--track@edge_rotateC2:Cグループ(凸エッジ)::凸エッジ3角度,-3600,3600,45.00,0.01
+
+--track@frame_sC2:Cグループ(縁取り)::縁取り3サイズ,0,500,5,1
+--track@frame_bC2:Cグループ(縁取り)::縁取り3ぼかし,0,100,5,1
+--color@frame_colC2:Cグループ(縁取り)::縁取り3縁色,0xffffff
+
+--track@edge_widthC3:Cグループ(凸エッジ)::凸エッジ4幅,0,100,4
+--track@edge_heightC3:Cグループ(凸エッジ)::凸エッジ4高さ,0,3.00,1.00,0.01
+--track@edge_rotateC3:Cグループ(凸エッジ)::凸エッジ4角度,-3600,3600,45.00,0.01
+
+--track@drop_shadow_xC:Cグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yC:Cグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepC:Cグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionC:Cグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorC:Cグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@border_xC:Cグループ(枠線)::枠線X,-2000,2000,0
+--track@border_yC:Cグループ(枠線)::枠線Y,-2000,1000,0
+--track@border_sC:Cグループ(枠線)::枠線サイズ,0,1000,10
+--track@border_rC:Cグループ(枠線)::枠線丸み,0,1000,0
+--color@border_colC:Cグループ(枠線)::枠線枠色,0xffffff
+
+--group
+
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+
+--hide@grd_powA:effectA==0
+--hide@grd_cxA:effectA==0
+--hide@grd_cyA:effectA==0
+--hide@grd_rotateA:effectA==0
+--hide@grd_widthA:effectA==0
+--hide@grd_compositeA:effectA==0
+--hide@grd_typeA:effectA==0
+--hide@grd_start_colA:effectA==0
+--hide@grd_end_colA:effectA==0
+--hide@edge_widthA0:effectA==0
+--hide@edge_heightA0:effectA==0
+--hide@edge_rotateA0:effectA==0
+--hide@frame_sA0:effectA<1
+--hide@frame_bA0:effectA<1
+--hide@frame_colA0:effectA<1
+--hide@edge_widthA1:effectA<1
+--hide@edge_heightA1:effectA<1
+--hide@edge_rotateA1:effectA<1
+--hide@frame_sA1:effectA<2
+--hide@frame_bA1:effectA<2
+--hide@frame_colA1:effectA<2
+--hide@edge_widthA2:effectA<2
+--hide@edge_heightA2:effectA<2
+--hide@edge_rotateA2:effectA<2
+--hide@frame_sA2:effectA<3
+--hide@frame_bA2:effectA<3
+--hide@frame_colA2:effectA<3
+--hide@edge_widthA3:effectA<3
+--hide@edge_heightA3:effectA<3
+--hide@edge_rotateA3:effectA<3
+--hide@drop_shadow_xA:effectA<4
+--hide@drop_shadow_yA:effectA<4
+--hide@drop_shadow_deepA:effectA<4
+--hide@drop_shadow_diffusionA:effectA<4
+--hide@drop_shadow_colorA:effectA<4
+--hide@border_xA:effectA<5
+--hide@border_yA:effectA<5
+--hide@border_sA:effectA<5
+--hide@border_rA:effectA<5
+--hide@border_colA:effectA<5
+
+--hide@grd_powB:effectB==0
+--hide@grd_cxB:effectB==0
+--hide@grd_cyB:effectB==0
+--hide@grd_rotateB:effectB==0
+--hide@grd_widthB:effectB==0
+--hide@grd_compositeB:effectB==0
+--hide@grd_typeB:effectB==0
+--hide@grd_start_colB:effectB==0
+--hide@grd_end_colB:effectB==0
+--hide@edge_widthB0:effectB==0
+--hide@edge_heightB0:effectB==0
+--hide@edge_rotateB0:effectB==0
+--hide@frame_sB0:1<effectB
+--hide@frame_bB0:1<effectB
+--hide@frame_colB0:1<effectB
+--hide@edge_widthB1:1<effectB
+--hide@edge_heightB1:1<effectB
+--hide@edge_rotateB1:1<effectB
+--hide@frame_sB1:2<effectB
+--hide@frame_bB1:2<effectB
+--hide@frame_colB1:2<effectB
+--hide@edge_widthB2:2<effectB
+--hide@edge_heightB2:2<effectB
+--hide@edge_rotateB2:2<effectB
+--hide@frame_sB2:3<effectB
+--hide@frame_bB2:3<effectB
+--hide@frame_colB2:3<effectB
+--hide@edge_widthB3:3<effectB
+--hide@edge_heightB3:3<effectB
+--hide@edge_rotateB3:3<effectB
+--hide@drop_shadow_xB:4<effectB
+--hide@drop_shadow_yB:4<effectB
+--hide@drop_shadow_deepB:4<effectB
+--hide@drop_shadow_diffusionB:4<effectB
+--hide@drop_shadow_colorB:4<effectB
+--hide@border_xB:5<effectB
+--hide@border_yB:5<effectB
+--hide@border_sB:5<effectB
+--hide@border_rB:5<effectB
+--hide@border_colB:5<effectB
+
+--hide@grd_powC:effectC==0
+--hide@grd_cxC:effectC==0
+--hide@grd_cyC:effectC==0
+--hide@grd_rotateC:effectC==0
+--hide@grd_widthC:effectC==0
+--hide@grd_compositeC:effectC==0
+--hide@grd_typeC:effectC==0
+--hide@grd_start_colC:effectC==0
+--hide@grd_end_colC:effectC==0
+--hide@edge_widthC0:effectC==0
+--hide@edge_heightC0:effectC==0
+--hide@edge_rotateC0:effectC==0
+--hide@frame_sC0:1<effectC
+--hide@frame_bC0:1<effectC
+--hide@frame_colC0:1<effectC
+--hide@edge_widthC1:1<effectC
+--hide@edge_heightC1:1<effectC
+--hide@edge_rotateC1:1<effectC
+--hide@frame_sC1:2<effectC
+--hide@frame_bC1:2<effectC
+--hide@frame_colC1:2<effectC
+--hide@edge_widthC2:2<effectC
+--hide@edge_heightC2:2<effectC
+--hide@edge_rotateC2:2<effectC
+--hide@frame_sC2:3<effectC
+--hide@frame_bC2:3<effectC
+--hide@frame_colC2:3<effectC
+--hide@edge_widthC3:3<effectC
+--hide@edge_heightC3:3<effectC
+--hide@edge_rotateC3:3<effectC
+--hide@drop_shadow_xC:4<effectC
+--hide@drop_shadow_yC:4<effectC
+--hide@drop_shadow_deepC:4<effectC
+--hide@drop_shadow_diffusionC:4<effectC
+--hide@drop_shadow_colorC:4<effectC
+--hide@border_xC:5<effectC
+--hide@border_yC:5<effectC
+--hide@border_sC:5<effectC
+--hide@border_rC:5<effectC
+--hide@border_colC:5<effectC
+
+-- ヘルパーモジュールの読み込みを試行
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local AKIRA_h = nil
+if condition then
+    AKIRA_h = AKIRA_helper
+else
+    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+end
+
+-- 個別オブジェクトが有効かを確認
+local is_multi = obj.getoption("multi_object")
+if not is_multi then
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクト」処理をスキップします。")
+    return
+end
+
+-- ================================================================
+-- グローバル変数の初期化 (index == 0 のときリセット)
+-- 各文字の位置・変形情報をここに蓄積していく
+-- ================================================================
+if obj.index == 0 then
+    _G.gi_ox    = {}  -- 各文字の obj.ox
+    _G.gi_oy    = {}  -- 各文字の obj.oy
+    _G.gi_oz    = {}  -- 各文字の obj.oz
+    _G.gi_scale = {}  -- 各文字の obj.sx (拡大率)
+    _G.gi_alpha = {}  -- 各文字の alpha
+    _G.gi_rx    = {}  -- 各文字の obj.rx
+    _G.gi_ry    = {}  -- 各文字の obj.ry
+    _G.gi_rz    = {}  -- 各文字の obj.rz
+    _G.gi_has_packed_A = false
+    _G.gi_has_packed_B = false
+    _G.gi_has_packed_C = false
+end
+
+-- ----------------------------------------------------------------
+-- まず、現在の文字の位置・変形情報をグローバル変数に保存する
+-- ----------------------------------------------------------------
+local idx   = obj.index
+local last = obj.num-1
+local scale = obj.sx
+local alpha = obj.getvalue("alpha")
+
+_G.gi_ox[idx]    = obj.ox
+_G.gi_oy[idx]    = obj.oy
+_G.gi_oz[idx]    = obj.oz
+_G.gi_scale[idx] = scale
+_G.gi_alpha[idx] = alpha
+_G.gi_rx[idx]    = obj.rx
+_G.gi_ry[idx]    = obj.ry
+_G.gi_rz[idx]    = obj.rz
+
+-- グループ範囲の正規化 (逆順指定でも正しく動くよう min/max で補正)
+-- 終了文字が文字数を超えた場合は最後の文字に自動クランプ
+local total_char = obj.num  -- テキストの総文字数 (1-based)
+local sA = math.min(startA, endA)                         -- Aグループ開始 (1-based)
+local eA = math.min(math.max(startA, endA), total_char)   -- Aグループ終了 (1-based, 上限クランプ)
+local sB = math.min(startB, endB)                         -- Bグループ開始 (1-based)
+local eB = math.min(math.max(startB, endB), total_char)   -- Bグループ終了 (1-based, 上限クランプ)
+local sC = math.min(startC, endC)                         -- Cグループ開始 (1-based)
+local eC = math.min(math.max(startC, endC), total_char)   -- Cグループ終了 (1-based, 上限クランプ)
+
+-- 現在の文字番号 (1-based)
+local current_char = idx + 1
+
+-- グループ判定
+local inA = (current_char >= sA and current_char <= eA)
+local inB = (current_char >= sB and current_char <= eB)
+local inC = (current_char >= sC and current_char <= eC)
+
+-- 範囲外文字の最後のインデックスを検索 (pack == 1 用)
+local pack = pack or 0
+local last_other_idx = -1
+if pack == 1 then
+    for i = 0, obj.num - 1 do
+        local c = i + 1
+        local is_in_grp = (c >= sA and c <= eA) or (c >= sB and c <= eB) or (c >= sC and c <= eC)
+        if not is_in_grp then
+            last_other_idx = i
+        end
+    end
+end
+
+-- ここに各グループのオブジェクトのサイズを求める変数を作る予定
+-- ここに変数を作成する
+
+-- ================================================================
+-- まとめた文字群の中心点を計算する関数
+-- ================================================================
+local function get_group_center(start_num, end_num)
+    local s = math.min(start_num, end_num)
+    local e = math.max(start_num, end_num)
+    local min_x, max_x = math.huge, -math.huge
+    local min_y, max_y = math.huge, -math.huge
+    local count = 0
+
+    for i = s - 1, e - 1 do
+        local ox = _G.gi_ox and _G.gi_ox[i]
+        local oy = _G.gi_oy and _G.gi_oy[i]
+        local w  = (_G.gi_w and _G.gi_w[i]) or 0
+        local h  = (_G.gi_h and _G.gi_h[i]) or 0
+        if ox and oy then
+            count = count + 1
+            local left   = ox - w / 2
+            local right  = ox + w / 2
+            local top    = oy - h / 2
+            local bottom = oy + h / 2
+            if left < min_x then min_x = left end
+            if right > max_x then max_x = right end
+            if top < min_y then min_y = top end
+            if bottom > max_y then max_y = bottom end
+        end
+    end
+
+    if count == 0 then
+        return 0, 0
+    end
+
+    return (min_x + max_x) / 2, (min_y + max_y) / 2
+end
+
+-- ================================================================
+-- 合成バッファのサイズを取得
+-- テキスト全体が収まるサイズ (各文字を ox,oy で配置できるよう全体サイズが必要)
+-- ================================================================
+local full_w = obj.screen_w
+local full_h = obj.screen_h
+if AKIRA_h then
+    local tw, th = AKIRA_h.get_text_size()
+    local lc     = AKIRA_h.line_break_confirmation()
+    full_w = math.min(obj.screen_w, tw)
+    full_h = math.min(obj.screen_h, th * lc)
+end
+
+-- ================================================================
+-- グループAの処理
+-- ================================================================
+if inA then
+
+    if current_char < eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 非終了文字の処理】
+        -- 仮想バッファ(フルサイズ)を新規作成し、
+        -- 保存した ox,oy の位置にこの文字を描画して cache に保存する
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- グローバル変数に保存した ox,oy の位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- 仮想バッファをキャッシュに保存 ("cache:gi_A_インデックス" の形式)
+        obj.copybuffer("cache:gi_A_" .. idx, "tempbuffer")
+
+        -- この文字は cache に保存したので framebuffer には描画しない (alpha=0 で不可視)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startA")
+
+    elseif current_char == eA then
+        -- --------------------------------------------------------
+        -- 【Aグループ: 終了文字の処理】
+        -- フルサイズの仮想バッファを新規作成し、
+        -- 1) 終了文字を ox,oy に描画
+        -- 2) これまでの全 cache を各文字の保存済み ox,oy で描画
+        -- 3) 仮想バッファを load してエフェクトを適用し framebuffer に描画
+        -- --------------------------------------------------------
+
+        -- フルサイズの仮想バッファを新規作成・クリア
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        -- (1) 終了文字(現在の文字)の ox,oy をグローバルに保存し、その位置に描画
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        -- (2) 開始文字 ～ 終了文字の1つ前 までのキャッシュを順番に描画
+        --     各キャッシュはフルサイズ画像として ox,oy が既に適用されているため
+        --     (0,0,0, 1,1, 0,0,0) でそのまま合成する
+        for i = sA - 1, eA - 2 do  -- 0-based index: sA-1 から eA-2 まで
+            obj.copybuffer("object","cache:gi_A_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        -- (3) 合成した仮想バッファを framebuffer に描画 (エフェクト適用)
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxA, cyA = get_group_center(startA, endA)
+        obj.cx = cxA
+        obj.cy = cyA
+        obj.ox = cxA
+        obj.oy = cyA
+
+        -- ↓ Aグループへのエフェクト適用 ↓
+        if effectA == 1 then
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA0,
+            "高さ",edge_heightA0,
+            "角度",edge_rotateA0
+            )
+        elseif effectA == 2 then
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA0,
+            "高さ",edge_heightA0,
+            "角度",edge_rotateA0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA0,
+            "ぼかし",frame_bA0,
+            "縁色",frame_colA0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA1,
+            "高さ",edge_heightA1,
+            "角度",edge_rotateA1
+            )
+        elseif effectA == 3 then
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA0,
+            "高さ",edge_heightA0,
+            "角度",edge_rotateA0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA0,
+            "ぼかし",frame_bA0,
+            "縁色",frame_colA0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA1,
+            "高さ",edge_heightA1,
+            "角度",edge_rotateA1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA1,
+            "ぼかし",frame_bA1,
+            "縁色",frame_colA1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA2,
+            "高さ",edge_heightA2,
+            "角度",edge_rotateA2
+            )
+        elseif effectA == 4 then
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA0,
+            "高さ",edge_heightA0,
+            "角度",edge_rotateA0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA0,
+            "ぼかし",frame_bA0,
+            "縁色",frame_colA0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA1,
+            "高さ",edge_heightA1,
+            "角度",edge_rotateA1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA1,
+            "ぼかし",frame_bA1,
+            "縁色",frame_colA1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA2,
+            "高さ",edge_heightA2,
+            "角度",edge_rotateA2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA2,
+            "ぼかし",frame_bA2,
+            "縁色",frame_colA2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA3,
+            "高さ",edge_heightA3,
+            "角度",edge_rotateA3
+            )
+        elseif effectA == 5 then
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA0,
+            "高さ",edge_heightA0,
+            "角度",edge_rotateA0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA0,
+            "ぼかし",frame_bA0,
+            "縁色",frame_colA0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA1,
+            "高さ",edge_heightA1,
+            "角度",edge_rotateA1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA1,
+            "ぼかし",frame_bA1,
+            "縁色",frame_colA1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA2,
+            "高さ",edge_heightA2,
+            "角度",edge_rotateA2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA2,
+            "ぼかし",frame_bA2,
+            "縁色",frame_colA2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA3,
+            "高さ",edge_heightA3,
+            "角度",edge_rotateA3
+            )
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xA,
+            "Y",drop_shadow_yA,
+            "濃さ",drop_shadow_deepA,
+            "拡散",drop_shadow_diffusionA,
+            "影色",drop_shadow_colorA,
+            "影を別オブジェクトで描画",0
+            )
+        elseif effectA == 6 then
+            obj.effect("グラデーション",
+            "強さ",grd_powA,
+            "中心X",grd_cxA,
+            "中心Y",grd_cyA,
+            "角度",grd_rotateA,
+            "幅",grd_widthA,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colA,
+            "終了色",grd_end_colA
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA0,
+            "高さ",edge_heightA0,
+            "角度",edge_rotateA0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA0,
+            "ぼかし",frame_bA0,
+            "縁色",frame_colA0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA1,
+            "高さ",edge_heightA1,
+            "角度",edge_rotateA1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA1,
+            "ぼかし",frame_bA1,
+            "縁色",frame_colA1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA2,
+            "高さ",edge_heightA2,
+            "角度",edge_rotateA2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sA2,
+            "ぼかし",frame_bA2,
+            "縁色",frame_colA2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthA3,
+            "高さ",edge_heightA3,
+            "角度",edge_rotateA3
+            )
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xA,
+            "Y",drop_shadow_yA,
+            "濃さ",drop_shadow_deepA,
+            "拡散",drop_shadow_diffusionA,
+            "影色",drop_shadow_colorA,
+            "影を別オブジェクトで描画",0
+            )
+            obj.effect("枠線",
+            "X",border_xA,
+            "Y",border_yA,
+            "サイズ",border_sA,
+            "丸み",border_rA,
+            "枠色",border_colA
+            )
+        end
+        -- ↑ エフェクト追加ここまで ↑
+
+        if pack == 2 then
+            -- すべての文字をまとめるモード: エフェクト適用後バッファに描画してキャッシュに保存し、画面上は不可視
+            obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+            obj.clearbuffer("tempbuffer")
+            obj.ox = 0; obj.oy = 0; obj.oz = 0; obj.rx = 0; obj.ry = 0; obj.rz = 0; obj.cx = 0; obj.cy = 0
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)  -- 合成済み画像を位置オフセットなしで描画
+            obj.copybuffer("cache:packed_group_A", "tempbuffer")
+            _G.gi_has_packed_A = true
+
+            obj.setoption("drawtarget", "framebuffer")
+            obj.clearbuffer("object")
+        else
+            obj.clearbuffer("tempbuffer")
+        end
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endA")
+
+    end
+
+-- ================================================================
+-- グループBの処理
+-- ================================================================
+elseif inB then
+
+    if current_char < eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_B_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startB")
+
+    elseif current_char == eB then
+        -- --------------------------------------------------------
+        -- 【Bグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sB - 1, eB - 2 do  -- 0-based index: sB-1 から eB-2 まで
+            obj.copybuffer("object","cache:gi_B_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxB, cyB = get_group_center(startB, endB)
+        obj.cx = cxB
+        obj.cy = cyB
+        obj.ox = cxB
+        obj.oy = cyB
+
+        -- ↓ Bグループへのエフェクト適用 ↓
+        if effectB == 1 then
+            obj.effect("グラデーション",
+            "強さ",grd_powB,
+            "中心X",grd_cxB,
+            "中心Y",grd_cyB,
+            "角度",grd_rotateB,
+            "幅",grd_widthB,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colB,
+            "終了色",grd_end_colB
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB0,
+            "高さ",edge_heightB0,
+            "角度",edge_rotateB0
+            )
+        elseif effectB == 2 then
+            obj.effect("グラデーション",
+            "強さ",grd_powB,
+            "中心X",grd_cxB,
+            "中心Y",grd_cyB,
+            "角度",grd_rotateB,
+            "幅",grd_widthB,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colB,
+            "終了色",grd_end_colB
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB0,
+            "高さ",edge_heightB0,
+            "角度",edge_rotateB0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB0,
+            "ぼかし",frame_bB0,
+            "縁色",frame_colB0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB1,
+            "高さ",edge_heightB1,
+            "角度",edge_rotateB1
+            )
+        elseif effectB == 3 then
+            obj.effect("グラデーション",
+            "強さ",grd_powB,
+            "中心X",grd_cxB,
+            "中心Y",grd_cyB,
+            "角度",grd_rotateB,
+            "幅",grd_widthB,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colB,
+            "終了色",grd_end_colB
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB0,
+            "高さ",edge_heightB0,
+            "角度",edge_rotateB0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB0,
+            "ぼかし",frame_bB0,
+            "縁色",frame_colB0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB1,
+            "高さ",edge_heightB1,
+            "角度",edge_rotateB1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB1,
+            "ぼかし",frame_bB1,
+            "縁色",frame_colB1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB2,
+            "高さ",edge_heightB2,
+            "角度",edge_rotateB2
+            )
+        elseif effectB == 4 then
+            obj.effect("グラデーション",
+            "強さ",grd_powB,
+            "中心X",grd_cxB,
+            "中心Y",grd_cyB,
+            "角度",grd_rotateB,
+            "幅",grd_widthB,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colB,
+            "終了色",grd_end_colB
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB0,
+            "高さ",edge_heightB0,
+            "角度",edge_rotateB0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB0,
+            "ぼかし",frame_bB0,
+            "縁色",frame_colB0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB1,
+            "高さ",edge_heightB1,
+            "角度",edge_rotateB1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB1,
+            "ぼかし",frame_bB1,
+            "縁色",frame_colB1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB2,
+            "高さ",edge_heightB2,
+            "角度",edge_rotateB2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB2,
+            "ぼかし",frame_bB2,
+            "縁色",frame_colB2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB3,
+            "高さ",edge_heightB3,
+            "角度",edge_rotateB3
+            )
+        elseif effectB == 5 then
+            obj.effect("グラデーション",
+            "強さ",grd_powB,
+            "中心X",grd_cxB,
+            "中心Y",grd_cyB,
+            "角度",grd_rotateB,
+            "幅",grd_widthB,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colB,
+            "終了色",grd_end_colB
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB0,
+            "高さ",edge_heightB0,
+            "角度",edge_rotateB0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB0,
+            "ぼかし",frame_bB0,
+            "縁色",frame_colB0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB1,
+            "高さ",edge_heightB1,
+            "角度",edge_rotateB1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB1,
+            "ぼかし",frame_bB1,
+            "縁色",frame_colB1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB2,
+            "高さ",edge_heightB2,
+            "角度",edge_rotateB2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB2,
+            "ぼかし",frame_bB2,
+            "縁色",frame_colB2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB3,
+            "高さ",edge_heightB3,
+            "角度",edge_rotateB3
+            )
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xB,
+            "Y",drop_shadow_yB,
+            "濃さ",drop_shadow_deepB,
+            "拡散",drop_shadow_diffusionB,
+            "影色",drop_shadow_colorB,
+            "影を別オブジェクトで描画",0
+            )
+        elseif effectB == 6 then
+            obj.effect("グラデーション",
+            "強さ",grd_powB,
+            "中心X",grd_cxB,
+            "中心Y",grd_cyB,
+            "角度",grd_rotateB,
+            "幅",grd_widthB,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colB,
+            "終了色",grd_end_colB
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB0,
+            "高さ",edge_heightB0,
+            "角度",edge_rotateB0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB0,
+            "ぼかし",frame_bB0,
+            "縁色",frame_colB0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB1,
+            "高さ",edge_heightB1,
+            "角度",edge_rotateB1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB1,
+            "ぼかし",frame_bB1,
+            "縁色",frame_colB1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB2,
+            "高さ",edge_heightB2,
+            "角度",edge_rotateB2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sB2,
+            "ぼかし",frame_bB2,
+            "縁色",frame_colB2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthB3,
+            "高さ",edge_heightB3,
+            "角度",edge_rotateB3
+            )
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xB,
+            "Y",drop_shadow_yB,
+            "濃さ",drop_shadow_deepB,
+            "拡散",drop_shadow_diffusionB,
+            "影色",drop_shadow_colorB,
+            "影を別オブジェクトで描画",0
+            )
+            obj.effect("枠線",
+            "X",border_xB,
+            "Y",border_yB,
+            "サイズ",border_sB,
+            "丸み",border_rB,
+            "枠色",border_colB
+            )
+        end
+                -- ↑ エフェクト追加ここまで ↑
+
+        if pack == 2 then
+            -- すべての文字をまとめるモード: エフェクト適用後バッファに描画してキャッシュに保存し、画面上は不可視
+            obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+            obj.clearbuffer("tempbuffer")
+            obj.ox = 0; obj.oy = 0; obj.oz = 0; obj.rx = 0; obj.ry = 0; obj.rz = 0; obj.cx = 0; obj.cy = 0
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)  -- 合成済み画像を位置オフセットなしで描画
+            obj.copybuffer("cache:packed_group_B", "tempbuffer")
+            _G.gi_has_packed_B = true
+
+            obj.setoption("drawtarget", "framebuffer")
+            obj.clearbuffer("object")
+        else
+            obj.clearbuffer("tempbuffer")
+        end
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endB")
+
+    end
+
+-- ================================================================
+-- グループCの処理
+-- ================================================================
+elseif inC then
+
+    if current_char < eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 非終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_C_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","startC")
+
+    elseif current_char == eC then
+        -- --------------------------------------------------------
+        -- 【Cグループ: 終了文字の処理】
+        -- グループAと同じロジック
+        -- --------------------------------------------------------
+
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        for i = sC - 1, eC - 2 do  -- 0-based index: sC-1 から eC-2 まで
+            obj.copybuffer("object","cache:gi_C_" .. i)
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+
+
+        -- まとまった文字群の中心に中心点(cx, cy)と描画座標(ox, oy)を移動
+        local cxC, cyC = get_group_center(startC, endC)
+        obj.cx = cxC
+        obj.cy = cyC
+        obj.ox = cxC
+        obj.oy = cyC
+
+        -- ↓ Cグループへのエフェクト適用 ↓
+        if effectC == 1 then
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC0,
+            "高さ",edge_heightC0,
+            "角度",edge_rotateC0
+            )
+        elseif effectC == 2 then
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC0,
+            "高さ",edge_heightC0,
+            "角度",edge_rotateC0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC0,
+            "ぼかし",frame_bC0,
+            "縁色",frame_colC0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC1,
+            "高さ",edge_heightC1,
+            "角度",edge_rotateC1
+            )
+        elseif effectC == 3 then
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC0,
+            "高さ",edge_heightC0,
+            "角度",edge_rotateC0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC0,
+            "ぼかし",frame_bC0,
+            "縁色",frame_colC0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC1,
+            "高さ",edge_heightC1,
+            "角度",edge_rotateC1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC1,
+            "ぼかし",frame_bC1,
+            "縁色",frame_colC1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC2,
+            "高さ",edge_heightC2,
+            "角度",edge_rotateC2
+            )
+        elseif effectC == 4 then
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC0,
+            "高さ",edge_heightC0,
+            "角度",edge_rotateC0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC0,
+            "ぼかし",frame_bC0,
+            "縁色",frame_colC0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC1,
+            "高さ",edge_heightC1,
+            "角度",edge_rotateC1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC1,
+            "ぼかし",frame_bC1,
+            "縁色",frame_colC1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC2,
+            "高さ",edge_heightC2,
+            "角度",edge_rotateC2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC2,
+            "ぼかし",frame_bC2,
+            "縁色",frame_colC2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC3,
+            "高さ",edge_heightC3,
+            "角度",edge_rotateC3
+            )
+        elseif effectC == 5 then
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC0,
+            "高さ",edge_heightC0,
+            "角度",edge_rotateC0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC0,
+            "ぼかし",frame_bC0,
+            "縁色",frame_colC0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC1,
+            "高さ",edge_heightC1,
+            "角度",edge_rotateC1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC1,
+            "ぼかし",frame_bC1,
+            "縁色",frame_colC1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC2,
+            "高さ",edge_heightC2,
+            "角度",edge_rotateC2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC2,
+            "ぼかし",frame_bC2,
+            "縁色",frame_colC2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC3,
+            "高さ",edge_heightC3,
+            "角度",edge_rotateC3
+            )
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xC,
+            "Y",drop_shadow_yC,
+            "濃さ",drop_shadow_deepC,
+            "拡散",drop_shadow_diffusionC,
+            "影色",drop_shadow_colorC,
+            "影を別オブジェクトで描画",0
+            )
+        elseif effectC == 6 then
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC0,
+            "高さ",edge_heightC0,
+            "角度",edge_rotateC0
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC0,
+            "ぼかし",frame_bC0,
+            "縁色",frame_colC0
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC1,
+            "高さ",edge_heightC1,
+            "角度",edge_rotateC1
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC1,
+            "ぼかし",frame_bC1,
+            "縁色",frame_colC1
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC2,
+            "高さ",edge_heightC2,
+            "角度",edge_rotateC2
+            )
+            obj.effect("縁取り",
+            "サイズ",frame_sC2,
+            "ぼかし",frame_bC2,
+            "縁色",frame_colC2
+            )
+            obj.effect("凸エッジ",
+            "幅",edge_widthC3,
+            "高さ",edge_heightC3,
+            "角度",edge_rotateC3
+            )
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xC,
+            "Y",drop_shadow_yC,
+            "濃さ",drop_shadow_deepC,
+            "拡散",drop_shadow_diffusionC,
+            "影色",drop_shadow_colorC,
+            "影を別オブジェクトで描画",0
+            )
+            obj.effect("枠線",
+            "X",border_xC,
+            "Y",border_yC,
+            "サイズ",border_sC,
+            "丸み",border_rC,
+            "枠色",border_colC
+            )
+        end
+                -- ↑ エフェクト追加ここまで ↑
+
+        if pack == 2 then
+            -- すべての文字をまとめるモード: エフェクト適用後バッファに描画してキャッシュに保存し、画面上は不可視
+            obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+            obj.clearbuffer("tempbuffer")
+            obj.ox = 0; obj.oy = 0; obj.oz = 0; obj.rx = 0; obj.ry = 0; obj.rz = 0; obj.cx = 0; obj.cy = 0
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)  -- 合成済み画像を位置オフセットなしで描画
+            obj.copybuffer("cache:packed_group_C", "tempbuffer")
+            _G.gi_has_packed_C = true
+
+            obj.setoption("drawtarget", "framebuffer")
+            obj.clearbuffer("object")
+        else
+            obj.clearbuffer("tempbuffer")
+        end
+        
+        -- デバッグ用の記述(配布時にはコメントアウトする)
+        -- debug_print(current_char.."文字目","endC")
+
+    end
+
+
+-- ================================================================
+-- グループ外の文字: pack の設定に応じてまとめるか個別描画するか切り替え
+-- ================================================================
+elseif idx <= last then
+    if pack == 2 then
+        -- pack == 2 (すべての文字をまとめる): 範囲外文字はキャッシュに保存し、画面上は不可視
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.clearbuffer("tempbuffer")
+
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+
+        obj.copybuffer("cache:gi_other_" .. idx, "tempbuffer")
+
+        obj.setoption("drawtarget", "framebuffer")
+        obj.load("tempbuffer")
+        obj.clearbuffer("object")
+
+    elseif pack == 1 then
+        -- pack == 1 (範囲外の文字をまとめる):
+        if idx < last_other_idx then
+            -- 最後の範囲外文字ではない場合: キャッシュに保存し画面上は不可視
+            obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+            obj.clearbuffer("tempbuffer")
+
+            obj.draw(
+                _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+                _G.gi_scale[idx], _G.gi_alpha[idx],
+                _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+            )
+
+            obj.copybuffer("cache:gi_other_" .. idx, "tempbuffer")
+
+            obj.setoption("drawtarget", "framebuffer")
+            obj.load("tempbuffer")
+            obj.clearbuffer("object")
+        else
+            -- 最後の範囲外文字の場合: 範囲外文字群を合成して出力
+            obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+            obj.clearbuffer("tempbuffer")
+
+            for i = 0, idx - 1 do
+                local c = i + 1
+                local is_in_grp = (c >= sA and c <= eA) or (c >= sB and c <= eB) or (c >= sC and c <= eC)
+                if not is_in_grp then
+                    obj.copybuffer("object", "cache:gi_other_" .. i)
+                    obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+                end
+            end
+
+            obj.draw(
+                _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+                _G.gi_scale[idx], _G.gi_alpha[idx],
+                _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+            )
+
+            obj.setoption("drawtarget", "framebuffer")
+            obj.load("tempbuffer")
+            obj.clearbuffer("tempbuffer")
+        end
+    else
+        -- pack == 0 (まとめない: 元のまま個別描画)
+        obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+        obj.draw(
+            _G.gi_ox[idx], _G.gi_oy[idx], _G.gi_oz[idx],
+            _G.gi_scale[idx], _G.gi_alpha[idx],
+            _G.gi_rx[idx], _G.gi_ry[idx], _G.gi_rz[idx]
+        )
+        obj.load("tempbuffer")
+        obj.clearbuffer("tempbuffer")
+    end
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","elseif")
+else
+        
+    -- デバッグ用の記述(配布時にはコメントアウトする)
+    -- debug_print(current_char.."文字目","else")
+    return
+end
+
+-- ================================================================
+-- 【pack == 2: すべての文字をまとめる】
+-- 最後の文字(idx == last)のタイミングで、全文字（全グループ＋範囲外文字）を1枚のオブジェクトに合成
+-- ================================================================
+if pack == 2 and idx == last then
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.clearbuffer("tempbuffer")
+
+    -- 1. 範囲外文字のキャッシュを順番に描画
+    for i = 0, obj.num - 1 do
+        local c = i + 1
+        local is_in_grp = (c >= sA and c <= eA) or (c >= sB and c <= eB) or (c >= sC and c <= eC)
+        if not is_in_grp then
+            if obj.copybuffer("object", "cache:gi_other_" .. i) then
+                obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+            end
+        end
+    end
+
+    -- 2. エフェクト適用済みAグループを描画
+    if _G.gi_has_packed_A then
+        if obj.copybuffer("object", "cache:packed_group_A") then
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+    end
+
+    -- 3. エフェクト適用済みBグループを描画
+    if _G.gi_has_packed_B then
+        if obj.copybuffer("object", "cache:packed_group_B") then
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+    end
+
+    -- 4. エフェクト適用済みCグループを描画
+    if _G.gi_has_packed_C then
+        if obj.copybuffer("object", "cache:packed_group_C") then
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+    end
+
+    -- 5. 合成された単一オブジェクトをフレームバッファに出力
+    obj.setoption("drawtarget", "framebuffer")
+    obj.load("tempbuffer")
+    obj.clearbuffer("tempbuffer")
+end
