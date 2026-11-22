@@ -1,0 +1,3547 @@
+-- 「@個別エフェクト.anm2」で指定した文字グループに対して追加エフェクトを適用するスクリプト
+-- 他のファイルでは問題ないが、このファイルだけは最初の1行を開けないと認識されないようだ。理由は不明。
+@エフェクト追加(移動登退場)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--track@entry_timeA:Aグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeA:Aグループ::登場秒数,0,5,0,0.01
+--track@out_timeA:Aグループ::退場秒数,0,5,0,0.01
+
+--check@ankerA:Aグループ::座標アンカー表示,0
+--track@entry_xA:Aグループ::X,-2000,2000,0
+--track@entry_yA:Aグループ::Y,-2000,2000,0
+--track@entry_zA:Aグループ::Z,-2000,2000,0
+--trackgroup@entry_xA,entry_yA,entry_zA:Agroup_pos
+--track@entry_zoomA:Aグループ::拡大率,0,1000,100
+--track@entry_aspect_xA:Aグループ::X拡大率,0,1000,100
+--track@entry_aspect_yA:Aグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zA:Aグループ::Z拡大率,0,1000,100
+--trackgroup@entry_aspect_xA,entry_aspect_yA,entry_aspect_zA:Agroup_aspect
+--track@entry_rotate_xA:Aグループ::X回転,-3600,3600,0
+--track@entry_rotate_yA:Aグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zA:Aグループ::Z回転,-3600,3600,0
+--trackgroup@entry_rotate_xA,entry_rotate_yA,entry_rotate_zA:Agroup_rotate
+--check@entry_inA:Aグループ::登場,1
+--check@entry_outA:Aグループ::退場,0
+
+--select@entry_easingA:Aグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeA:Aグループ::INフェード,0
+--track@in_fade_timeA:Aグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeA:Aグループ::OUTフェード,0
+--track@out_fade_timeA:Aグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--group:Bグループ
+--select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--track@entry_timeB:Bグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeB:Bグループ::登場秒数,0,5,0,0.01
+--track@out_timeB:Bグループ::退場秒数,0,5,0,0.01
+
+--check@ankerB:Bグループ::座標アンカー表示,0
+--track@entry_xB:Bグループ::X,-2000,2000,0
+--track@entry_yB:Bグループ::Y,-2000,2000,0
+--track@entry_zB:Bグループ::Z,-2000,2000,0
+--trackgroup@entry_xB,entry_yB,entry_zB:Bgroup_pos
+--track@entry_zoomB:Bグループ::拡大率,0,1000,100
+--track@entry_aspect_xB:Bグループ::X拡大率,0,1000,100
+--track@entry_aspect_yB:Bグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zB:Bグループ::Z拡大率,0,1000,100
+--trackgroup@entry_aspect_xB,entry_aspect_yB,entry_aspect_zB:Bgroup_aspect
+--track@entry_rotate_xB:Bグループ::X回転,-3600,3600,0
+--track@entry_rotate_yB:Bグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zB:Bグループ::Z回転,-3600,3600,0
+--trackgroup@entry_rotate_xB,entry_rotate_yB,entry_rotate_zB:Bgroup_rotate
+
+--check@entry_inB:Bグループ::登場,1
+--check@entry_outB:Bグループ::退場,0
+
+--select@entry_easingB:Bグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeB:Bグループ::INフェード,0
+--track@in_fade_timeB:Bグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeB:Bグループ::OUTフェード,0
+--track@out_fade_timeB:Bグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--group:Cグループ
+--select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1
+--track@entry_timeC:Cグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeC:Cグループ::登場秒数,0,5,0,0.01
+--track@out_timeC:Cグループ::退場秒数,0,5,0,0.01
+
+--check@ankerC:Cグループ::座標アンカー表示,0
+--track@entry_xC:Cグループ::X,-2000,2000,0
+--track@entry_yC:Cグループ::Y,-2000,2000,0
+--track@entry_zC:Cグループ::Z,-2000,2000,0
+--trackgroup@entry_xC,entry_yC,entry_zC:Agroup_pos
+--track@entry_zoomC:Cグループ::拡大率,0,1000,100
+--track@entry_aspect_xC:Cグループ::X拡大率,0,1000,100
+--track@entry_aspect_yC:Cグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zC:Cグループ::Z拡大率,0,1000,100
+--trackgroup@entry_aspect_xC,entry_aspect_yC,entry_aspect_zC:Cgroup_aspect
+--track@entry_rotate_xC:Cグループ::X回転,-3600,3600,0
+--track@entry_rotate_yC:Cグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zC:Cグループ::Z回転,-3600,3600,0
+--trackgroup@entry_rotate_xC,entry_rotate_yC,entry_rotate_zC:Cgroup_rotate
+
+--check@entry_inC:Cグループ::登場,1
+--check@entry_outC:Cグループ::退場,0
+
+--select@entry_easingC:Cグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeC:Cグループ::INフェード,0
+--track@in_fade_timeC:Cグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeC:Cグループ::OUTフェード,0
+--track@out_fade_timeC:Cグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeA:effectA==0
+--hide@in_timeA:effectA==0
+--hide@out_timeA:effectA==0
+--hide@ankerA:effectA~=1
+--hide@entry_xA:effectA~=1
+--hide@entry_yA:effectA~=1
+--hide@entry_zA:effectA~=1
+--hide@entry_zoomA:effectA~=1
+--hide@entry_aspect_xA:effectA~=1
+--hide@entry_aspect_yA:effectA~=1
+--hide@entry_aspect_zA:effectA~=1
+--hide@entry_rotate_xA:effectA~=1
+--hide@entry_rotate_yA:effectA~=1
+--hide@entry_rotate_zA:effectA~=1
+--hide@entry_inA:effectA~=1
+--hide@entry_outA:effectA~=1
+--hide@entry_easingA:effectA==0
+--hide@entry_in_fadeA:effectA==0
+--hide@in_fade_timeA:effectA==0
+--hide@entry_out_fadeA:effectA==0
+--hide@out_fade_timeA:effectA==0
+
+--hide@entry_timeB:effectB==0
+--hide@in_timeB:effectB==0
+--hide@out_timeB:effectB==0
+--hide@ankerB:effectB~=1
+--hide@entry_xB:effectB~=1
+--hide@entry_yB:effectB~=1
+--hide@entry_zB:effectB~=1
+--hide@entry_zoomB:effectB~=1
+--hide@entry_aspect_xB:effectB~=1
+--hide@entry_aspect_yB:effectB~=1
+--hide@entry_aspect_zB:effectB~=1
+--hide@entry_rotate_xB:effectB~=1
+--hide@entry_rotate_yB:effectB~=1
+--hide@entry_rotate_zB:effectB~=1
+--hide@entry_inB:effectB~=1
+--hide@entry_outB:effectB~=1
+--hide@entry_easingB:effectB==0
+--hide@entry_in_fadeB:effectB==0
+--hide@in_fade_timeB:effectB==0
+--hide@entry_out_fadeB:effectB==0
+--hide@out_fade_timeB:effectB==0
+
+--hide@entry_timeC:effectC==0
+--hide@in_timeC:effectC==0
+--hide@out_timeC:effectC==0
+--hide@ankerC:effectC~=1
+--hide@entry_xC:effectC~=1
+--hide@entry_yC:effectC~=1
+--hide@entry_zC:effectC~=1
+--hide@entry_zoomC:effectC~=1
+--hide@entry_aspect_xC:effectC~=1
+--hide@entry_aspect_yC:effectC~=1
+--hide@entry_aspect_zC:effectC~=1
+--hide@entry_rotate_xC:effectC~=1
+--hide@entry_rotate_yC:effectC~=1
+--hide@entry_rotate_zC:effectC~=1
+--hide@entry_inC:effectC~=1
+--hide@entry_outC:effectC~=1
+--hide@entry_easingC:effectC==0
+--hide@entry_in_fadeC:effectC==0
+--hide@in_fade_timeC:effectC==0
+--hide@entry_out_fadeC:effectC==0
+--hide@out_fade_timeC:effectC==0
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- アンカーを表示するか非表示にするかをトラックバーで設定
+if ankerA ~= 0 then
+    obj.setanchor("entry_xA,entry_yA",0,"arm","color",0xff0000)
+end
+if ankerB ~= 0 then
+    obj.setanchor("entry_xB,entry_yB",0,"arm","color",0x00ff00)
+end
+if ankerC ~= 0 then
+    obj.setanchor("entry_xC,entry_yC",0,"arm","color",0x0000ff)
+end
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then
+        obj.effect("移動登場と退場_AKIRA",
+            "登退場秒数",entry_timeA,
+            "登場秒数",in_timeA,
+            "退場秒数",out_timeA,
+            "X",entry_xA,
+            "Y",entry_yA,
+            "Z",entry_zA,
+            "拡大率",entry_zoomA,
+            "X拡大率",entry_aspect_xA,
+            "Y拡大率",entry_aspect_yA,
+            "Z拡大率",entry_aspect_zA,
+            "X回転",entry_rotate_xA,
+            "Y回転",entry_rotate_yA,
+            "Z回転",entry_rotate_zA,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingA,
+            "登場",entry_inA,
+            "退場",entry_outA,
+            "INフェード",entry_in_fadeA,
+            "インフェード時間",in_fade_timeA,
+            "OUTフェード",entry_out_fadeA,
+            "アウトフェード時間",out_fade_timeA
+        )
+    end
+end
+-- ↑ Aグループエフェクト追加ここまで ↑
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then
+        obj.effect("移動登場と退場_AKIRA",
+            "登退場秒数",entry_timeB,
+            "登場秒数",in_timeB,
+            "退場秒数",out_timeB,
+            "X",entry_xB,
+            "Y",entry_yB,
+            "Z",entry_zB,
+            "拡大率",entry_zoomB,
+            "X拡大率",entry_aspect_xB,
+            "Y拡大率",entry_aspect_yB,
+            "Z拡大率",entry_aspect_zB,
+            "X回転",entry_rotate_xB,
+            "Y回転",entry_rotate_yB,
+            "Z回転",entry_rotate_zB,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingB,
+            "登場",entry_inB,
+            "退場",entry_outB,
+            "INフェード",entry_in_fadeB,
+            "インフェード時間",in_fade_timeB,
+            "OUTフェード",entry_out_fadeB,
+            "アウトフェード時間",out_fade_timeB
+        )
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+    if effectC == 1 then
+        obj.effect("移動登場と退場_AKIRA",
+            "登退場秒数",entry_timeC,
+            "登場秒数",in_timeC,
+            "退場秒数",out_timeC,
+            "X",entry_xC,
+            "Y",entry_yC,
+            "Z",entry_zC,
+            "拡大率",entry_zoomC,
+            "X拡大率",entry_aspect_xC,
+            "Y拡大率",entry_aspect_yC,
+            "Z拡大率",entry_aspect_zC,
+            "X回転",entry_rotate_xC,
+            "Y回転",entry_rotate_yC,
+            "Z回転",entry_rotate_zC,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingC,
+            "登場",entry_inC,
+            "退場",entry_outC,
+            "INフェード",entry_in_fadeC,
+            "インフェード時間",in_fade_timeC,
+            "OUTフェード",entry_out_fadeC,
+            "アウトフェード時間",out_fade_timeC
+        )
+    end
+end
+-- ↑ エフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+@エフェクト追加(手動設定)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::各種設定=0,変更なし=0,手動設定=1
+
+--check@ankerA:Aグループ::座標アンカー表示,0
+--track@xA:Aグループ::X,-2000,2000,0
+--track@yA:Aグループ::Y,-2000,2000,0
+--track@zA:Aグループ::Z,-2000,2000,0
+--trackgroup@xA,yA,zA:Agroup_pos
+--track@zoomA:Aグループ::拡大率,0,1000,100
+--track@aspect_xA:Aグループ::X拡大率,0,1000,50
+--track@aspect_yA:Aグループ::Y拡大率,0,1000,50
+--track@aspect_zA:Aグループ::Z拡大率,0,1000,50
+--trackgroup@aspect_xA,aspect_yA,aspect_zA:Agroup_aspect
+--track@alphaA:Aグループ::透明度,0,100,0,0.1
+--track@rotate_xA:Aグループ::X回転,-3600,3600,0
+--track@rotate_yA:Aグループ::Y回転,-3600,3600,0
+--track@rotate_zA:Aグループ::Z回転,-3600,3600,0
+--trackgroup@rotate_xA,rotate_yA,rotate_zA:Agroup_rotate
+--select@rotationA:Aグループ::ローテーション=0,0°=0,90°=1,180°=2,270°=3,360°=4
+--check@flip_verticallyA:Aグループ::上下反転,0
+--check@horizontal_flipA:Aグループ::左右反転,0
+--check@luminance_inversionA:Aグループ::輝度反転,0
+--check@hue_inversionA:Aグループ::色相反転,0
+--check@transparency_inversionA:Aグループ::透明度反転,0
+--group
+
+--group:Bグループ
+--select@effectB:Bグループ::各種設定=0,変更なし=0,手動設定=1
+
+--check@ankerB:Bグループ::座標アンカー表示,0
+--track@xB:Bグループ::X,-2000,2000,0
+--track@yB:Bグループ::Y,-2000,2000,0
+--track@zB:Bグループ::Z,-2000,2000,0
+--trackgroup@xB,yB,zB:Bgroup_pos
+--track@zoomB:Bグループ::拡大率,0,1000,100
+--track@aspect_xB:Bグループ::X拡大率,0,1000,50
+--track@aspect_yB:Bグループ::Y拡大率,0,1000,50
+--track@aspect_zB:Bグループ::Z拡大率,0,1000,50
+--trackgroup@aspect_xB,aspect_yB,aspect_zB:Bgroup_aspect
+--track@alphaB:Bグループ::透明度,0,100,0,0.1
+--track@rotate_xB:Bグループ::X回転,-3600,3600,0
+--track@rotate_yB:Bグループ::Y回転,-3600,3600,0
+--track@rotate_zB:Bグループ::Z回転,-3600,3600,0
+--trackgroup@rotate_xB,rotate_yB,rotate_zB:Bgroup_rotate
+--select@rotationB:Bグループ::ローテーション=0,0°=0,90°=1,180°=2,270°=3,360°=4
+--check@flip_verticallyB:Bグループ::上下反転,0
+--check@horizontal_flipB:Bグループ::左右反転,0
+--check@luminance_inversionB:Bグループ::輝度反転,0
+--check@hue_inversionB:Bグループ::色相反転,0
+--check@transparency_inversionB:Bグループ::透明度反転,0
+--group
+
+--group:Cグループ
+--select@effectC:Cグループ::各種設定=0,変更なし=0,手動設定=1
+
+--check@ankerC:Cグループ::座標アンカー表示,0
+--track@xC:Cグループ::X,-2000,2000,0
+--track@yC:Cグループ::Y,-2000,2000,0
+--track@zC:Cグループ::Z,-2000,2000,0
+--trackgroup@xC,yC,zC:Cgroup_pos
+--track@zoomC:Cグループ::拡大率,0,1000,100
+--track@aspect_xC:Cグループ::X拡大率,0,1000,50
+--track@aspect_yC:Cグループ::Y拡大率,0,1000,50
+--track@aspect_zC:Cグループ::Z拡大率,0,1000,50
+--trackgroup@aspect_xC,aspect_yC,aspect_zC:Cgroup_aspect
+--track@alphaC:Cグループ::透明度,0,100,0,0.1
+--track@rotate_xC:Cグループ::X回転,-3600,3600,0
+--track@rotate_yC:Cグループ::Y回転,-3600,3600,0
+--track@rotate_zC:Cグループ::Z回転,-3600,3600,0
+--trackgroup@rotate_xC,rotate_yC,rotate_zC:Cgroup_rotate
+--select@rotationC:Cグループ::ローテーション=0,0°=0,90°=1,180°=2,270°=3,360°=4
+--check@flip_verticallyC:Cグループ::上下反転,0
+--check@horizontal_flipC:Cグループ::左右反転,0
+--check@luminance_inversionC:Cグループ::輝度反転,0
+--check@hue_inversionC:Cグループ::色相反転,0
+--check@transparency_inversionC:Cグループ::透明度反転,0
+--group
+
+--hide@ankerA:effectA==0
+--hide@xA:effectA==0
+--hide@yA:effectA==0
+--hide@zA:effectA==0
+--hide@zoomA:effectA==0
+--hide@aspect_xA:effectA==0
+--hide@aspect_yA:effectA==0
+--hide@aspect_zA:effectA==0
+--hide@alphaA:effectA==0
+--hide@rotate_xA:effectA==0
+--hide@rotate_yA:effectA==0
+--hide@rotate_zA:effectA==0
+--hide@rotationA:effectA==0
+--hide@flip_verticallyA:effectA==0
+--hide@horizontal_flipA:effectA==0
+--hide@luminance_inversionA:effectA==0
+--hide@hue_inversionA:effectA==0
+--hide@transparency_inversionA:effectA==0
+
+--hide@ankerB:effectB==0
+--hide@xB:effectB==0
+--hide@yB:effectB==0
+--hide@zB:effectB==0
+--hide@zoomB:effectB==0
+--hide@aspect_xB:effectB==0
+--hide@aspect_yB:effectB==0
+--hide@aspect_zB:effectB==0
+--hide@alphaB:effectB==0
+--hide@rotate_xB:effectB==0
+--hide@rotate_yB:effectB==0
+--hide@rotate_zB:effectB==0
+--hide@rotationB:effectB==0
+--hide@flip_verticallyB:effectB==0
+--hide@horizontal_flipB:effectB==0
+--hide@luminance_inversionB:effectB==0
+--hide@hue_inversionB:effectB==0
+--hide@transparency_inversionB:effectB==0
+
+--hide@ankerC:effectC==0
+--hide@xC:effectC==0
+--hide@yC:effectC==0
+--hide@zC:effectC==0
+--hide@zoomC:effectC==0
+--hide@aspect_xC:effectC==0
+--hide@aspect_yC:effectC==0
+--hide@aspect_zC:effectC==0
+--hide@alphaC:effectC==0
+--hide@rotate_xC:effectC==0
+--hide@rotate_yC:effectC==0
+--hide@rotate_zC:effectC==0
+--hide@rotationC:effectC==0
+--hide@flip_verticallyC:effectC==0
+--hide@horizontal_flipC:effectC==0
+--hide@luminance_inversionC:effectC==0
+--hide@hue_inversionC:effectC==0
+--hide@transparency_inversionC:effectC==0
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- アンカーを表示するか非表示にするかをトラックバーで設定
+if ankerA ~= 0 then
+    obj.setanchor("xA,yA",0,"arm","color",0xff0000)
+end
+if ankerB ~= 0 then
+    obj.setanchor("xB,yB",0,"arm","color",0x00ff00)
+end
+if ankerC ~= 0 then
+    obj.setanchor("xC,yC",0,"arm","color",0x0000ff)
+end
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then
+        obj.effect("座標","X",xA,"Y",yA,"Z",zA)
+        obj.effect("拡大率","拡大率",100.000 + zoomA,"X",aspect_xA,"Y",aspect_yA,"Z",aspect_zA)
+        obj.effect("透明度","透明度",alphaA)
+        obj.effect("回転","X",rotate_xA,"Y",rotate_yA,"Z",rotate_zA)
+        obj.effect("ローテーション","90度回転",rotationA)
+        obj.effect("反転","上下反転",flip_verticallyA,
+        "左右反転",horizontal_flipA,
+        "輝度反転",luminance_inversionA,
+        "色相反転",hue_inversionA,
+        "透明度反転",transparency_inversionA
+        )
+    end
+end
+-- ↑ Aグループエフェクト追加ここまで ↑
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then
+        obj.effect("座標","X",xB,"Y",yB,"Z",zB)
+        obj.effect("拡大率","拡大率",100.000 + zoomB,"X",aspect_xB,"Y",aspect_yB,"Z",aspect_zB)
+        obj.effect("透明度","透明度",alphaB)
+        obj.effect("回転","X",rotate_xB,"Y",rotate_yB,"Z",rotate_zB)
+        obj.effect("ローテーション","90度回転",rotationB)
+        obj.effect("反転","上下反転",flip_verticallyB,
+        "左右反転",horizontal_flipB,
+        "輝度反転",luminance_inversionB,
+        "色相反転",hue_inversionB,
+        "透明度反転",transparency_inversionB
+        )
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+        if effectC == 1 then
+           obj.effect("座標","X",xC,"Y",yC,"Z",zC)
+           obj.effect("拡大率","拡大率",100.000 + zoomC,"X",aspect_xC,"Y",aspect_yC,"Z",aspect_zC)
+           obj.effect("透明度","透明度",alphaC)
+           obj.effect("回転","X",rotate_xC,"Y",rotate_yC,"Z",rotate_zC)
+           obj.effect("ローテーション","90度回転",rotationC)
+           obj.effect("反転","上下反転",flip_verticallyC,
+           "左右反転",horizontal_flipC,
+           "輝度反転",luminance_inversionC,
+           "色相反転",hue_inversionC,
+           "透明度反転",transparency_inversionC
+            )
+        end
+end
+-- ↑ Cグループエフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+@エフェクト追加(装飾1)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::装飾=0,なし=0,縁取り=1,枠線=2,ドロップシャドウ=3,凸エッジ=4,グラデーション=5,ぼかし=6
+
+--track@frame_sA:Aグループ(縁取り)::サイズ,0,500,5,1
+--track@frame_bA:Aグループ(縁取り)::ぼかし,0,100,5,1
+--color@frame_colA:Aグループ(縁取り)::縁色,0xffffff
+
+--track@border_xA:Aグループ(枠線)::X,-2000,2000,0
+--track@border_yA:Aグループ(枠線)::Y,-2000,1000,0
+--track@border_sA:Aグループ(枠線)::サイズ,0,1000,10
+--track@border_rA:Aグループ(枠線)::丸み,0,1000,0
+--color@border_colA:Aグループ(枠線)::枠色,0xffffff
+
+--track@drop_shadow_xA:Aグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yA:Aグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepA:Aグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionA:Aグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorA:Aグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@edge_widthA:Aグループ(凸エッジ)::幅,0,100,4
+--track@edge_heightA:Aグループ(凸エッジ)::高さ,0,3.00,1.00,0.01
+--track@edge_rotateA:Aグループ(凸エッジ)::角度,-3600,3600,45.00,0.01
+
+--track@grd_powA:Aグループ(グラデーション)::強さ,0.0,100.0,100.0
+--track@grd_cxA:Aグループ(グラデーション)::中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyA:Aグループ(グラデーション)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateA:Aグループ(グラデーション)::角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthA:Aグループ(グラデーション)::幅,0,2000,100
+--select@grd_compositeA:Aグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeA:Aグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colA:Aグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colA:Aグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@blur_rangeA:Aグループ(ぼかし)::範囲,0,1000,5
+--track@blur_aspectA:Aグループ(ぼかし)::縦横比,-100.00,100.00,0.00,0.01
+--track@blur_lightA:Aグループ(ぼかし)::光の強さ,0.0,60.0,0.0,0.1
+
+--group
+
+--group:Bグループ
+--select@effectB:Bグループ::装飾=0,なし=0,縁取り=1,枠線=2,ドロップシャドウ=3,凸エッジ=4,グラデーション=5,ぼかし=6
+
+--track@frame_sB:Bグループ(縁取り)::サイズ,0,500,5,1
+--track@frame_bB:Bグループ(縁取り)::ぼかし,0,100,5,1
+--color@frame_colB:Bグループ(縁取り)::縁色,0xffffff
+
+--track@border_xB:Bグループ(枠線)::X,-2000,2000,0
+--track@border_yB:Bグループ(枠線)::Y,-2000,1000,0
+--track@border_sB:Bグループ(枠線)::サイズ,0,1000,10
+--track@border_rB:Bグループ(枠線)::丸み,0,1000,0
+--color@border_colB:Bグループ(枠線)::枠色,0xffffff
+
+--track@drop_shadow_xB:Bグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yB:Bグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepB:Bグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionB:Bグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorB:Bグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@edge_widthB:Bグループ(凸エッジ)::幅,0,100,4
+--track@edge_heightB:Bグループ(凸エッジ)::高さ,0,3.00,1.00,0.01
+--track@edge_rotateB:Bグループ(凸エッジ)::角度,-3600,3600,45.00,0.01
+
+--track@grd_powB:Bグループ(グラデーション)::強さ,0.0,100.0,100.0
+--track@grd_cxB:Bグループ(グラデーション)::中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyB:Bグループ(グラデーション)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateB:Bグループ(グラデーション)::角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthB:Bグループ(グラデーション)::幅,0,2000,100
+--select@grd_compositeB:Bグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeB:Bグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colB:Bグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colB:Bグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@blur_rangeB:Bグループ(ぼかし)::範囲,0,1000,5
+--track@blur_aspectB:Bグループ(ぼかし)::縦横比,-100.00,100.00,0.00,0.01
+--track@blur_lightB:Bグループ(ぼかし)::光の強さ,0.0,60.0,0.0,0.1
+
+--group
+
+--group:Cグループ
+--select@effectC:Cグループ::装飾=0,なし=0,縁取り=1,枠線=2,ドロップシャドウ=3,凸エッジ=4,グラデーション=5,ぼかし=6
+
+--track@frame_sC:Cグループ(縁取り)::サイズ,0,500,5,1
+--track@frame_bC:Cグループ(縁取り)::ぼかし,0,100,5,1
+--color@frame_colC:Cグループ(縁取り)::縁色,0xffffff
+
+--track@border_xC:Cグループ(枠線)::X,-2000,2000,0
+--track@border_yC:Cグループ(枠線)::Y,-2000,1000,0
+--track@border_sC:Cグループ(枠線)::サイズ,0,1000,10
+--track@border_rC:Cグループ(枠線)::丸み,0,1000,0
+--color@border_colC:Cグループ(枠線)::枠色,0xffffff
+
+--track@drop_shadow_xC:Cグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yC:Cグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepC:Cグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionC:Cグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorC:Cグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@edge_widthC:Cグループ(凸エッジ)::幅,0,100,4
+--track@edge_heightC:Cグループ(凸エッジ)::高さ,0,3.00,1.00,0.01
+--track@edge_rotateC:Cグループ(凸エッジ)::角度,-3600,3600,45.00,0.01
+
+--track@grd_powC:Cグループ(グラデーション)::強さ,0.0,100.0,100.0
+--track@grd_cxC:Cグループ(グラデーション)::中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyC:Cグループ(グラデーション)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateC:Cグループ(グラデーション)::角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthC:Cグループ(グラデーション)::幅,0,2000,100
+--select@grd_compositeC:Cグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeC:Cグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colC:Cグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colC:Cグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@blur_rangeC:Cグループ(ぼかし)::範囲,0,1000,5
+--track@blur_aspectC:Cグループ(ぼかし)::縦横比,-100.00,100.00,0.00,0.01
+--track@blur_lightC:Cグループ(ぼかし)::光の強さ,0.0,60.0,0.0,0.1
+
+--group
+
+--hide@frame_sA:effectA~=1
+--hide@frame_bA:effectA~=1
+--hide@frame_colA:effectA~=1
+--hide@border_xA:effectA~=2
+--hide@border_yA:effectA~=2
+--hide@border_sA:effectA~=2
+--hide@border_rA:effectA~=2
+--hide@border_colA:effectA~=2
+--hide@drop_shadow_xA:effectA~=3
+--hide@drop_shadow_yA:effectA~=3
+--hide@drop_shadow_deepA:effectA~=3
+--hide@drop_shadow_diffusionA:effectA~=3
+--hide@drop_shadow_colorA:effectA~=3
+--hide@edge_widthA:effectA~=4
+--hide@edge_heightA:effectA~=4
+--hide@edge_rotateA:effectA~=4
+--hide@grd_powA:effectA~=5
+--hide@grd_cxA:effectA~=5
+--hide@grd_cyA:effectA~=5
+--hide@grd_rotateA:effectA~=5
+--hide@grd_widthA:effectA~=5
+--hide@grd_compositeA:effectA~=5
+--hide@grd_typeA:effectA~=5
+--hide@grd_start_colA:effectA~=5
+--hide@grd_end_colA:effectA~=5
+--hide@blur_rangeA:effectA~=6
+--hide@blur_aspectA:effectA~=6
+--hide@blur_lightA:effectA~=6
+
+--hide@frame_sB:effectB~=1
+--hide@frame_bB:effectB~=1
+--hide@frame_colB:effectB~=1
+--hide@border_xB:effectB~=2
+--hide@border_yB:effectB~=2
+--hide@border_sB:effectB~=2
+--hide@border_rB:effectB~=2
+--hide@border_colB:effectB~=2
+--hide@drop_shadow_xB:effectB~=3
+--hide@drop_shadow_yB:effectB~=3
+--hide@drop_shadow_deepB:effectB~=3
+--hide@drop_shadow_diffusionB:effectB~=3
+--hide@drop_shadow_colorB:effectB~=3
+--hide@edge_widthB:effectB~=4
+--hide@edge_heightB:effectB~=4
+--hide@edge_rotateB:effectB~=4
+--hide@grd_powB:effectB~=5
+--hide@grd_cxB:effectB~=5
+--hide@grd_cyB:effectB~=5
+--hide@grd_rotateB:effectB~=5
+--hide@grd_widthB:effectB~=5
+--hide@grd_compositeB:effectB~=5
+--hide@grd_typeB:effectB~=5
+--hide@grd_start_colB:effectB~=5
+--hide@grd_end_colB:effectB~=5
+--hide@blur_rangeB:effectB~=6
+--hide@blur_aspectB:effectB~=6
+--hide@blur_lightB:effectB~=6
+
+--hide@frame_sC:effectC~=1
+--hide@frame_bC:effectC~=1
+--hide@frame_colC:effectC~=1
+--hide@border_xC:effectC~=2
+--hide@border_yC:effectC~=2
+--hide@border_sC:effectC~=2
+--hide@border_rC:effectC~=2
+--hide@border_colC:effectC~=2
+--hide@drop_shadow_xC:effectC~=3
+--hide@drop_shadow_yC:effectC~=3
+--hide@drop_shadow_deepC:effectC~=3
+--hide@drop_shadow_diffusionC:effectC~=3
+--hide@drop_shadow_colorC:effectC~=3
+--hide@edge_widthC:effectC~=4
+--hide@edge_heightC:effectC~=4
+--hide@edge_rotateC:effectC~=4
+--hide@grd_powC:effectC~=5
+--hide@grd_cxC:effectC~=5
+--hide@grd_cyC:effectC~=5
+--hide@grd_rotateC:effectC~=5
+--hide@grd_widthC:effectC~=5
+--hide@grd_compositeC:effectC~=5
+--hide@grd_typeC:effectC~=5
+--hide@grd_start_colC:effectC~=5
+--hide@grd_end_colC:effectC~=5
+--hide@blur_rangeC:effectC~=6
+--hide@blur_aspectC:effectC~=6
+--hide@blur_lightC:effectC~=6
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then
+        obj.effect("縁取り",
+        "サイズ",frame_sA,
+        "ぼかし",frame_bA,
+        "縁色",frame_colA
+        )
+    elseif effectA == 2 then
+        obj.effect("枠線",
+        "X",border_xA,
+        "Y",border_yA,
+        "サイズ",border_sA,
+        "丸み",border_rA,
+        "枠色",border_colA
+        )
+    elseif effectA == 3 then
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xA,
+        "Y",drop_shadow_yA,
+        "濃さ",drop_shadow_deepA,
+        "拡散",drop_shadow_diffusionA,
+        "影色",drop_shadow_colorA,
+        "影を別オブジェクトで描画",0
+        )
+    elseif effectA == 4 then
+        obj.effect("凸エッジ",
+        "幅",edge_widthA,
+        "高さ",edge_heightA,
+        "角度",edge_rotateA
+        )
+    elseif effectA == 5 then -- 合成モード、形状への変換テーブル未作成のため、一旦定数。またアプデでグラデの使用は変わったようだが、未対応。
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+    elseif effectA == 6 then
+        obj.effect("ぼかし",
+        "範囲",blur_rangeA,
+        "縦横比",blur_aspectA,
+        "光の強さ",blur_lightA,
+        "サイズ固定",0
+        )
+    end
+end
+-- ↑ Aグループエフェクト追加ここまで ↑
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then
+        obj.effect("縁取り",
+        "サイズ",frame_sB,
+        "ぼかし",frame_bB,
+        "縁色",frame_colB
+        )
+    elseif effectB == 2 then
+        obj.effect("枠線",
+        "X",border_xB,
+        "Y",border_yB,
+        "サイズ",border_sB,
+        "丸み",border_rB,
+        "枠色",border_colB
+        )
+    elseif effectB == 3 then
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xB,
+        "Y",drop_shadow_yB,
+        "濃さ",drop_shadow_deepB,
+        "拡散",drop_shadow_diffusionB,
+        "影色",drop_shadow_colorB,
+        "影を別オブジェクトで描画",0
+        )
+    elseif effectB == 4 then
+        obj.effect("凸エッジ",
+        "幅",edge_widthB,
+        "高さ",edge_heightB,
+        "角度",edge_rotateB
+        )
+    elseif effectB == 5 then -- 合成モード、形状への変換テーブル未作成のため、一旦定数。またアプデでグラデの使用は変わったようだが、未対応。
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+    elseif effectB == 6 then
+        obj.effect("ぼかし",
+        "範囲",blur_rangeB,
+        "縦横比",blur_aspectB,
+        "光の強さ",blur_lightB,
+        "サイズ固定",0
+        )
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+        if effectC == 1 then
+            obj.effect("縁取り",
+            "サイズ",frame_sC,
+            "ぼかし",frame_bC,
+            "縁色",frame_colC
+            )
+        elseif effectC == 2 then
+            obj.effect("枠線",
+            "X",border_xC,
+            "Y",border_yC,
+            "サイズ",border_sC,
+            "丸み",border_rC,
+            "枠色",border_colC
+            )
+        elseif effectC == 3 then
+            obj.effect("ドロップシャドウ",
+            "X",drop_shadow_xC,
+            "Y",drop_shadow_yC,
+            "濃さ",drop_shadow_deepC,
+            "拡散",drop_shadow_diffusionC,
+            "影色",drop_shadow_colorC,
+            "影を別オブジェクトで描画",0
+            )
+        elseif effectC == 4 then
+            obj.effect("凸エッジ",
+            "幅",edge_widthC,
+            "高さ",edge_heightC,
+            "角度",edge_rotateC
+            )
+        elseif effectC == 5 then -- 合成モード、形状への変換テーブル未作成のため、一旦定数。またアプデでグラデの使用は変わったようだが、未対応。
+            obj.effect("グラデーション",
+            "強さ",grd_powC,
+            "中心X",grd_cxC,
+            "中心Y",grd_cyC,
+            "角度",grd_rotateC,
+            "幅",grd_widthC,
+            "合成モード","通常",
+            "形状","線形",
+            "開始色",grd_start_colC,
+            "終了色",grd_end_colC
+            )
+        elseif effectC == 6 then
+            obj.effect("ぼかし",
+            "範囲",blur_rangeC,
+            "縦横比",blur_aspectC,
+            "光の強さ",blur_lightC,
+            "サイズ固定",0
+            )
+    end
+end
+-- ↑ Cグループエフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+@エフェクト追加(装飾2)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::装飾=0,なし=0,グロー=1,発光=2,色ずれ=3,モザイク=4,ミラー=5
+
+--track@glow2_strengthA:Aグループ(グロー)::強さ,-4000,4000,50
+--track@glow2_diffusionA:Aグループ(グロー)::拡散,0,400,50
+--track@glow2_angleA:Aグループ(グロー)::角度,-3600,3600,25
+--track@glow2_thresholdA:Aグループ(グロー)::しきい値,0,100,20
+--track@glow2_ratioA:Aグループ(グロー)::比率,0,200,100
+--track@glow2_blurA:Aグループ(グロー)::ぼかし,0,100,1
+--color@glow2_colorA:Aグループ(グロー)::光色,nil
+--check@glow2_disableA:Aグループ(グロー)::光色を無効,0
+--select@glow2_shapeA:Aグループ(グロー)::形状=0,通常=0,クロス(4本)=1,クロス(6本)=2,クロス(8本)=3,クロス(10本)=4,クロス(12本)=5,ライン=6
+
+--track@glow_strengthA:Aグループ(発光)::強さ,-4000,4000,500
+--track@glow_diffusionA:Aグループ(発光)::拡散,0,4000,250
+--track@glow_thresholdA:Aグループ(発光)::しきい値,0,100,80
+--track@glow_speedA:Aグループ(発光)::拡散速度,0,4000,0
+--check@glow_fix_sizeA:Aグループ(発光)::サイズ固定,0
+--color@glow_colorA:Aグループ(発光)::光色,0xffffff
+
+--track@shift_widthA:Aグループ(色ずれ)::ずれ幅,-4000,4000,7
+--track@shift_angleA:Aグループ(色ずれ)::角度,-3600,3600,90
+--track@shift_strengthA:Aグループ(色ずれ)::強さ,-4000,4000,100
+--select@shift_typeA:Aグループ(色ずれ)::色ずれの種類=1,赤緑A=0,赤青A=1,緑青A=2,赤緑B=3,赤青B=4,緑青B=5
+
+--track@mosaic_sizeA:Aグループ(モザイク)::モザイクサイズ,1,4000,12
+--check@mosaic_tileA:Aグループ(モザイク)::タイル風,0
+
+--track@mirror_alphaA:Aグループ(ミラー)::透明度
+--track@mirror_attenuationA:Aグループ(ミラー)::減衰
+--track@mirror_boundaryA:Aグループ(ミラー)::境目調整
+--select@mirror_dirA:Aグループ(ミラー)::ミラーの方向=1,上側=0,下側=1,左側=2,右側=3
+
+--group
+
+--group:Bグループ
+--select@effectB:Bグループ::装飾=0,なし=0,グロー=1,発光=2,色ずれ=3,モザイク=4,ミラー=5
+
+--track@glow2_strengthB:Bグループ(グロー)::強さ,-4000,4000,50
+--track@glow2_diffusionB:Bグループ(グロー)::拡散,0,400,50
+--track@glow2_angleB:Bグループ(グロー)::角度,-3600,3600,25
+--track@glow2_thresholdB:Bグループ(グロー)::しきい値,0,100,20
+--track@glow2_ratioB:Bグループ(グロー)::比率,0,200,100
+--track@glow2_blurB:Bグループ(グロー)::ぼかし,0,100,1
+--color@glow2_colorB:Bグループ(グロー)::光色,nil
+--check@glow2_disableB:Bグループ(グロー)::光色を無効,0
+--select@glow2_shapeB:Bグループ(グロー)::形状=0,通常=0,クロス(4本)=1,クロス(6本)=2,クロス(8本)=3,クロス(10本)=4,クロス(12本)=5,ライン=6
+
+--track@glow_strengthB:Bグループ(発光)::強さ,-4000,4000,500
+--track@glow_diffusionB:Bグループ(発光)::拡散,0,4000,250
+--track@glow_thresholdB:Bグループ(発光)::しきい値,0,100,80
+--track@glow_speedB:Bグループ(発光)::拡散速度,0,4000,0
+--check@glow_fix_sizeB:Bグループ(発光)::サイズ固定,0
+--color@glow_colorB:Bグループ(発光)::光色,0xffffff
+
+--track@shift_widthB:Bグループ(色ずれ)::ずれ幅,-4000,4000,7
+--track@shift_angleB:Bグループ(色ずれ)::角度,-3600,3600,90
+--track@shift_strengthB:Bグループ(色ずれ)::強さ,-4000,4000,100
+--select@shift_typeB:Bグループ(色ずれ)::色ずれの種類=1,赤緑A=0,赤青A=1,緑青A=2,赤緑B=3,赤青B=4,緑青B=5
+
+--track@mosaic_sizeB:Bグループ(モザイク)::モザイクサイズ,1,4000,12
+--check@mosaic_tileB:Bグループ(モザイク)::タイル風,0
+
+--track@mirror_alphaB:Bグループ(ミラー)::透明度
+--track@mirror_attenuationB:Bグループ(ミラー)::減衰
+--track@mirror_boundaryB:Bグループ(ミラー)::境目調整
+--select@mirror_dirB:Bグループ(ミラー)::ミラーの方向=1,上側=0,下側=1,左側=2,右側=3
+
+--group
+
+--group:Cグループ
+--select@effectC:Cグループ::装飾=0,なし=0,グロー=1,発光=2,色ずれ=3,モザイク=4,ミラー=5
+
+--track@glow2_strengthC:Cグループ(グロー)::強さ,-4000,4000,50
+--track@glow2_diffusionC:Cグループ(グロー)::拡散,0,400,50
+--track@glow2_angleC:Cグループ(グロー)::角度,-3600,3600,25
+--track@glow2_thresholdC:Cグループ(グロー)::しきい値,0,100,20
+--track@glow2_ratioC:Cグループ(グロー)::比率,0,200,100
+--track@glow2_blurC:Cグループ(グロー)::ぼかし,0,100,1
+--color@glow2_colorC:Cグループ(グロー)::光色,nil
+--check@glow2_disableC:Cグループ(グロー)::光色を無効,0
+--select@glow2_shapeC:Cグループ(グロー)::形状=0,通常=0,クロス(4本)=1,クロス(6本)=2,クロス(8本)=3,クロス(10本)=4,クロス(12本)=5,ライン=6
+
+--track@glow_strengthC:Cグループ(発光)::強さ,-4000,4000,500
+--track@glow_diffusionC:Cグループ(発光)::拡散,0,4000,250
+--track@glow_thresholdC:Cグループ(発光)::しきい値,0,100,80
+--track@glow_speedC:Cグループ(発光)::拡散速度,0,4000,0
+--check@glow_fix_sizeC:Cグループ(発光)::サイズ固定,0
+--color@glow_colorC:Cグループ(発光)::光色,0xffffff
+
+--track@shift_widthC:Cグループ(色ずれ)::ずれ幅,-4000,4000,7
+--track@shift_angleC:Cグループ(色ずれ)::角度,-3600,3600,90
+--track@shift_strengthC:Cグループ(色ずれ)::強さ,-4000,4000,100
+--select@shift_typeC:Cグループ(色ずれ)::色ずれの種類=1,赤緑A=0,赤青A=1,緑青A=2,赤緑B=3,赤青B=4,緑青B=5
+
+--track@mosaic_sizeC:Cグループ(モザイク)::モザイクサイズ,1,4000,12
+--check@mosaic_tileC:Cグループ(モザイク)::タイル風,0
+
+--track@mirror_alphaC:Cグループ(ミラー)::透明度
+--track@mirror_attenuationC:Cグループ(ミラー)::減衰
+--track@mirror_boundaryC:Cグループ(ミラー)::境目調整
+--select@mirror_dirC:Cグループ(ミラー)::ミラーの方向=1,上側=0,下側=1,左側=2,右側=3
+
+--group
+
+--hide@glow2_strengthA:effectA~=1
+--hide@glow2_diffusionA:effectA~=1
+--hide@glow2_angleA:effectA~=1
+--hide@glow2_thresholdA:effectA~=1
+--hide@glow2_ratioA:effectA~=1
+--hide@glow2_blurA:effectA~=1
+--hide@glow2_colorA:effectA~=1
+--hide@glow2_disableA:effectA~=1
+--hide@glow2_shapeA:effectA~=1
+--hide@glow_strengthA:effectA~=2
+--hide@glow_diffusionA:effectA~=2
+--hide@glow_thresholdA:effectA~=2
+--hide@glow_speedA:effectA~=2
+--hide@glow_fix_sizeA:effectA~=2
+--hide@glow_colorA:effectA~=2
+--hide@shift_widthA:effectA~=3
+--hide@shift_angleA:effectA~=3
+--hide@shift_strengthA:effectA~=3
+--hide@shift_typeA:effectA~=3
+--hide@mosaic_sizeA:effectA~=4
+--hide@mosaic_tileA:effectA~=4
+--hide@mirror_alphaA:effectA~=5
+--hide@mirror_attenuationA:effectA~=5
+--hide@mirror_boundaryA:effectA~=5
+--hide@mirror_dirA:effectA~=5
+
+--hide@glow2_strengthB:effectB~=1
+--hide@glow2_diffusionB:effectB~=1
+--hide@glow2_angleB:effectB~=1
+--hide@glow2_thresholdB:effectB~=1
+--hide@glow2_ratioB:effectB~=1
+--hide@glow2_blurB:effectB~=1
+--hide@glow2_colorB:effectB~=1
+--hide@glow2_disableB:effectB~=1
+--hide@glow2_shapeB:effectB~=1
+--hide@glow_strengthB:effectB~=2
+--hide@glow_diffusionB:effectB~=2
+--hide@glow_thresholdB:effectB~=2
+--hide@glow_speedB:effectB~=2
+--hide@glow_fix_sizeB:effectB~=2
+--hide@glow_colorB:effectB~=2
+--hide@shift_widthB:effectB~=3
+--hide@shift_angleB:effectB~=3
+--hide@shift_strengthB:effectB~=3
+--hide@shift_typeB:effectB~=3
+--hide@mosaic_sizeB:effectB~=4
+--hide@mosaic_tileB:effectB~=4
+--hide@mirror_alphaB:effectB~=5
+--hide@mirror_attenuationB:effectB~=5
+--hide@mirror_boundaryB:effectB~=5
+--hide@mirror_dirB:effectB~=5
+
+--hide@glow2_strengthC:effectC~=1
+--hide@glow2_diffusionC:effectC~=1
+--hide@glow2_angleC:effectC~=1
+--hide@glow2_thresholdC:effectC~=1
+--hide@glow2_ratioC:effectC~=1
+--hide@glow2_blurC:effectC~=1
+--hide@glow2_colorC:effectC~=1
+--hide@glow2_disableC:effectC~=1
+--hide@glow2_shapeC:effectC~=1
+--hide@glow_strengthC:effectC~=2
+--hide@glow_diffusionC:effectC~=2
+--hide@glow_thresholdC:effectC~=2
+--hide@glow_speedC:effectC~=2
+--hide@glow_fix_sizeC:effectC~=2
+--hide@glow_colorC:effectC~=2
+--hide@shift_widthC:effectC~=3
+--hide@shift_angleC:effectC~=3
+--hide@shift_strengthC:effectC~=3
+--hide@shift_typeC:effectC~=3
+--hide@mosaic_sizeC:effectC~=4
+--hide@mosaic_tileC:effectC~=4
+--hide@mirror_alphaC:effectC~=5
+--hide@mirror_attenuationC:effectC~=5
+--hide@mirror_boundaryC:effectC~=5
+--hide@mirror_dirC:effectC~=5
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then -- 形状への変換テーブル未作成のため、一旦定数。
+        obj.effect("グロー",
+        "強さ",glow2_strengthA,
+        "拡散",glow2_diffusionA,
+        "角度",glow2_angleA,
+        "しきい値",glow2_thresholdA,
+        "比率",glow2_ratioA,
+        "ぼかし",glow2_blurA,
+        "形状","クロス(4本)",
+        "光成分のみ",glow2_disableA,
+        "サイズ固定",0
+        )
+    elseif effectA == 2 then -- 光色の項目は一旦保留
+        obj.effect("発光",
+        "強さ",glow_strengthA,
+        "拡散",glow_diffusionA,
+        "しきい値",glow_thresholdA,
+        "拡散速度",glow_speedA,
+        "サイズ固定",0
+        )
+    elseif effectA == 3 then -- 色ずれの種類への変換テーブル未作成のため、一旦定数。
+        obj.effect("色ずれ",
+        "ずれ幅",shift_widthA,
+        "角度",shift_angleA,
+        "強さ",shift_strengthA,
+        "色ずれの種類","赤緑A"
+        )
+    elseif effectA == 4 then
+        obj.effect("モザイク",
+        "サイズ",mosaic_sizeA,
+        "タイル風",mosaic_tileA
+        )
+    elseif effectA == 5 then -- ミラーの方向への変換テーブル未作成のため、一旦定数。
+        obj.effect("ミラー",
+        "透明度",mirror_alphaA,
+        "減衰",mirror_attenuationA,
+        "境目調整",mirror_boundaryA,
+        "ミラーの方向","下側",
+        "中心の位置を変更",0
+        )
+    end
+end
+-- ↑ Aグループエフェクト追加ここまで ↑
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then -- 形状への変換テーブル未作成のため、一旦定数。
+        obj.effect("グロー",
+        "強さ",glow2_strengthB,
+        "拡散",glow2_diffusionB,
+        "角度",glow2_angleB,
+        "しきい値",glow2_thresholdB,
+        "比率",glow2_ratioB,
+        "ぼかし",glow2_blurB,
+        "形状","クロス(4本)",
+        "光成分のみ",glow2_disableB,
+        "サイズ固定",0
+        )
+    elseif effectB == 2 then -- 光色の項目は一旦保留
+        obj.effect("発光",
+        "強さ",glow_strengthB,
+        "拡散",glow_diffusionB,
+        "しきい値",glow_thresholdB,
+        "拡散速度",glow_speedB,
+        "サイズ固定",0
+        )
+    elseif effectB == 3 then -- 色ずれの種類への変換テーブル未作成のため、一旦定数。
+        obj.effect("色ずれ",
+        "ずれ幅",shift_widthB,
+        "角度",shift_angleB,
+        "強さ",shift_strengthB,
+        "色ずれの種類","赤緑A"
+        )
+    elseif effectB == 4 then
+        obj.effect("モザイク",
+        "サイズ",mosaic_sizeB,
+        "タイル風",mosaic_tileB
+        )
+    elseif effectB == 5 then -- ミラーの方向への変換テーブル未作成のため、一旦定数。
+        obj.effect("ミラー",
+        "透明度",mirror_alphaB,
+        "減衰",mirror_attenuationB,
+        "境目調整",mirror_boundaryB,
+        "ミラーの方向","下側",
+        "中心の位置を変更",0
+        )
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+    if effectC == 1 then -- 形状への変換テーブル未作成のため、一旦定数。
+        obj.effect("グロー",
+        "強さ",glow2_strengthC,
+        "拡散",glow2_diffusionC,
+        "角度",glow2_angleC,
+        "しきい値",glow2_thresholdC,
+        "比率",glow2_ratioC,
+        "ぼかし",glow2_blurC,
+        "形状","クロス(4本)",
+        "光成分のみ",glow2_disableC,
+        "サイズ固定",0
+        )
+    elseif effectC == 2 then -- 光色の項目は一旦保留
+        obj.effect("発光",
+        "強さ",glow_strengthC,
+        "拡散",glow_diffusionC,
+        "しきい値",glow_thresholdC,
+        "拡散速度",glow_speedC,
+        "サイズ固定",0
+        )
+    elseif effectC == 3 then -- 色ずれの種類への変換テーブル未作成のため、一旦定数。
+        obj.effect("色ずれ",
+        "ずれ幅",shift_widthC,
+        "角度",shift_angleC,
+        "強さ",shift_strengthC,
+        "色ずれの種類","赤緑A"
+        )
+    elseif effectC == 4 then
+        obj.effect("モザイク",
+        "サイズ",mosaic_sizeC,
+        "タイル風",mosaic_tileC
+        )
+    elseif effectC == 5 then -- ミラーの方向への変換テーブル未作成のため、一旦定数。
+        obj.effect("ミラー",
+        "透明度",mirror_alphaC,
+        "減衰",mirror_attenuationC,
+        "境目調整",mirror_boundaryC,
+        "ミラーの方向","下側",
+        "中心の位置を変更",0
+        )
+    end
+end
+-- ↑ Cグループエフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+@エフェクト追加(装飾3)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::装飾=0,なし=0,振動=1,震える=2,砕け散る=3
+
+--track@vib_xA:Aグループ(振動)::X,-4000,4000,10
+--track@vib_yA:Aグループ(振動)::Y,-4000,4000,10
+--track@vib_zA:Aグループ(振動)::Z,-4000,4000,0
+--track@vib_periodA:Aグループ(振動)::周期,0,100,1,0.01
+--check@vib_randA:Aグループ(振動)::ランダムに強さを変える,1
+--check@vib_complexA:Aグループ(振動)::複雑に振動,0
+
+--track@tremble_ampA:Aグループ(震える)::振幅,-4000,4000,5
+--track@tremble_angleA:Aグループ(震える)::角度,-3600,3600,10
+--track@tremble_intervalA:Aグループ(震える)::震え間隔,0,100,0,1
+
+--track@shatter_timeA:Aグループ(砕け散る)::開始時間,-100.00,100.00,0.00,0.01
+--track@shatter_playbackspeedA:Aグループ(砕け散る)::再生速度,-10.00,10.00,1.00,0.01
+--track@shatter_cxA:Aグループ(砕け散る)::中心X,-5000.0,5000.0,0.0,0.1
+--track@shatter_cyA:Aグループ(砕け散る)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@shatter_czA:Aグループ(砕け散る)::中心Z,-5000.0,5000.0,0.0,0.1
+--track@shatter_fragmentA:Aグループ(砕け散る)::破片サイズ,5.0,1000.0,50.0
+--track@shatter_speedA:Aグループ(砕け散る)::速度,-5000.0,5000.0,100.0
+--track@shatter_gravityA:Aグループ(砕け散る)::重力,0.0,1000.0,100.0
+--track@shatter_lagA:Aグループ(砕け散る)::時間差,-1000.0,1000.0,100.0,0.1
+--track@shatter_distanceA:Aグループ(砕け散る)::距離影響,0.0,5000.0,100.0,0.1
+--track@shatter_rotateA:Aグループ(砕け散る)::ランダム回転,0.0,5000.0,100.0,0.1
+--track@shatter_directionA:Aグループ(砕け散る)::ランダム方向,0.0,5000.0,100.0,0.1
+
+--group
+
+--group:Bグループ
+--select@effectB:Bグループ::装飾=0,なし=0,振動=1,震える=2,砕け散る=3
+
+--track@vib_xB:Bグループ(振動)::X,-4000,4000,10
+--track@vib_yB:Bグループ(振動)::Y,-4000,4000,10
+--track@vib_zB:Bグループ(振動)::Z,-4000,4000,0
+--track@vib_periodB:Bグループ(振動)::周期,0,100,1,0.01
+--check@vib_randB:Bグループ(振動)::ランダムに強さを変える,1
+--check@vib_complexB:Bグループ(振動)::複雑に振動,0
+
+--track@tremble_ampB:Bグループ(震える)::振幅,-4000,4000,5
+--track@tremble_angleB:Bグループ(震える)::角度,-3600,3600,10
+--track@tremble_intervalB:Bグループ(震える)::震え間隔,0,100,0,1
+
+--track@shatter_timeB:Bグループ(砕け散る)::開始時間,-100.00,100.00,0.00,0.01
+--track@shatter_playbackspeedB:Bグループ(砕け散る)::再生速度,-10.00,10.00,1.00,0.01
+--track@shatter_cxB:Bグループ(砕け散る)::中心X,-5000.0,5000.0,0.0,0.1
+--track@shatter_cyB:Bグループ(砕け散る)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@shatter_czB:Bグループ(砕け散る)::中心Z,-5000.0,5000.0,0.0,0.1
+--track@shatter_fragmentB:Bグループ(砕け散る)::破片サイズ,5.0,1000.0,50.0
+--track@shatter_speedB:Bグループ(砕け散る)::速度,-5000.0,5000.0,100.0
+--track@shatter_gravityB:Bグループ(砕け散る)::重力,0.0,1000.0,100.0
+--track@shatter_lagB:Bグループ(砕け散る)::時間差,-1000.0,1000.0,100.0,0.1
+--track@shatter_distanceB:Bグループ(砕け散る)::距離影響,0.0,5000.0,100.0,0.1
+--track@shatter_rotateB:Bグループ(砕け散る)::ランダム回転,0.0,5000.0,100.0,0.1
+--track@shatter_directionB:Bグループ(砕け散る)::ランダム方向,0.0,5000.0,100.0,0.1
+
+--group
+
+--group:Cグループ
+--select@effectC:Cグループ::装飾=0,なし=0,振動=1,震える=2,砕け散る=3
+
+--track@vib_xC:Cグループ(振動)::X,-4000,4000,10
+--track@vib_yC:Cグループ(振動)::Y,-4000,4000,10
+--track@vib_zC:Cグループ(振動)::Z,-4000,4000,0
+--track@vib_periodC:Cグループ(振動)::周期,0,100,1,0.01
+--check@vib_randC:Cグループ(振動)::ランダムに強さを変える,1
+--check@vib_complexC:Cグループ(振動)::複雑に振動,0
+
+--track@tremble_ampC:Cグループ(震える)::振幅,-4000,4000,5
+--track@tremble_angleC:Cグループ(震える)::角度,-3600,3600,10
+--track@tremble_intervalC:Cグループ(震える)::震え間隔,0,100,0,1
+
+--track@shatter_timeC:Cグループ(砕け散る)::開始時間,-100.00,100.00,0.00,0.01
+--track@shatter_playbackspeedC:Cグループ(砕け散る)::再生速度,-10.00,10.00,1.00,0.01
+--track@shatter_cxC:Cグループ(砕け散る)::中心X,-5000.0,5000.0,0.0,0.1
+--track@shatter_cyC:Cグループ(砕け散る)::中心Y,-5000.0,5000.0,0.0,0.1
+--track@shatter_czC:Cグループ(砕け散る)::中心Z,-5000.0,5000.0,0.0,0.1
+--track@shatter_fragmentC:Cグループ(砕け散る)::破片サイズ,5.0,1000.0,50.0
+--track@shatter_speedC:Cグループ(砕け散る)::速度,-5000.0,5000.0,100.0
+--track@shatter_gravityC:Cグループ(砕け散る)::重力,0.0,1000.0,100.0
+--track@shatter_lagC:Cグループ(砕け散る)::時間差,-1000.0,1000.0,100.0,0.1
+--track@shatter_distanceC:Cグループ(砕け散る)::距離影響,0.0,5000.0,100.0,0.1
+--track@shatter_rotateC:Cグループ(砕け散る)::ランダム回転,0.0,5000.0,100.0,0.1
+--track@shatter_directionC:Cグループ(砕け散る)::ランダム方向,0.0,5000.0,100.0,0.1
+
+--group
+
+--hide@vib_xA:effectA~=1
+--hide@vib_yA:effectA~=1
+--hide@vib_zA:effectA~=1
+--hide@vib_periodA:effectA~=1
+--hide@vib_randA:effectA~=1
+--hide@vib_complexA:effectA~=1
+--hide@tremble_ampA:effectA~=2
+--hide@tremble_angleA:effectA~=2
+--hide@tremble_intervalA:effectA~=2
+--hide@shatter_timeA:effectA~=3
+--hide@shatter_playbackspeedA:effectA~=3
+--hide@shatter_cxA:effectA~=3
+--hide@shatter_cyA:effectA~=3
+--hide@shatter_czA:effectA~=3
+--hide@shatter_fragmentA:effectA~=3
+--hide@shatter_speedA:effectA~=3
+--hide@shatter_gravityA:effectA~=3
+--hide@shatter_lagA:effectA~=3
+--hide@shatter_distanceA:effectA~=3
+--hide@shatter_rotateA:effectA~=3
+--hide@shatter_directionA:effectA~=3
+
+--hide@vib_xB:effectB~=1
+--hide@vib_yB:effectB~=1
+--hide@vib_zB:effectB~=1
+--hide@vib_periodB:effectB~=1
+--hide@vib_randB:effectB~=1
+--hide@vib_complexB:effectB~=1
+--hide@tremble_ampB:effectB~=2
+--hide@tremble_angleB:effectB~=2
+--hide@tremble_intervalB:effectB~=2
+--hide@shatter_timeB:effectB~=3
+--hide@shatter_playbackspeedB:effectB~=3
+--hide@shatter_cxB:effectB~=3
+--hide@shatter_cyB:effectB~=3
+--hide@shatter_czB:effectB~=3
+--hide@shatter_fragmentB:effectB~=3
+--hide@shatter_speedB:effectB~=3
+--hide@shatter_gravityB:effectB~=3
+--hide@shatter_lagB:effectB~=3
+--hide@shatter_distanceB:effectB~=3
+--hide@shatter_rotateB:effectB~=3
+--hide@shatter_directionB:effectB~=3
+
+--hide@vib_xC:effectC~=1
+--hide@vib_yC:effectC~=1
+--hide@vib_zC:effectC~=1
+--hide@vib_periodC:effectC~=1
+--hide@vib_randC:effectC~=1
+--hide@vib_complexC:effectC~=1
+--hide@tremble_ampC:effectC~=2
+--hide@tremble_angleC:effectC~=2
+--hide@tremble_intervalC:effectC~=2
+--hide@shatter_timeC:effectC~=3
+--hide@shatter_playbackspeedC:effectC~=3
+--hide@shatter_cxC:effectC~=3
+--hide@shatter_cyC:effectC~=3
+--hide@shatter_czC:effectC~=3
+--hide@shatter_fragmentC:effectC~=3
+--hide@shatter_speedC:effectC~=3
+--hide@shatter_gravityC:effectC~=3
+--hide@shatter_lagC:effectC~=3
+--hide@shatter_distanceC:effectC~=3
+--hide@shatter_rotateC:effectC~=3
+--hide@shatter_directionC:effectC~=3
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then
+        obj.effect("振動",
+        "X",vib_xA,
+        "Y",vib_yA,
+        "Z",vib_zA,
+        "周期",vib_periodA,
+        "ランダムに強さを変える",vib_randA,
+        "複雑に振動",vib_complexA
+        )
+    elseif effectA == 2 then
+        obj.effect("震える",
+        "振幅",tremble_ampA,
+        "角度",tremble_angleA,
+        "間隔",tremble_intervalA
+        )
+    elseif effectA == 3 then
+        obj.effect("砕け散る",
+        "開始時間",shatter_timeA,
+        "再生速度",shatter_playbackspeedA,
+        "中心X",shatter_cxA,
+        "中心Y",shatter_cyA,
+        "中心Z",shatter_czA,
+        "破片サイズ",shatter_fragmentA,
+        "速度",shatter_speedA,
+        "重力",shatter_gravityA,
+        "時間差",shatter_lagA,
+        "距離影響",shatter_distanceA,
+        "ランダム回転",shatter_rotateA,
+        "ランダム方向",shatter_directionA
+        )
+    end
+end
+-- ↑ Aグループエフェクト追加ここまで ↑
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then
+        obj.effect("振動",
+        "X",vib_xB,
+        "Y",vib_yB,
+        "Z",vib_zB,
+        "周期",vib_periodB,
+        "ランダムに強さを変える",vib_randB,
+        "複雑に振動",vib_complexB
+        )
+    elseif effectB == 2 then
+        obj.effect("震える",
+        "振幅",tremble_ampB,
+        "角度",tremble_angleB,
+        "間隔",tremble_intervalB
+        )
+    elseif effectB == 3 then
+        obj.effect("砕け散る",
+        "開始時間",shatter_timeB,
+        "再生速度",shatter_playbackspeedB,
+        "中心X",shatter_cxB,
+        "中心Y",shatter_cyB,
+        "中心Z",shatter_czB,
+        "破片サイズ",shatter_fragmentB,
+        "速度",shatter_speedB,
+        "重力",shatter_gravityB,
+        "時間差",shatter_lagB,
+        "距離影響",shatter_distanceB,
+        "ランダム回転",shatter_rotateB,
+        "ランダム方向",shatter_directionB
+        )
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+    if effectC == 1 then
+        obj.effect("振動",
+        "X",vib_xC,
+        "Y",vib_yC,
+        "Z",vib_zC,
+        "周期",vib_periodC,
+        "ランダムに強さを変える",vib_randC,
+        "複雑に振動",vib_complexC
+        )
+    elseif effectC == 2 then
+        obj.effect("震える",
+        "振幅",tremble_ampC,
+        "角度",tremble_angleC,
+        "間隔",tremble_intervalC
+        )
+    elseif effectC == 3 then
+        obj.effect("砕け散る",
+        "開始時間",shatter_timeC,
+        "再生速度",shatter_playbackspeedC,
+        "中心X",shatter_cxC,
+        "中心Y",shatter_cyC,
+        "中心Z",shatter_czC,
+        "破片サイズ",shatter_fragmentC,
+        "速度",shatter_speedC,
+        "重力",shatter_gravityC,
+        "時間差",shatter_lagC,
+        "距離影響",shatter_distanceC,
+        "ランダム回転",shatter_rotateC,
+        "ランダム方向",shatter_directionC
+        )
+    end
+end
+-- ↑ Cグループエフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+@エフェクト追加(装飾4)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::装飾=0,なし=0,グラデ=1,グラデ縁取り=2,グラデ縁取り*2=3,グラデ縁取り*3=4,グラデ縁取り*3ドロップシャドウ=5,グラデ縁取り*3ドロップシャドウ枠線=6
+
+--track@grd_powA:Aグループ(グラデーション)::グラデ強さ,0.0,100.0,100.0
+--track@grd_cxA:Aグループ(グラデーション)::グラデ中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyA:Aグループ(グラデーション)::グラデ中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateA:Aグループ(グラデーション)::グラデ角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthA:Aグループ(グラデーション)::グラデ幅,0,2000,100
+--select@grd_compositeA:Aグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeA:Aグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colA:Aグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colA:Aグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@edge_widthA0:Aグループ(凸エッジ)::凸エッジ1幅,0,100,4
+--track@edge_heightA0:Aグループ(凸エッジ)::凸エッジ1高さ,0,3.00,1.00,0.01
+--track@edge_rotateA0:Aグループ(凸エッジ)::凸エッジ角度,-3600,3600,45.00,0.01
+
+--track@frame_sA0:Aグループ(縁取り)::縁取り1サイズ,0,500,5,1
+--track@frame_bA0:Aグループ(縁取り)::縁取り1ぼかし,0,100,5,1
+--color@frame_colA0:Aグループ(縁取り)::縁取り1縁色,0xffffff
+
+--track@edge_widthA1:Aグループ(凸エッジ)::凸エッジ2幅,0,100,4
+--track@edge_heightA1:Aグループ(凸エッジ)::凸エッジ2高さ,0,3.00,1.00,0.01
+--track@edge_rotateA1:Aグループ(凸エッジ)::凸エッジ2角度,-3600,3600,45.00,0.01
+
+--track@frame_sA1:Aグループ(縁取り)::縁取り2サイズ,0,500,5,1
+--track@frame_bA1:Aグループ(縁取り)::縁取り2ぼかし,0,100,5,1
+--color@frame_colA1:Aグループ(縁取り)::縁取り2縁色,0xffffff
+
+--track@edge_widthA2:Aグループ(凸エッジ)::凸エッジ3幅,0,100,4
+--track@edge_heightA2:Aグループ(凸エッジ)::凸エッジ3高さ,0,3.00,1.00,0.01
+--track@edge_rotateA2:Aグループ(凸エッジ)::凸エッジ3角度,-3600,3600,45.00,0.01
+
+--track@frame_sA2:Aグループ(縁取り)::縁取り3サイズ,0,500,5,1
+--track@frame_bA2:Aグループ(縁取り)::縁取り3ぼかし,0,100,5,1
+--color@frame_colA2:Aグループ(縁取り)::縁取り3縁色,0xffffff
+
+--track@edge_widthA3:Aグループ(凸エッジ)::凸エッジ4幅,0,100,4
+--track@edge_heightA3:Aグループ(凸エッジ)::凸エッジ4高さ,0,3.00,1.00,0.01
+--track@edge_rotateA3:Aグループ(凸エッジ)::凸エッジ4角度,-3600,3600,45.00,0.01
+
+--track@drop_shadow_xA:Aグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yA:Aグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepA:Aグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionA:Aグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorA:Aグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@border_xA:Aグループ(枠線)::枠線X,-2000,2000,0
+--track@border_yA:Aグループ(枠線)::枠線Y,-2000,1000,0
+--track@border_sA:Aグループ(枠線)::枠線サイズ,0,1000,10
+--track@border_rA:Aグループ(枠線)::枠線丸み,0,1000,0
+--color@border_colA:Aグループ(枠線)::枠線枠色,0xffffff
+
+--group
+
+
+--group
+
+--group:Bグループ
+--select@effectB:Bグループ::装飾=0,なし=0,グラデ=1,グラデ縁取り=2,グラデ縁取り*2=3,グラデ縁取り*3=4,グラデ縁取り*3ドロップシャドウ=5,グラデ縁取り*3ドロップシャドウ枠線=6
+
+--track@grd_powB:Bグループ(グラデーション)::グラデ強さ,0.0,100.0,100.0
+--track@grd_cxB:Bグループ(グラデーション)::グラデ中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyB:Bグループ(グラデーション)::グラデ中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateB:Bグループ(グラデーション)::グラデ角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthB:Bグループ(グラデーション)::グラデ幅,0,2000,100
+--select@grd_compositeB:Bグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeB:Bグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colB:Bグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colB:Bグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@edge_widthB0:Bグループ(凸エッジ)::凸エッジ1幅,0,100,4
+--track@edge_heightB0:Bグループ(凸エッジ)::凸エッジ1高さ,0,3.00,1.00,0.01
+--track@edge_rotateB0:Bグループ(凸エッジ)::凸エッジ角度,-3600,3600,45.00,0.01
+
+--track@frame_sB0:Bグループ(縁取り)::縁取り1サイズ,0,500,5,1
+--track@frame_bB0:Bグループ(縁取り)::縁取り1ぼかし,0,100,5,1
+--color@frame_colB0:Bグループ(縁取り)::縁取り1縁色,0xffffff
+
+--track@edge_widthB1:Bグループ(凸エッジ)::凸エッジ2幅,0,100,4
+--track@edge_heightB1:Bグループ(凸エッジ)::凸エッジ2高さ,0,3.00,1.00,0.01
+--track@edge_rotateB1:Bグループ(凸エッジ)::凸エッジ2角度,-3600,3600,45.00,0.01
+
+--track@frame_sB1:Bグループ(縁取り)::縁取り2サイズ,0,500,5,1
+--track@frame_bB1:Bグループ(縁取り)::縁取り2ぼかし,0,100,5,1
+--color@frame_colB1:Bグループ(縁取り)::縁取り2縁色,0xffffff
+
+--track@edge_widthB2:Bグループ(凸エッジ)::凸エッジ3幅,0,100,4
+--track@edge_heightB2:Bグループ(凸エッジ)::凸エッジ3高さ,0,3.00,1.00,0.01
+--track@edge_rotateB2:Bグループ(凸エッジ)::凸エッジ3角度,-3600,3600,45.00,0.01
+
+--track@frame_sB2:Bグループ(縁取り)::縁取り3サイズ,0,500,5,1
+--track@frame_bB2:Bグループ(縁取り)::縁取り3ぼかし,0,100,5,1
+--color@frame_colB2:Bグループ(縁取り)::縁取り3縁色,0xffffff
+
+--track@edge_widthB3:Bグループ(凸エッジ)::凸エッジ4幅,0,100,4
+--track@edge_heightB3:Bグループ(凸エッジ)::凸エッジ4高さ,0,3.00,1.00,0.01
+--track@edge_rotateB3:Bグループ(凸エッジ)::凸エッジ4角度,-3600,3600,45.00,0.01
+
+--track@drop_shadow_xB:Bグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yB:Bグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepB:Bグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionB:Bグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorB:Bグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@border_xB:Bグループ(枠線)::枠線X,-2000,2000,0
+--track@border_yB:Bグループ(枠線)::枠線Y,-2000,1000,0
+--track@border_sB:Bグループ(枠線)::枠線サイズ,0,1000,10
+--track@border_rB:Bグループ(枠線)::枠線丸み,0,1000,0
+--color@border_colB:Bグループ(枠線)::枠線枠色,0xffffff
+
+--group
+
+--group:Cグループ
+--select@effectC:Cグループ::装飾=0,なし=0,グラデ=1,グラデ縁取り=2,グラデ縁取り*2=3,グラデ縁取り*3=4,グラデ縁取り*3ドロップシャドウ=5,グラデ縁取り*3ドロップシャドウ枠線=6
+
+--track@grd_powC:Cグループ(グラデーション)::グラデ強さ,0.0,100.0,100.0
+--track@grd_cxC:Cグループ(グラデーション)::グラデ中心X,-5000.0,5000.0,0.0,0.1
+--track@grd_cyC:Cグループ(グラデーション)::グラデ中心Y,-5000.0,5000.0,0.0,0.1
+--track@grd_rotateC:Cグループ(グラデーション)::グラデ角度,-3600.00,3600.00,0.00,0.01
+--track@grd_widthC:Cグループ(グラデーション)::グラデ幅,0,2000,100
+--select@grd_compositeC:Cグループ(グラデーション)::グラデ合成モード=1,通常=1,加算=2,減算=3,乗算=4,スクリーン=5,オーバーレイ=6,比較(明)=7,比較(暗)=8,輝度=9,色差=10,陰影=11,明暗=12,差分=13
+--select@grd_typeC:Cグループ(グラデーション)::グラデーションタイプ=1,線形=1,円形=2,矩形=3,凸形=4
+--color@grd_start_colC:Cグループ(グラデーション)::グラデ開始色,0xff0000
+--color@grd_end_colC:Cグループ(グラデーション)::グラデ終了色,0xffff00
+
+--track@edge_widthC0:Cグループ(凸エッジ)::凸エッジ1幅,0,100,4
+--track@edge_heightC0:Cグループ(凸エッジ)::凸エッジ1高さ,0,3.00,1.00,0.01
+--track@edge_rotateC0:Cグループ(凸エッジ)::凸エッジ角度,-3600,3600,45.00,0.01
+
+--track@frame_sC0:Cグループ(縁取り)::縁取り1サイズ,0,500,5,1
+--track@frame_bC0:Cグループ(縁取り)::縁取り1ぼかし,0,100,5,1
+--color@frame_colC0:Cグループ(縁取り)::縁取り1縁色,0xffffff
+
+--track@edge_widthC1:Cグループ(凸エッジ)::凸エッジ2幅,0,100,4
+--track@edge_heightC1:Cグループ(凸エッジ)::凸エッジ2高さ,0,3.00,1.00,0.01
+--track@edge_rotateC1:Cグループ(凸エッジ)::凸エッジ2角度,-3600,3600,45.00,0.01
+
+--track@frame_sC1:Cグループ(縁取り)::縁取り2サイズ,0,500,5,1
+--track@frame_bC1:Cグループ(縁取り)::縁取り2ぼかし,0,100,5,1
+--color@frame_colC1:Cグループ(縁取り)::縁取り2縁色,0xffffff
+
+--track@edge_widthC2:Cグループ(凸エッジ)::凸エッジ3幅,0,100,4
+--track@edge_heightC2:Cグループ(凸エッジ)::凸エッジ3高さ,0,3.00,1.00,0.01
+--track@edge_rotateC2:Cグループ(凸エッジ)::凸エッジ3角度,-3600,3600,45.00,0.01
+
+--track@frame_sC2:Cグループ(縁取り)::縁取り3サイズ,0,500,5,1
+--track@frame_bC2:Cグループ(縁取り)::縁取り3ぼかし,0,100,5,1
+--color@frame_colC2:Cグループ(縁取り)::縁取り3縁色,0xffffff
+
+--track@edge_widthC3:Cグループ(凸エッジ)::凸エッジ4幅,0,100,4
+--track@edge_heightC3:Cグループ(凸エッジ)::凸エッジ4高さ,0,3.00,1.00,0.01
+--track@edge_rotateC3:Cグループ(凸エッジ)::凸エッジ4角度,-3600,3600,45.00,0.01
+
+--track@drop_shadow_xC:Cグループ(ドロップシャドウ)::X,-1000,1000,-40
+--track@drop_shadow_yC:Cグループ(ドロップシャドウ)::Y,-1000,1000,24
+--track@drop_shadow_deepC:Cグループ(ドロップシャドウ)::濃さ,0.0,100.0,40.0,0.1
+--track@drop_shadow_diffusionC:Cグループ(ドロップシャドウ)::拡散,0,500,10
+--color@drop_shadow_colorC:Cグループ(ドロップシャドウ)::縁色,0x000000
+
+--track@border_xC:Cグループ(枠線)::枠線X,-2000,2000,0
+--track@border_yC:Cグループ(枠線)::枠線Y,-2000,1000,0
+--track@border_sC:Cグループ(枠線)::枠線サイズ,0,1000,10
+--track@border_rC:Cグループ(枠線)::枠線丸み,0,1000,0
+--color@border_colC:Cグループ(枠線)::枠線枠色,0xffffff
+
+--group
+
+--hide@grd_powA:effectA==0
+--hide@grd_cxA:effectA==0
+--hide@grd_cyA:effectA==0
+--hide@grd_rotateA:effectA==0
+--hide@grd_widthA:effectA==0
+--hide@grd_compositeA:effectA==0
+--hide@grd_typeA:effectA==0
+--hide@grd_start_colA:effectA==0
+--hide@grd_end_colA:effectA==0
+--hide@edge_widthA0:effectA==0
+--hide@edge_heightA0:effectA==0
+--hide@edge_rotateA0:effectA==0
+--hide@frame_sA0:effectA<1
+--hide@frame_bA0:effectA<1
+--hide@frame_colA0:effectA<1
+--hide@edge_widthA1:effectA<1
+--hide@edge_heightA1:effectA<1
+--hide@edge_rotateA1:effectA<1
+--hide@frame_sA1:effectA<2
+--hide@frame_bA1:effectA<2
+--hide@frame_colA1:effectA<2
+--hide@edge_widthA2:effectA<2
+--hide@edge_heightA2:effectA<2
+--hide@edge_rotateA2:effectA<2
+--hide@frame_sA2:effectA<3
+--hide@frame_bA2:effectA<3
+--hide@frame_colA2:effectA<3
+--hide@edge_widthA3:effectA<3
+--hide@edge_heightA3:effectA<3
+--hide@edge_rotateA3:effectA<3
+--hide@drop_shadow_xA:effectA<4
+--hide@drop_shadow_yA:effectA<4
+--hide@drop_shadow_deepA:effectA<4
+--hide@drop_shadow_diffusionA:effectA<4
+--hide@drop_shadow_colorA:effectA<4
+--hide@border_xA:effectA<5
+--hide@border_yA:effectA<5
+--hide@border_sA:effectA<5
+--hide@border_rA:effectA<5
+--hide@border_colA:effectA<5
+
+--hide@grd_powB:effectB==0
+--hide@grd_cxB:effectB==0
+--hide@grd_cyB:effectB==0
+--hide@grd_rotateB:effectB==0
+--hide@grd_widthB:effectB==0
+--hide@grd_compositeB:effectB==0
+--hide@grd_typeB:effectB==0
+--hide@grd_start_colB:effectB==0
+--hide@grd_end_colB:effectB==0
+--hide@edge_widthB0:effectB==0
+--hide@edge_heightB0:effectB==0
+--hide@edge_rotateB0:effectB==0
+--hide@frame_sB0:effectB<1
+--hide@frame_bB0:effectB<1
+--hide@frame_colB0:effectB<1
+--hide@edge_widthB1:effectB<1
+--hide@edge_heightB1:effectB<1
+--hide@edge_rotateB1:effectB<1
+--hide@frame_sB1:effectB<2
+--hide@frame_bB1:effectB<2
+--hide@frame_colB1:effectB<2
+--hide@edge_widthB2:effectB<2
+--hide@edge_heightB2:effectB<2
+--hide@edge_rotateB2:effectB<2
+--hide@frame_sB2:effectB<3
+--hide@frame_bB2:effectB<3
+--hide@frame_colB2:effectB<3
+--hide@edge_widthB3:effectB<3
+--hide@edge_heightB3:effectB<3
+--hide@edge_rotateB3:effectB<3
+--hide@drop_shadow_xB:effectB<4
+--hide@drop_shadow_yB:effectB<4
+--hide@drop_shadow_deepB:effectB<4
+--hide@drop_shadow_diffusionB:effectB<4
+--hide@drop_shadow_colorB:effectB<4
+--hide@border_xB:effectB<5
+--hide@border_yB:effectB<5
+--hide@border_sB:effectB<5
+--hide@border_rB:effectB<5
+--hide@border_colB:effectB<5
+
+--hide@grd_powC:effectC==0
+--hide@grd_cxC:effectC==0
+--hide@grd_cyC:effectC==0
+--hide@grd_rotateC:effectC==0
+--hide@grd_widthC:effectC==0
+--hide@grd_compositeC:effectC==0
+--hide@grd_typeC:effectC==0
+--hide@grd_start_colC:effectC==0
+--hide@grd_end_colC:effectC==0
+--hide@edge_widthC0:effectC==0
+--hide@edge_heightC0:effectC==0
+--hide@edge_rotateC0:effectC==0
+--hide@frame_sC0:effectC<1
+--hide@frame_bC0:effectC<1
+--hide@frame_colC0:effectC<1
+--hide@edge_widthC1:effectC<1
+--hide@edge_heightC1:effectC<1
+--hide@edge_rotateC1:effectC<1
+--hide@frame_sC1:effectC<2
+--hide@frame_bC1:effectC<2
+--hide@frame_colC1:effectC<2
+--hide@edge_widthC2:effectC<2
+--hide@edge_heightC2:effectC<2
+--hide@edge_rotateC2:effectC<2
+--hide@frame_sC2:effectC<3
+--hide@frame_bC2:effectC<3
+--hide@frame_colC2:effectC<3
+--hide@edge_widthC3:effectC<3
+--hide@edge_heightC3:effectC<3
+--hide@edge_rotateC3:effectC<3
+--hide@drop_shadow_xC:effectC<4
+--hide@drop_shadow_yC:effectC<4
+--hide@drop_shadow_deepC:effectC<4
+--hide@drop_shadow_diffusionC:effectC<4
+--hide@drop_shadow_colorC:effectC<4
+--hide@border_xC:effectC<5
+--hide@border_yC:effectC<5
+--hide@border_sC:effectC<5
+--hide@border_rC:effectC<5
+--hide@border_colC:effectC<5
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA0,
+        "高さ",edge_heightA0,
+        "角度",edge_rotateA0
+        )
+    elseif effectA == 2 then
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA0,
+        "高さ",edge_heightA0,
+        "角度",edge_rotateA0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA0,
+        "ぼかし",frame_bA0,
+        "縁色",frame_colA0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA1,
+        "高さ",edge_heightA1,
+        "角度",edge_rotateA1
+        )
+    elseif effectA == 3 then
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA0,
+        "高さ",edge_heightA0,
+        "角度",edge_rotateA0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA0,
+        "ぼかし",frame_bA0,
+        "縁色",frame_colA0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA1,
+        "高さ",edge_heightA1,
+        "角度",edge_rotateA1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA1,
+        "ぼかし",frame_bA1,
+        "縁色",frame_colA1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA2,
+        "高さ",edge_heightA2,
+        "角度",edge_rotateA2
+        )
+    elseif effectA == 4 then
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA0,
+        "高さ",edge_heightA0,
+        "角度",edge_rotateA0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA0,
+        "ぼかし",frame_bA0,
+        "縁色",frame_colA0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA1,
+        "高さ",edge_heightA1,
+        "角度",edge_rotateA1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA1,
+        "ぼかし",frame_bA1,
+        "縁色",frame_colA1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA2,
+        "高さ",edge_heightA2,
+        "角度",edge_rotateA2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA2,
+        "ぼかし",frame_bA2,
+        "縁色",frame_colA2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA3,
+        "高さ",edge_heightA3,
+        "角度",edge_rotateA3
+        )
+    elseif effectA == 5 then
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA0,
+        "高さ",edge_heightA0,
+        "角度",edge_rotateA0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA0,
+        "ぼかし",frame_bA0,
+        "縁色",frame_colA0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA1,
+        "高さ",edge_heightA1,
+        "角度",edge_rotateA1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA1,
+        "ぼかし",frame_bA1,
+        "縁色",frame_colA1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA2,
+        "高さ",edge_heightA2,
+        "角度",edge_rotateA2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA2,
+        "ぼかし",frame_bA2,
+        "縁色",frame_colA2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA3,
+        "高さ",edge_heightA3,
+        "角度",edge_rotateA3
+        )
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xA,
+        "Y",drop_shadow_yA,
+        "濃さ",drop_shadow_deepA,
+        "拡散",drop_shadow_diffusionA,
+        "影色",drop_shadow_colorA,
+        "影を別オブジェクトで描画",0
+        )
+    elseif effectA == 6 then
+        obj.effect("グラデーション",
+        "強さ",grd_powA,
+        "中心X",grd_cxA,
+        "中心Y",grd_cyA,
+        "角度",grd_rotateA,
+        "幅",grd_widthA,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colA,
+        "終了色",grd_end_colA
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA0,
+        "高さ",edge_heightA0,
+        "角度",edge_rotateA0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA0,
+        "ぼかし",frame_bA0,
+        "縁色",frame_colA0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA1,
+        "高さ",edge_heightA1,
+        "角度",edge_rotateA1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA1,
+        "ぼかし",frame_bA1,
+        "縁色",frame_colA1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA2,
+        "高さ",edge_heightA2,
+        "角度",edge_rotateA2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sA2,
+        "ぼかし",frame_bA2,
+        "縁色",frame_colA2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthA3,
+        "高さ",edge_heightA3,
+        "角度",edge_rotateA3
+        )
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xA,
+        "Y",drop_shadow_yA,
+        "濃さ",drop_shadow_deepA,
+        "拡散",drop_shadow_diffusionA,
+        "影色",drop_shadow_colorA,
+        "影を別オブジェクトで描画",0
+        )
+        obj.effect("枠線",
+        "X",border_xA,
+        "Y",border_yA,
+        "サイズ",border_sA,
+        "丸み",border_rA,
+        "枠色",border_colA
+        )
+    end
+end
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB0,
+        "高さ",edge_heightB0,
+        "角度",edge_rotateB0
+        )
+    elseif effectB == 2 then
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB0,
+        "高さ",edge_heightB0,
+        "角度",edge_rotateB0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB0,
+        "ぼかし",frame_bB0,
+        "縁色",frame_colB0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB1,
+        "高さ",edge_heightB1,
+        "角度",edge_rotateB1
+        )
+    elseif effectB == 3 then
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB0,
+        "高さ",edge_heightB0,
+        "角度",edge_rotateB0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB0,
+        "ぼかし",frame_bB0,
+        "縁色",frame_colB0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB1,
+        "高さ",edge_heightB1,
+        "角度",edge_rotateB1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB1,
+        "ぼかし",frame_bB1,
+        "縁色",frame_colB1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB2,
+        "高さ",edge_heightB2,
+        "角度",edge_rotateB2
+        )
+    elseif effectB == 4 then
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB0,
+        "高さ",edge_heightB0,
+        "角度",edge_rotateB0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB0,
+        "ぼかし",frame_bB0,
+        "縁色",frame_colB0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB1,
+        "高さ",edge_heightB1,
+        "角度",edge_rotateB1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB1,
+        "ぼかし",frame_bB1,
+        "縁色",frame_colB1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB2,
+        "高さ",edge_heightB2,
+        "角度",edge_rotateB2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB2,
+        "ぼかし",frame_bB2,
+        "縁色",frame_colB2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB3,
+        "高さ",edge_heightB3,
+        "角度",edge_rotateB3
+        )
+    elseif effectB == 5 then
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB0,
+        "高さ",edge_heightB0,
+        "角度",edge_rotateB0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB0,
+        "ぼかし",frame_bB0,
+        "縁色",frame_colB0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB1,
+        "高さ",edge_heightB1,
+        "角度",edge_rotateB1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB1,
+        "ぼかし",frame_bB1,
+        "縁色",frame_colB1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB2,
+        "高さ",edge_heightB2,
+        "角度",edge_rotateB2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB2,
+        "ぼかし",frame_bB2,
+        "縁色",frame_colB2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB3,
+        "高さ",edge_heightB3,
+        "角度",edge_rotateB3
+        )
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xB,
+        "Y",drop_shadow_yB,
+        "濃さ",drop_shadow_deepB,
+        "拡散",drop_shadow_diffusionB,
+        "影色",drop_shadow_colorB,
+        "影を別オブジェクトで描画",0
+        )
+    elseif effectB == 6 then
+        obj.effect("グラデーション",
+        "強さ",grd_powB,
+        "中心X",grd_cxB,
+        "中心Y",grd_cyB,
+        "角度",grd_rotateB,
+        "幅",grd_widthB,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colB,
+        "終了色",grd_end_colB
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB0,
+        "高さ",edge_heightB0,
+        "角度",edge_rotateB0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB0,
+        "ぼかし",frame_bB0,
+        "縁色",frame_colB0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB1,
+        "高さ",edge_heightB1,
+        "角度",edge_rotateB1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB1,
+        "ぼかし",frame_bB1,
+        "縁色",frame_colB1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB2,
+        "高さ",edge_heightB2,
+        "角度",edge_rotateB2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sB2,
+        "ぼかし",frame_bB2,
+        "縁色",frame_colB2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthB3,
+        "高さ",edge_heightB3,
+        "角度",edge_rotateB3
+        )
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xB,
+        "Y",drop_shadow_yB,
+        "濃さ",drop_shadow_deepB,
+        "拡散",drop_shadow_diffusionB,
+        "影色",drop_shadow_colorB,
+        "影を別オブジェクトで描画",0
+        )
+        obj.effect("枠線",
+        "X",border_xB,
+        "Y",border_yB,
+        "サイズ",border_sB,
+        "丸み",border_rB,
+        "枠色",border_colB
+        ) 
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+    if effectC == 1 then
+        obj.effect("グラデーション",
+        "強さ",grd_powC,
+        "中心X",grd_cxC,
+        "中心Y",grd_cyC,
+        "角度",grd_rotateC,
+        "幅",grd_widthC,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colC,
+        "終了色",grd_end_colC
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC0,
+        "高さ",edge_heightC0,
+        "角度",edge_rotateC0
+        )
+    elseif effectC == 2 then
+        obj.effect("グラデーション",
+        "強さ",grd_powC,
+        "中心X",grd_cxC,
+        "中心Y",grd_cyC,
+        "角度",grd_rotateC,
+        "幅",grd_widthC,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colC,
+        "終了色",grd_end_colC
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC0,
+        "高さ",edge_heightC0,
+        "角度",edge_rotateC0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC0,
+        "ぼかし",frame_bC0,
+        "縁色",frame_colC0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC1,
+        "高さ",edge_heightC1,
+        "角度",edge_rotateC1
+        )
+    elseif effectC == 3 then
+        obj.effect("グラデーション",
+        "強さ",grd_powC,
+        "中心X",grd_cxC,
+        "中心Y",grd_cyC,
+        "角度",grd_rotateC,
+        "幅",grd_widthC,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colC,
+        "終了色",grd_end_colC
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC0,
+        "高さ",edge_heightC0,
+        "角度",edge_rotateC0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC0,
+        "ぼかし",frame_bC0,
+        "縁色",frame_colC0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC1,
+        "高さ",edge_heightC1,
+        "角度",edge_rotateC1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC1,
+        "ぼかし",frame_bC1,
+        "縁色",frame_colC1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC2,
+        "高さ",edge_heightC2,
+        "角度",edge_rotateC2
+        )
+    elseif effectC == 4 then
+        obj.effect("グラデーション",
+        "強さ",grd_powC,
+        "中心X",grd_cxC,
+        "中心Y",grd_cyC,
+        "角度",grd_rotateC,
+        "幅",grd_widthC,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colC,
+        "終了色",grd_end_colC
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC0,
+        "高さ",edge_heightC0,
+        "角度",edge_rotateC0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC0,
+        "ぼかし",frame_bC0,
+        "縁色",frame_colC0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC1,
+        "高さ",edge_heightC1,
+        "角度",edge_rotateC1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC1,
+        "ぼかし",frame_bC1,
+        "縁色",frame_colC1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC2,
+        "高さ",edge_heightC2,
+        "角度",edge_rotateC2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC2,
+        "ぼかし",frame_bC2,
+        "縁色",frame_colC2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC3,
+        "高さ",edge_heightC3,
+        "角度",edge_rotateC3
+        )
+    elseif effectC == 5 then
+        obj.effect("グラデーション",
+        "強さ",grd_powC,
+        "中心X",grd_cxC,
+        "中心Y",grd_cyC,
+        "角度",grd_rotateC,
+        "幅",grd_widthC,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colC,
+        "終了色",grd_end_colC
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC0,
+        "高さ",edge_heightC0,
+        "角度",edge_rotateC0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC0,
+        "ぼかし",frame_bC0,
+        "縁色",frame_colC0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC1,
+        "高さ",edge_heightC1,
+        "角度",edge_rotateC1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC1,
+        "ぼかし",frame_bC1,
+        "縁色",frame_colC1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC2,
+        "高さ",edge_heightC2,
+        "角度",edge_rotateC2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC2,
+        "ぼかし",frame_bC2,
+        "縁色",frame_colC2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC3,
+        "高さ",edge_heightC3,
+        "角度",edge_rotateC3
+        )
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xC,
+        "Y",drop_shadow_yC,
+        "濃さ",drop_shadow_deepC,
+        "拡散",drop_shadow_diffusionC,
+        "影色",drop_shadow_colorC,
+        "影を別オブジェクトで描画",0
+        )
+    elseif effectC == 6 then
+        obj.effect("グラデーション",
+        "強さ",grd_powC,
+        "中心X",grd_cxC,
+        "中心Y",grd_cyC,
+        "角度",grd_rotateC,
+        "幅",grd_widthC,
+        "合成モード","通常",
+        "形状","線形",
+        "開始色",grd_start_colC,
+        "終了色",grd_end_colC
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC0,
+        "高さ",edge_heightC0,
+        "角度",edge_rotateC0
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC0,
+        "ぼかし",frame_bC0,
+        "縁色",frame_colC0
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC1,
+        "高さ",edge_heightC1,
+        "角度",edge_rotateC1
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC1,
+        "ぼかし",frame_bC1,
+        "縁色",frame_colC1
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC2,
+        "高さ",edge_heightC2,
+        "角度",edge_rotateC2
+        )
+        obj.effect("縁取り",
+        "サイズ",frame_sC2,
+        "ぼかし",frame_bC2,
+        "縁色",frame_colC2
+        )
+        obj.effect("凸エッジ",
+        "幅",edge_widthC3,
+        "高さ",edge_heightC3,
+        "角度",edge_rotateC3
+        )
+        obj.effect("ドロップシャドウ",
+        "X",drop_shadow_xC,
+        "Y",drop_shadow_yC,
+        "濃さ",drop_shadow_deepC,
+        "拡散",drop_shadow_diffusionC,
+        "影色",drop_shadow_colorC,
+        "影を別オブジェクトで描画",0
+        )
+        obj.effect("枠線",
+        "X",border_xC,
+        "Y",border_yC,
+        "サイズ",border_sC,
+        "丸み",border_rC,
+        "枠色",border_colC
+        ) 
+    end
+end
+-- ↑ Cグループエフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+
+
+@エフェクト追加(アニメーション1)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:Aグループ
+--select@effectA:Aグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--track@entry_timeA:Aグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeA:Aグループ::登場秒数,0,5,0,0.01
+--track@out_timeA:Aグループ::退場秒数,0,5,0,0.01
+
+--check@ankerA:Aグループ::座標アンカー表示,0
+--track@entry_xA:Aグループ::X,-2000,2000,0
+--track@entry_yA:Aグループ::Y,-2000,2000,0
+--track@entry_zA:Aグループ::Z,-2000,2000,0
+--track@entry_zoomA:Aグループ::拡大率,0,1000,100
+--track@entry_aspect_xA:Aグループ::X拡大率,0,1000,100
+--track@entry_aspect_yA:Aグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zA:Aグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xA:Aグループ::X回転,-3600,3600,0
+--track@entry_rotate_yA:Aグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zA:Aグループ::Z回転,-3600,3600,0
+
+--track@entry_strengthA:Aグループ::強さ,-4000,4000,500
+--track@glow_diffusionA:Aグループ::拡散,0,4000,250
+--track@glow_thresholdA:Aグループ::しきい値,0,100,80
+--track@glow_speedA:Aグループ::拡散速度,0,4000,0
+--check@glow_fix_sizeA:Aグループ::サイズ固定,0
+--color@glow_colorA:Aグループ::光色,0xffffff
+
+--track@entry_clip_uA:Aグループ::上,-4000,4000,0
+--track@entry_clip_dA:Aグループ::下,-4000,4000,0
+--track@entry_clip_lA:Aグループ::左,-4000,4000,0
+--track@entry_clip_rA:Aグループ::右,-4000,4000,0
+--check@clip_centerA:Aグループ::中心の位置を固定,0
+
+--track@entry_ripples_heightA:Aグループ_波紋::高さ,-4000,4000,15
+--track@ripple_cxA:Aグループ::中心X,-4000,4000,0
+--track@ripple_cyA:Aグループ::中心Y,-4000,4000,0
+--track@ripple_wA:Aグループ::幅,0,4000,30
+--track@ripple_speedA:Aグループ::速度,-4000,4000,150
+--track@ripple_countA:Aグループ::波紋数,-100,100,0
+--track@ripple_intervalA:Aグループ::波紋間隔,-4000,4000,0
+--track@ripple_ampA:Aグループ::増幅減衰回数,-100,100,0
+
+--track@entry_raster_heightA:Aグループ_ラスター::高さ,-4000,4000,100
+--track@raster_wA:Aグループ::横幅,0,4000,100
+--track@raster_periodA:Aグループ::周期,0.01,100,1,0.01
+--check@raster_vA:Aグループ::縦ラスター,0
+--check@raster_randA:Aグループ::ランダム振幅,0
+
+--check@entry_inA:Aグループ::登場,1
+--check@entry_outA:Aグループ::退場,0
+
+--select@entry_easingA:Aグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeA:Aグループ::INフェード,0
+--track@in_fade_timeA:Aグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeA:Aグループ::OUTフェード,0
+--track@out_fade_timeA:Aグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeA:effectA==0
+--hide@in_timeA:effectA==0
+--hide@out_timeA:effectA==0
+--hide@entry_inA:effectA==0
+--hide@entry_outA:effectA==0
+--hide@entry_easingA:effectA==0
+--hide@entry_in_fadeA:effectA==0
+--hide@in_fade_timeA:effectA==0
+--hide@entry_out_fadeA:effectA==0
+--hide@out_fade_timeA:effectA==0
+
+--hide@ankerA:effectA~=1
+--hide@entry_xA:effectA~=1
+--hide@entry_yA:effectA~=1
+--hide@entry_zA:effectA~=1
+--hide@entry_zoomA:effectA~=1
+--hide@entry_aspect_xA:effectA~=1
+--hide@entry_aspect_yA:effectA~=1
+--hide@entry_aspect_zA:effectA~=1
+--hide@entry_rotate_xA:effectA~=1
+--hide@entry_rotate_yA:effectA~=1
+--hide@entry_rotate_zA:effectA~=1
+
+--hide@entry_strengthA:effectA~=2
+--hide@glow_diffusionA:effectA~=2
+--hide@glow_thresholdA:effectA~=2
+--hide@glow_speedA:effectA~=2
+--hide@glow_fix_sizeA:effectA~=2
+--hide@glow_colorA:effectA~=2
+
+--hide@entry_clip_uA:effectA~=3
+--hide@entry_clip_dA:effectA~=3
+--hide@entry_clip_lA:effectA~=3
+--hide@entry_clip_rA:effectA~=3
+--hide@clip_centerA:effectA~=3
+
+--hide@entry_ripples_heightA:effectA~=4
+--hide@ripple_cxA:effectA~=4
+--hide@ripple_cyA:effectA~=4
+--hide@ripple_wA:effectA~=4
+--hide@ripple_speedA:effectA~=4
+--hide@ripple_countA:effectA~=4
+--hide@ripple_intervalA:effectA~=4
+--hide@ripple_ampA:effectA~=4
+
+--hide@entry_raster_heightA:effectA~=5
+--hide@raster_wA:effectA~=5
+--hide@raster_periodA:effectA~=5
+--hide@raster_vA:effectA~=5
+--hide@raster_randA:effectA~=5
+
+--group:Bグループ
+--select@effectB:Bグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--track@entry_timeB:Bグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeB:Bグループ::登場秒数,0,5,0,0.01
+--track@out_timeB:Bグループ::退場秒数,0,5,0,0.01
+
+--check@ankerB:Bグループ::座標アンカー表示,0
+--track@entry_xB:Bグループ::X,-2000,2000,0
+--track@entry_yB:Bグループ::Y,-2000,2000,0
+--track@entry_zB:Bグループ::Z,-2000,2000,0
+--track@entry_zoomB:Bグループ::拡大率,0,1000,100
+--track@entry_aspect_xB:Bグループ::X拡大率,0,1000,100
+--track@entry_aspect_yB:Bグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zB:Bグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xB:Bグループ::X回転,-3600,3600,0
+--track@entry_rotate_yB:Bグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zB:Bグループ::Z回転,-3600,3600,0
+
+--track@entry_strengthB:Bグループ::強さ,-4000,4000,500
+--track@glow_diffusionB:Bグループ::拡散,0,4000,250
+--track@glow_thresholdB:Bグループ::しきい値,0,100,80
+--track@glow_speedB:Bグループ::拡散速度,0,4000,0
+--check@glow_fix_sizeB:Bグループ::サイズ固定,0
+--color@glow_colorB:Bグループ::光色,0xffffff
+
+--track@entry_clip_uB:Bグループ::上,-4000,4000,0
+--track@entry_clip_dB:Bグループ::下,-4000,4000,0
+--track@entry_clip_lB:Bグループ::左,-4000,4000,0
+--track@entry_clip_rB:Bグループ::右,-4000,4000,0
+--check@clip_centerB:Bグループ::中心の位置を固定,0
+
+--track@entry_ripples_heightB:Bグループ_波紋::高さ,-4000,4000,15
+--track@ripple_cxB:Bグループ::中心X,-4000,4000,0
+--track@ripple_cyB:Bグループ::中心Y,-4000,4000,0
+--track@ripple_wB:Bグループ::幅,0,4000,30
+--track@ripple_speedB:Bグループ::速度,-4000,4000,150
+--track@ripple_countB:Bグループ::波紋数,-100,100,0
+--track@ripple_intervalB:Bグループ::波紋間隔,-4000,4000,0
+--track@ripple_ampB:Bグループ::増幅減衰回数,-100,100,0
+
+--track@entry_raster_heightB:Bグループ_ラスター::高さ,-4000,4000,100
+--track@raster_wB:Bグループ::横幅,0,4000,100
+--track@raster_periodB:Bグループ::周期,0.01,100,1,0.01
+--check@raster_vB:Bグループ::縦ラスター,0
+--check@raster_randB:Bグループ::ランダム振幅,0
+
+--check@entry_inB:Bグループ::登場,1
+--check@entry_outB:Bグループ::退場,0
+
+--select@entry_easingB:Bグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+--check@entry_in_fadeB:Bグループ::INフェード,0
+--track@in_fade_timeB:Bグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeB:Bグループ::OUTフェード,0
+--track@out_fade_timeB:Bグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeB:effectB==0
+--hide@in_timeB:effectB==0
+--hide@out_timeB:effectB==0
+--hide@entry_inB:effectB==0
+--hide@entry_outB:effectB==0
+--hide@entry_easingB:effectB==0
+--hide@entry_in_fadeB:effectB==0
+--hide@in_fade_timeB:effectB==0
+--hide@entry_out_fadeB:effectB==0
+--hide@out_fade_timeB:effectB==0
+
+--hide@ankerB:effectB~=1
+--hide@entry_xB:effectB~=1
+--hide@entry_yB:effectB~=1
+--hide@entry_zB:effectB~=1
+--hide@entry_zoomB:effectB~=1
+--hide@entry_aspect_xB:effectB~=1
+--hide@entry_aspect_yB:effectB~=1
+--hide@entry_aspect_zB:effectB~=1
+--hide@entry_rotate_xB:effectB~=1
+--hide@entry_rotate_yB:effectB~=1
+--hide@entry_rotate_zB:effectB~=1
+
+--hide@entry_strengthB:effectB~=2
+--hide@glow_diffusionB:effectB~=2
+--hide@glow_thresholdB:effectB~=2
+--hide@glow_speedB:effectB~=2
+--hide@glow_fix_sizeB:effectB~=2
+--hide@glow_colorB:effectB~=2
+
+--hide@entry_clip_uB:effectB~=3
+--hide@entry_clip_dB:effectB~=3
+--hide@entry_clip_lB:effectB~=3
+--hide@entry_clip_rB:effectB~=3
+--hide@clip_centerB:effectB~=3
+
+--hide@entry_ripples_heightB:effectB~=4
+--hide@ripple_cxB:effectB~=4
+--hide@ripple_cyB:effectB~=4
+--hide@ripple_wB:effectB~=4
+--hide@ripple_speedB:effectB~=4
+--hide@ripple_countB:effectB~=4
+--hide@ripple_intervalB:effectB~=4
+--hide@ripple_ampB:effectB~=4
+
+--hide@entry_raster_heightB:effectB~=5
+--hide@raster_wB:effectB~=5
+--hide@raster_periodB:effectB~=5
+--hide@raster_vB:effectB~=5
+--hide@raster_randB:effectB~=5
+
+--group:Cグループ
+--select@effectC:Cグループ::アニメーション=0,なし=0,移動登場と退場_AKIRA=1,発光登退場_AKIRA=2,クリッピング登退場_AKIRA=3,波紋登退場_AKIRA=4,ラスター登退場_AKIRA=5
+--track@entry_timeC:Cグループ::登退場秒数,0,5,0.3,0.01
+--track@in_timeC:Cグループ::登場秒数,0,5,0,0.01
+--track@out_timeC:Cグループ::退場秒数,0,5,0,0.01
+
+--check@ankerC:Cグループ::座標アンカー表示,0
+--track@entry_xC:Cグループ::X,-2000,2000,0
+--track@entry_yC:Cグループ::Y,-2000,2000,0
+--track@entry_zC:Cグループ::Z,-2000,2000,0
+--track@entry_zoomC:Cグループ::拡大率,0,1000,100
+--track@entry_aspect_xC:Cグループ::X拡大率,0,1000,100
+--track@entry_aspect_yC:Cグループ::Y拡大率,0,1000,100
+--track@entry_aspect_zC:Cグループ::Z拡大率,0,1000,100
+--track@entry_rotate_xC:Cグループ::X回転,-3600,3600,0
+--track@entry_rotate_yC:Cグループ::Y回転,-3600,3600,0
+--track@entry_rotate_zC:Cグループ::Z回転,-3600,3600,0
+
+--track@entry_strengthC:Cグループ::強さ,-4000,4000,500
+--track@glow_diffusionC:Cグループ::拡散,0,4000,250
+--track@glow_thresholdC:Cグループ::しきい値,0,100,80
+--track@glow_speedC:Cグループ::拡散速度,0,4000,0
+--check@glow_fix_sizeC:Cグループ::サイズ固定,0
+--color@glow_colorC:Cグループ::光色,0xffffff
+
+--track@entry_clip_uC:Cグループ::上,-4000,4000,0
+--track@entry_clip_dC:Cグループ::下,-4000,4000,0
+--track@entry_clip_lC:Cグループ::左,-4000,4000,0
+--track@entry_clip_rC:Cグループ::右,-4000,4000,0
+--check@clip_centerC:Cグループ::中心の位置を固定,0
+
+
+--track@entry_ripples_heightC:Cグループ_波紋::高さ,-4000,4000,15
+--track@ripple_cxC:Cグループ::中心X,-4000,4000,0
+--track@ripple_cyC:Cグループ::中心Y,-4000,4000,0
+--track@ripple_wC:Cグループ::幅,0,4000,30
+--track@ripple_speedC:Cグループ::速度,-4000,4000,150
+--track@ripple_countC:Cグループ::波紋数,-100,100,0
+--track@ripple_intervalC:Cグループ::波紋間隔,-4000,4000,0
+--track@ripple_ampC:Cグループ::増幅減衰回数,-100,100,0
+
+--track@entry_raster_heightC:Cグループ_ラスター::高さ,-4000,4000,100
+--track@raster_wC:Cグループ::横幅,0,4000,100
+--track@raster_periodC:Cグループ::周期,0.01,100,1,0.01
+--check@raster_vC:Cグループ::縦ラスター,0
+--check@raster_randC:Cグループ::ランダム振幅,0
+
+--check@entry_inC:Cグループ::登場,1
+--check@entry_outC:Cグループ::退場,0
+
+--select@entry_easingC:Cグループ::イージングタイプ=3,Linear(等速)=0,inSine(正弦波:緩やかな加速)=1,inQuad(二次:標準的な加速)=2,inCubic(三次:強めの加速)=3,inQuart(四次:かなり強い加速)=4,inQuint(五次:非常に強い加速)=5,inCirc(円弧:最後に急加速)=6,inExpo(指数:急激な加速)=7,inBack(戻り:少し戻って加速)=8,inElastic(弾性:揺れてから加速)=9,inBounce(跳ね返り:跳ねて加速)=10,outSine(正弦波:緩やかに減速)=11,outQuad(二次:標準的な減速)=12,outCubic(三次:強めの減速)=13,outQuart(四次:かなり強い減速)=14,outQuint(五次:非常に強い減速)=15,outCirc(円弧:急激に減速)=16,outExpo(指数:瞬時に減速)=17,outBack(戻り:通り過ぎて戻る)=18,outElastic(弾性:揺れて減速)=19,outBounce(跳ね返り:着地して跳ねる)=20,inOutSine(正弦波:滑らかな加減速)=21,inOutQuad(二次:標準的な加減速)=22,inOutCubic(三次:強めの加減速)=23,inOutQuart(四次:かなり強い加減速)=24,inOutQuint(五次:非常に強い加減速)=25,inOutCirc(円弧:急激な加減速)=26,inOutExpo(指数:中央で急移動)=27,inOutBack(戻り:開始終了で戻る)=28,inOutElastic(弾性:開始終了で揺れる)=29,inOutBounce(跳ね返り:開始終了で跳ねる)=30
+
+--check@entry_in_fadeC:Cグループ::INフェード,0
+--track@in_fade_timeC:Cグループ::インフェード時間,0,5,0.3,0.01
+--check@entry_out_fadeC:Cグループ::OUTフェード,0
+--track@out_fade_timeC:Cグループ::アウトフェード時間,0,5,0.3,0.01
+--group
+
+--hide@entry_timeC:effectC==0
+--hide@in_timeC:effectC==0
+--hide@out_timeC:effectC==0
+--hide@entry_easingC:effectC==0
+--hide@entry_inC:effectC==0
+--hide@entry_outC:effectC==0
+--hide@entry_in_fadeC:effectC==0
+--hide@in_fade_timeC:effectC==0
+--hide@entry_out_fadeC:effectC==0
+--hide@out_fade_timeC:effectC==0
+
+--hide@ankerC:effectC~=1
+--hide@entry_xC:effectC~=1
+--hide@entry_yC:effectC~=1
+--hide@entry_zC:effectC~=1
+--hide@entry_zoomC:effectC~=1
+--hide@entry_aspect_xC:effectC~=1
+--hide@entry_aspect_yC:effectC~=1
+--hide@entry_aspect_zC:effectC~=1
+--hide@entry_rotate_xC:effectC~=1
+--hide@entry_rotate_yC:effectC~=1
+--hide@entry_rotate_zC:effectC~=1
+
+--hide@entry_strengthC:effectC~=2
+--hide@glow_diffusionC:effectC~=2
+--hide@glow_thresholdC:effectC~=2
+--hide@glow_speedC:effectC~=2
+--hide@glow_fix_sizeC:effectC~=2
+--hide@glow_colorC:effectC~=2
+
+--hide@entry_clip_uC:effectC~=3
+--hide@entry_clip_dC:effectC~=3
+--hide@entry_clip_lC:effectC~=3
+--hide@entry_clip_rC:effectC~=3
+--hide@clip_centerC:effectC~=3
+
+--hide@entry_ripples_heightC:effectC~=4
+--hide@ripple_cxC:effectC~=4
+--hide@ripple_cyC:effectC~=4
+--hide@ripple_wC:effectC~=4
+--hide@ripple_speedC:effectC~=4
+--hide@ripple_countC:effectC~=4
+--hide@ripple_intervalC:effectC~=4
+--hide@ripple_ampC:effectC~=4
+
+--hide@entry_raster_heightC:effectC~=5
+--hide@raster_wC:effectC~=5
+--hide@raster_periodC:effectC~=5
+--hide@raster_vC:effectC~=5
+--hide@raster_randC:effectC~=5
+
+-- 個別エフェクトの共通処理のモジュール
+local common = require("group_effect_add_effect_common")
+
+-- アンカーを表示するか非表示にするかをトラックバーで設定
+if ankerA ~= 0 then
+    obj.setanchor("entry_xA,entry_yA",0,"arm","color",0xff0000)
+end
+if ankerB ~= 0 then
+    obj.setanchor("entry_xB,entry_yB",0,"arm","color",0x00ff00)
+end
+if ankerC ~= 0 then
+    obj.setanchor("entry_xC,entry_yC",0,"arm","color",0x0000ff)
+end
+
+-- Aグループ固有のエフェクト処理
+local function apply_effect_A()
+    if effectA == 1 then
+        obj.effect("移動登場と退場_AKIRA",
+            "登退場秒数",entry_timeA,
+            "登場秒数",in_timeA,
+            "退場秒数",out_timeA,
+            "X",entry_xA,
+            "Y",entry_yA,
+            "Z",entry_zA,
+            "拡大率",entry_zoomA,
+            "X拡大率",entry_aspect_xA,
+            "Y拡大率",entry_aspect_yA,
+            "Z拡大率",entry_aspect_zA,
+            "X回転",entry_rotate_xA,
+            "Y回転",entry_rotate_yA,
+            "Z回転",entry_rotate_zA,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingA,
+            "登場",entry_inA,
+            "退場",entry_outA,
+            "INフェード",entry_in_fadeA,
+            "インフェード時間",in_fade_timeA,
+            "OUTフェード",entry_out_fadeA,
+            "アウトフェード時間",out_fade_timeA
+        )
+    elseif effectA == 2 then
+        obj.effect("発光登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeA,
+            "登場秒数",in_timeA,
+            "退場秒数",out_timeA,
+            "強さ",entry_strengthA,
+            "拡散",glow_diffusionA,
+            "しきい値",glow_thresholdA,
+            "拡散速度",glow_speedA,
+            "サイズ固定",glow_fix_sizeA,
+            "光色",glow_colorA,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingA,
+            "登場",entry_inA,
+            "退場",entry_outA,
+            "INフェード",entry_in_fadeA,
+            "インフェード時間",in_fade_timeA,
+            "OUTフェード",entry_out_fadeA,
+            "アウトフェード時間",out_fade_timeA
+        )
+    elseif effectA == 3 then
+        obj.effect("クリッピング登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeA,
+            "登場秒数",in_timeA,
+            "退場秒数",out_timeA,
+            "上", entry_clip_uA,
+            "下", entry_clip_dA,
+            "左", entry_clip_lA,
+            "右", entry_clip_rA,
+            "中心の位置を固定", clip_centerA,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingA,
+            "登場",entry_inA,
+            "退場",entry_outA,
+            "INフェード",entry_in_fadeA,
+            "インフェード時間",in_fade_timeA,
+            "OUTフェード",entry_out_fadeA,
+            "アウトフェード時間",out_fade_timeA
+        )
+    elseif effectA == 4 then
+        obj.effect("波紋登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeA,
+            "登場秒数",in_timeA,
+            "退場秒数",out_timeA,
+            "高さ", entry_ripples_heightA,
+            "中心X", ripple_cxA,
+            "中心Y", ripple_cyA,
+            "幅", ripple_wA,
+            "速度", ripple_speedA,
+            "波紋数", ripple_countA,
+            "波紋間隔", ripple_intervalA,
+            "増幅減衰回数", ripple_ampA,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingA,
+            "登場",entry_inA,
+            "退場",entry_outA,
+            "INフェード",entry_in_fadeA,
+            "インフェード時間",in_fade_timeA,
+            "OUTフェード",entry_out_fadeA,
+            "アウトフェード時間",out_fade_timeA
+        )
+    elseif effectA == 5 then
+        obj.effect("ラスター登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeA,
+            "登場秒数",in_timeA,
+            "退場秒数",out_timeA,
+            "高さ", entry_raster_heightA,
+            "横幅", raster_wA,
+            "周期", raster_periodA,
+            "縦ラスター", raster_vA,
+            "ランダム振幅", raster_randA,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingA,
+            "登場",entry_inA,
+            "退場",entry_outA,
+            "INフェード",entry_in_fadeA,
+            "インフェード時間",in_fade_timeA,
+            "OUTフェード",entry_out_fadeA,
+            "アウトフェード時間",out_fade_timeA
+        )
+    end
+end
+-- ↑ Aグループエフェクト追加ここまで ↑
+
+-- Bグループ固有のエフェクト処理
+local function apply_effect_B()
+    if effectB == 1 then
+        obj.effect("移動登場と退場_AKIRA",
+            "登退場秒数",entry_timeB,
+            "登場秒数",in_timeB,
+            "退場秒数",out_timeB,
+            "X",entry_xB,
+            "Y",entry_yB,
+            "Z",entry_zB,
+            "拡大率",entry_zoomB,
+            "X拡大率",entry_aspect_xA,
+            "Y拡大率",entry_aspect_yB,
+            "Z拡大率",entry_aspect_zB,
+            "X回転",entry_rotate_xB,
+            "Y回転",entry_rotate_yB,
+            "Z回転",entry_rotate_zB,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingB,
+            "登場",entry_inB,
+            "退場",entry_outB,
+            "INフェード",entry_in_fadeB,
+            "インフェード時間",in_fade_timeB,
+            "OUTフェード",entry_out_fadeB,
+            "アウトフェード時間",out_fade_timeB
+        )
+    elseif effectB == 2 then
+        obj.effect("発光登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeB,
+            "登場秒数",in_timeB,
+            "退場秒数",out_timeB,
+            "強さ",entry_strengthB,
+            "拡散",glow_diffusionB,
+            "しきい値",glow_thresholdB,
+            "拡散速度",glow_speedB,
+            "サイズ固定",glow_fix_sizeB,
+            "光色",glow_colorB,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingB,
+            "登場",entry_inB,
+            "退場",entry_outB,
+            "INフェード",entry_in_fadeB,
+            "インフェード時間",in_fade_timeB,
+            "OUTフェード",entry_out_fadeB,
+            "アウトフェード時間",out_fade_timeB
+        )
+    elseif effectB == 3 then
+        obj.effect("クリッピング登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeB,
+            "登場秒数",in_timeB,
+            "退場秒数",out_timeB,
+            "上", entry_clip_uB,
+            "下", entry_clip_dB,
+            "左", entry_clip_lB,
+            "右", entry_clip_rB,
+            "中心の位置を固定", clip_centerB,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingB,
+            "登場",entry_inB,
+            "退場",entry_outB,
+            "INフェード",entry_in_fadeB,
+            "インフェード時間",in_fade_timeB,
+            "OUTフェード",entry_out_fadeB,
+            "アウトフェード時間",out_fade_timeB
+        )
+    elseif effectB == 4 then
+        obj.effect("波紋登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeB,
+            "登場秒数",in_timeB,
+            "退場秒数",out_timeB,
+            "高さ", entry_ripples_heightB,
+            "中心X", ripple_cxB,
+            "中心Y", ripple_cyB,
+            "幅", ripple_wB,
+            "速度", ripple_speedB,
+            "波紋数", ripple_countB,
+            "波紋間隔", ripple_intervalB,
+            "増幅減衰回数", ripple_ampB,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingB,
+            "登場",entry_inB,
+            "退場",entry_outB,
+            "INフェード",entry_in_fadeB,
+            "インフェード時間",in_fade_timeB,
+            "OUTフェード",entry_out_fadeB,
+            "アウトフェード時間",out_fade_timeB
+        )
+    elseif effectB == 5 then
+        obj.effect("ラスター登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeB,
+            "登場秒数",in_timeB,
+            "退場秒数",out_timeB,
+            "高さ", entry_raster_heightB,
+            "横幅", raster_wB,
+            "周期", raster_periodB,
+            "縦ラスター", raster_vB,
+            "ランダム振幅", raster_randB,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingB,
+            "登場",entry_inB,
+            "退場",entry_outB,
+            "INフェード",entry_in_fadeB,
+            "インフェード時間",in_fade_timeB,
+            "OUTフェード",entry_out_fadeB,
+            "アウトフェード時間",out_fade_timeB
+        )
+    end
+end
+-- ↑ Bグループエフェクト追加ここまで ↑
+
+-- Cグループ固有のエフェクト処理
+local function apply_effect_C()
+    if effectC == 1 then
+        obj.effect("移動登場と退場_AKIRA",
+            "登退場秒数",entry_timeC,
+            "登場秒数",in_timeC,
+            "退場秒数",out_timeC,
+            "X",entry_xC,
+            "Y",entry_yC,
+            "Z",entry_zC,
+            "拡大率",entry_zoomC,
+            "X拡大率",entry_aspect_xC,
+            "Y拡大率",entry_aspect_yC,
+            "Z拡大率",entry_aspect_zC,
+            "X回転",entry_rotate_xC,
+            "Y回転",entry_rotate_yC,
+            "Z回転",entry_rotate_zC,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingC,
+            "登場",entry_inC,
+            "退場",entry_outC,
+            "INフェード",entry_in_fadeC,
+            "インフェード時間",in_fade_timeC,
+            "OUTフェード",entry_out_fadeC,
+            "アウトフェード時間",out_fade_timeC
+        )
+    elseif effectC == 2 then
+        obj.effect("発光登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeC,
+            "登場秒数",in_timeC,
+            "退場秒数",out_timeC,
+            "強さ",entry_strengthC,
+            "拡散",glow_diffusionC,
+            "しきい値",glow_thresholdC,
+            "拡散速度",glow_speedC,
+            "サイズ固定",glow_fix_sizeC,
+            "光色",glow_colorC,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingC,
+            "登場",entry_inC,
+            "退場",entry_outC,
+            "INフェード",entry_in_fadeC,
+            "インフェード時間",in_fade_timeC,
+            "OUTフェード",entry_out_fadeC,
+            "アウトフェード時間",out_fade_timeC
+        )
+    elseif effectC == 3 then
+        obj.effect("クリッピング登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeC,
+            "登場秒数",in_timeC,
+            "退場秒数",out_timeC,
+            "上", entry_clip_uC,
+            "下", entry_clip_dC,
+            "左", entry_clip_lC,
+            "右", entry_clip_rC,
+            "中心の位置を固定", clip_centerC,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingC,
+            "登場",entry_inC,
+            "退場",entry_outC,
+            "INフェード",entry_in_fadeC,
+            "インフェード時間",in_fade_timeC,
+            "OUTフェード",entry_out_fadeC,
+            "アウトフェード時間",out_fade_timeC
+        )
+    elseif effectC == 4 then
+        obj.effect("波紋登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeC,
+            "登場秒数",in_timeC,
+            "退場秒数",out_timeC,
+            "高さ", entry_ripples_heightC,
+            "中心X", ripple_cxC,
+            "中心Y", ripple_cyC,
+            "幅", ripple_wC,
+            "速度", ripple_speedC,
+            "波紋数", ripple_countC,
+            "波紋間隔", ripple_intervalC,
+            "増幅減衰回数", ripple_ampC,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingC,
+            "登場",entry_inC,
+            "退場",entry_outC,
+            "INフェード",entry_in_fadeC,
+            "インフェード時間",in_fade_timeC,
+            "OUTフェード",entry_out_fadeC,
+            "アウトフェード時間",out_fade_timeC
+        )
+    elseif effectC == 5 then
+        obj.effect("ラスター登退場_AKIRA@各種登退場_AKIRA",
+            "登退場秒数",entry_timeC,
+            "登場秒数",in_timeC,
+            "退場秒数",out_timeC,
+            "高さ", entry_raster_heightC,
+            "横幅", raster_wC,
+            "周期", raster_periodC,
+            "縦ラスター", raster_vC,
+            "ランダム振幅", raster_randC,
+            "登場順",0,
+            "間隔",0,
+            "イージングタイプ",entry_easingC,
+            "登場",entry_inC,
+            "退場",entry_outC,
+            "INフェード",entry_in_fadeC,
+            "インフェード時間",in_fade_timeC,
+            "OUTフェード",entry_out_fadeC,
+            "アウトフェード時間",out_fade_timeC
+        )
+    end
+end
+-- ↑ Cグループエフェクト追加ここまで ↑
+
+-- 共通処理の実行
+common.execute({
+    effectA = apply_effect_A,
+
+    effectB = apply_effect_B,
+
+    effectC = apply_effect_C,
+
+    pack    = pack
+})
+
+@エフェクト追加(縁取り)
+--label:個別エフェクト追加
+--information:「@個別エフェクト」で指定したグループ(A・B・C)に対して、追加でエフェクトを適用するスクリプト。文字数や範囲の指定は不要です。文字のまとめ方もここで上書き決定可能です。
+
+--group:文字のまとめ方,true
+--select@pack:文字のまとめ方=0,まとめない=0,範囲外の文字をまとめる=1,すべての文字をまとめる=2
+--group
+
+--group:1段目::Aグループ
+--select@effectA:1段目::縁取り=1,有効=1,なし=0
+--track@sizeA:1段目::サイズA,0,1000,5,1
+--track@blurA:1段目::ぼかしA,0,1000,0,1
+--color@colorA:1段目::縁色(A),0xff0000
+--color@colorX:1段目::指定外縁色(X),0xffffff
+--group
+
+--group:2段目::Bグループ
+--select@effectB:2段目::縁取り=0,なし=0,有効=1
+--track@sizeB:2段目::サイズB,0,1000,5,1
+--track@blurB:2段目::ぼかしB,0,1000,0,1
+--color@colorB:2段目::縁色(B),0x0000ff
+--color@colorY:2段目::指定外縁色(Y),0x000000
+--group
+
+--group:3段目::Cグループ
+--select@effectC:3段目::縁取り=0,なし=0,有効=1
+--track@sizeC:3段目::サイズC,0,1000,5,1
+--track@blurC:3段目::ぼかしC,0,1000,0,1
+--color@colorC:3段目::縁色(C),0x00ff00
+--color@colorZ:3段目::指定外縁色(Z),0x333333
+--group
+
+--hide@sizeA:effectA==0
+--hide@blurA:effectA==0
+--hide@colorA:effectA==0
+--hide@colorX:effectA==0
+--hide@sizeB:effectB==0
+--hide@blurB:effectB==0
+--hide@colorB:effectB==0
+--hide@colorY:effectB==0
+--hide@sizeC:effectC==0
+--hide@blurC:effectC==0
+--hide@colorC:effectC==0
+--hide@colorZ:effectC==0
+
+-- ヘルパーモジュールの読み込みを試行
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local AKIRA_h = nil
+if condition then
+    AKIRA_h = AKIRA_helper
+else
+    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+end
+
+-- 個別オブジェクトが有効かを確認
+local is_multi = obj.getoption("multi_object")
+if not is_multi then
+    debug_print("個別オブジェクトが有効ではないため、「個別エフェクト(縁取り)」処理をスキップします。")
+    return
+end
+
+-- ================================================================
+-- 合成バッファのサイズを取得 (他のスクリプトと同一にして位置ズレを防止)
+-- ================================================================
+local full_w = obj.screen_w
+local full_h = obj.screen_h
+if AKIRA_h then
+    local tw, th = AKIRA_h.get_text_size()
+    local lc     = AKIRA_h.line_break_confirmation()
+    full_w = math.min(obj.screen_w, tw) + 100 -- 仮想バッファが足りていなかったので、適当に+100している
+    full_h = math.min(obj.screen_h, th * lc) + 100 -- 仮想バッファが足りていなかったので、適当に+100している
+end
+
+-- ================================================================
+-- index == 0 のとき：各キャッシュバッファの初期化
+-- ================================================================
+if obj.index == 0 then
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.clearbuffer("tempbuffer")
+
+    -- 1段目用
+    obj.copybuffer("cache:text_A", "tempbuffer")
+    obj.copybuffer("cache:text_X", "tempbuffer")
+    -- 2段目用
+    obj.copybuffer("cache:text_B", "tempbuffer")
+    obj.copybuffer("cache:text_Y", "tempbuffer")
+    -- 3段目用
+    obj.copybuffer("cache:text_C", "tempbuffer")
+    obj.copybuffer("cache:text_Z", "tempbuffer")
+    -- 最前面の文字本体用
+    obj.copybuffer("cache:text_all", "tempbuffer")
+
+    _G.gi_has_A = false
+    _G.gi_has_X = false
+    _G.gi_has_B = false
+    _G.gi_has_Y = false
+    _G.gi_has_C = false
+    _G.gi_has_Z = false
+end
+
+-- ----------------------------------------------------------------
+-- 各文字のパラメータ取得とグループ判定
+-- ----------------------------------------------------------------
+local idx = obj.index
+local current_char = idx + 1
+local scale = obj.sx
+local alpha = obj.getvalue("alpha")
+
+-- 各グループの範囲正規化
+local startA = _G.gi_startA or 1
+local endA   = _G.gi_endA or 1
+local startB = _G.gi_startB or 1
+local endB   = _G.gi_endB or 1
+local startC = _G.gi_startC or 1
+local endC   = _G.gi_endC or 1
+
+local sA = _G.gi_sA or math.min(startA, endA)
+local eA = _G.gi_eA or math.max(startA, endA)
+local sB = _G.gi_sB or math.min(startB, endB)
+local eB = _G.gi_eB or math.max(startB, endB)
+local sC = _G.gi_sC or math.min(startC, endC)
+local eC = _G.gi_eC or math.max(startC, endC)
+
+local is_A = (current_char >= sA and current_char <= eA)
+local is_B = (current_char >= sB and current_char <= eB)
+local is_C = (current_char >= sC and current_char <= eC)
+
+-- ----------------------------------------------------------------
+-- 各バッファに文字を描画・蓄積
+-- ----------------------------------------------------------------
+
+-- 1. 最前面文字本体用 (全文字蓄積)
+obj.copybuffer("tempbuffer", "cache:text_all")
+obj.setoption("drawtarget", "tempbuffer")
+obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+obj.copybuffer("cache:text_all", "tempbuffer")
+
+-- 2. 1段目用 (A or X)
+if effectA == 1 then
+    if is_A then
+        _G.gi_has_A = true
+        obj.copybuffer("tempbuffer", "cache:text_A")
+        obj.setoption("drawtarget", "tempbuffer")
+        obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+        obj.copybuffer("cache:text_A", "tempbuffer")
+    else
+        _G.gi_has_X = true
+        obj.copybuffer("tempbuffer", "cache:text_X")
+        obj.setoption("drawtarget", "tempbuffer")
+        obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+        obj.copybuffer("cache:text_X", "tempbuffer")
+    end
+end
+
+-- 3. 2段目用 (B or Y)
+if effectB == 1 then
+    if is_B then
+        _G.gi_has_B = true
+        obj.copybuffer("tempbuffer", "cache:text_B")
+        obj.setoption("drawtarget", "tempbuffer")
+        obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+        obj.copybuffer("cache:text_B", "tempbuffer")
+    else
+        _G.gi_has_Y = true
+        obj.copybuffer("tempbuffer", "cache:text_Y")
+        obj.setoption("drawtarget", "tempbuffer")
+        obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+        obj.copybuffer("cache:text_Y", "tempbuffer")
+    end
+end
+
+-- 4. 3段目用 (C or Z)
+if effectC == 1 then
+    if is_C then
+        _G.gi_has_C = true
+        obj.copybuffer("tempbuffer", "cache:text_C")
+        obj.setoption("drawtarget", "tempbuffer")
+        obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+        obj.copybuffer("cache:text_C", "tempbuffer")
+    else
+        _G.gi_has_Z = true
+        obj.copybuffer("tempbuffer", "cache:text_Z")
+        obj.setoption("drawtarget", "tempbuffer")
+        obj.draw(obj.ox, obj.oy, obj.oz, scale, alpha, obj.rx, obj.ry, obj.rz)
+        obj.copybuffer("cache:text_Z", "tempbuffer")
+    end
+end
+
+-- ================================================================
+-- 描画処理
+-- 最後の文字で tempbuffer 上に最奥(3段目) → 2段目 → 1段目 → 本体 を合成し、
+-- 完成したバッファを load して元の位置に正確に描画する
+-- ================================================================
+if idx == obj.num - 1 then
+    -- 各段の外側への累計太さを計算
+    local t1 = (effectA == 1) and sizeA or 0
+    local t2 = t1 + ((effectB == 1) and sizeB or 0)
+    local t3 = t2 + ((effectC == 1) and sizeC or 0)
+
+    -- tempbuffer 上にレイヤー順で合成
+    obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
+    obj.clearbuffer("tempbuffer")
+
+    -- [第3段目] 最奥：Cグループ(C) / 指定外(Z)
+    if effectC == 1 and t3 > 0 then
+        if _G.gi_has_Z then
+            obj.copybuffer("object", "cache:text_Z")
+            obj.effect("縁取り", "サイズ", t3, "ぼかし", blurC, "縁色", string.format("%06x", colorZ))
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        if _G.gi_has_C then
+            obj.copybuffer("object", "cache:text_C")
+            obj.effect("縁取り", "サイズ", t3, "ぼかし", blurC, "縁色", string.format("%06x", colorC))
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+    end
+
+    -- [第2段目] 中奥：Bグループ(B) / 指定外(Y)
+    if effectB == 1 and t2 > 0 then
+        if _G.gi_has_Y then
+            obj.copybuffer("object", "cache:text_Y")
+            obj.effect("縁取り", "サイズ", t2, "ぼかし", blurB, "縁色", string.format("%06x", colorY))
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        if _G.gi_has_B then
+            obj.copybuffer("object", "cache:text_B")
+            obj.effect("縁取り", "サイズ", t2, "ぼかし", blurB, "縁色", string.format("%06x", colorB))
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+    end
+
+    -- [第1段目] 手前：Aグループ(A) / 指定外(X)
+    if effectA == 1 and t1 > 0 then
+        if _G.gi_has_X then
+            obj.copybuffer("object", "cache:text_X")
+            obj.effect("縁取り", "サイズ", t1, "ぼかし", blurA, "縁色", string.format("%06x", colorX))
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+        if _G.gi_has_A then
+            obj.copybuffer("object", "cache:text_A")
+            obj.effect("縁取り", "サイズ", t1, "ぼかし", blurA, "縁色", string.format("%06x", colorA))
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+        end
+    end
+
+    -- [最前面] 文字本体 (元のテキスト色)
+    obj.copybuffer("object", "cache:text_all")
+    obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+
+    -- 完成した合成画像をフレームバッファへロード (AviUtlが本来の位置に描画)
+    obj.setoption("drawtarget", "framebuffer")
+    obj.load("tempbuffer")
+    obj.clearbuffer("tempbuffer")
+else
+    -- 最後の文字以外は画面に描画しない
+    obj.setoption("drawtarget", "framebuffer")
+    obj.clearbuffer("object")
+end
