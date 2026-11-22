@@ -1,4 +1,4 @@
-﻿-- 他のファイルでは問題ないが、このファイルだけは最初の1行を開けないと認識されないようだ。理由は不明。
+-- 他のファイルでは問題ないが、このファイルだけは最初の1行を開けないと認識されないようだ。理由は不明。
 @個別エフェクト(移動登退場)
 --label:個別エフェクト
 --information:個別オブジェクトにした文字の中から、指定した範囲(A・B・Cグループ)をそれぞれ1つのオブジェクトとしてまとめ、各グループに個別のエフェクトを適用するスクリプト。グループ外の文字はそのまま表示される。使用できるエフェクトは外部スクリプト「移動登場_AKIRA」のみ。
@@ -3484,6 +3484,13 @@ local alpha = obj.getvalue("alpha")
 local sA, eA = math.min(startA, endA), math.max(startA, endA)
 local sB, eB = math.min(startB, endB), math.max(startB, endB)
 local sC, eC = math.min(startC, endC), math.max(startC, endC)
+    -- グローバル変数に範囲情報を保存 (エフェクト追加用スクリプト向け)
+    _G.gi_startA = startA; _G.gi_endA = endA
+    _G.gi_startB = startB; _G.gi_endB = endB
+    _G.gi_startC = startC; _G.gi_endC = endC
+    _G.gi_sA = sA; _G.gi_eA = eA
+    _G.gi_sB = sB; _G.gi_eB = eB
+    _G.gi_sC = sC; _G.gi_eC = eC
 
 local is_A = (current_char >= sA and current_char <= eA)
 local is_B = (current_char >= sB and current_char <= eB)

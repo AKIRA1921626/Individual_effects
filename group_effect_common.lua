@@ -82,6 +82,8 @@ local function process_group(group_name, current_char, idx, start_raw, end_raw, 
         obj.cy = cy
         obj.ox = cx
         obj.oy = cy
+        _G["gi_cx_" .. group_name] = cx
+        _G["gi_cy_" .. group_name] = cy
 
         -- (4) 呼び出し元から渡されたグループ固有のエフェクト処理を実行
         if type(effect_callback) == "function" then
@@ -172,6 +174,21 @@ function M.execute(config)
     local sC = math.min(startC, endC)
     local eC = math.min(math.max(startC, endC), total_char)
 
+    -- グローバル変数に範囲情報を保存 (エフェクト追加用スクリプト向け)
+    _G.gi_startA = startA
+    _G.gi_endA   = endA
+    _G.gi_startB = startB
+    _G.gi_endB   = endB
+    _G.gi_startC = startC
+    _G.gi_endC   = endC
+
+    _G.gi_sA = sA
+    _G.gi_eA = eA
+    _G.gi_sB = sB
+    _G.gi_eB = eB
+    _G.gi_sC = sC
+    _G.gi_eC = eC
+
     local current_char = idx + 1
 
     local inA = (current_char >= sA and current_char <= eA)
@@ -199,6 +216,8 @@ function M.execute(config)
         full_w = math.min(obj.screen_w, tw)
         full_h = math.min(obj.screen_h, th * lc)
     end
+    _G.gi_full_w = full_w
+    _G.gi_full_h = full_h
 
     -- 各グループまたはグループ外の分岐処理
     if inA then
@@ -268,37 +287,50 @@ function M.execute(config)
         return
     end
 
-    -- pack == 2: 最後の文字のタイミングで全グループ＋範囲外文字を1枚に合成
+    -- pack == 2: 最後の文字のタイミングで全グループ＋範囲外文字を文字順序どおりに1枚に合成
     if pack == 2 and idx == last then
         obj.setoption("drawtarget", "tempbuffer", full_w, full_h)
         obj.clearbuffer("tempbuffer")
 
+        local drawn_A = false
+        local drawn_B = false
+        local drawn_C = false
+
         for i = 0, obj.num - 1 do
             local c = i + 1
-            local is_in_grp = (c >= sA and c <= eA) or (c >= sB and c <= eB) or (c >= sC and c <= eC)
-            if not is_in_grp then
-                if obj.copybuffer("object", "cache:gi_other_" .. i) then
+            if c == eA and not drawn_A then
+                if _G.gi_has_packed_A and obj.copybuffer("object", "cache:packed_group_A") then
                     obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+                end
+                drawn_A = true
+            elseif c == eB and not drawn_B then
+                if _G.gi_has_packed_B and obj.copybuffer("object", "cache:packed_group_B") then
+                    obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+                end
+                drawn_B = true
+            elseif c == eC and not drawn_C then
+                if _G.gi_has_packed_C and obj.copybuffer("object", "cache:packed_group_C") then
+                    obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+                end
+                drawn_C = true
+            else
+                local is_in_grp = (c >= sA and c <= eA) or (c >= sB and c <= eB) or (c >= sC and c <= eC)
+                if not is_in_grp then
+                    if obj.copybuffer("object", "cache:gi_other_" .. i) then
+                        obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
+                    end
                 end
             end
         end
 
-        if _G.gi_has_packed_A then
-            if obj.copybuffer("object", "cache:packed_group_A") then
-                obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
-            end
+        if not drawn_A and _G.gi_has_packed_A and obj.copybuffer("object", "cache:packed_group_A") then
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
         end
-
-        if _G.gi_has_packed_B then
-            if obj.copybuffer("object", "cache:packed_group_B") then
-                obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
-            end
+        if not drawn_B and _G.gi_has_packed_B and obj.copybuffer("object", "cache:packed_group_B") then
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
         end
-
-        if _G.gi_has_packed_C then
-            if obj.copybuffer("object", "cache:packed_group_C") then
-                obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
-            end
+        if not drawn_C and _G.gi_has_packed_C and obj.copybuffer("object", "cache:packed_group_C") then
+            obj.draw(0, 0, 0, 1, 1, 0, 0, 0)
         end
 
         obj.setoption("drawtarget", "framebuffer")
