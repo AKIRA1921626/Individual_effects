@@ -3333,12 +3333,12 @@ common.execute({
 --hide@colorZ:effectC==0
 
 -- ヘルパーモジュールの読み込みを試行
-local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper")
+local condition, AKIRA_helper = pcall(require, "AKIRA_aviutl2_helper_ide_202261128")
 local AKIRA_h = nil
 if condition then
     AKIRA_h = AKIRA_helper
 else
-    debug_print("AKIRA_aviutl2_helper.luaが同じフォルダに存在しません。")
+    debug_print("AKIRA_aviutl2_helper_ide_202261128.luaが同じフォルダに存在しません。")
 end
 
 -- 個別オブジェクトが有効かを確認
